@@ -20,6 +20,15 @@
                 "cwd": "${workspaceFolder}/ohdccrm"
             },
             "problemMatcher": []
+        },
+        {
+            "label": "Django run server",
+            "type": "shell",
+            "command": "python manage.py runserver",
+            "options": {
+                "cwd": "${workspaceFolder}/ohdccrm"
+            },
+            "problemMatcher": []
         }
     ]
 }
