@@ -1,0 +1,8 @@
+Django
+djangorestframework
+django-rest-knox
+psycopg2-binary
+urllib3
+gunicorn
+uvicorn
+

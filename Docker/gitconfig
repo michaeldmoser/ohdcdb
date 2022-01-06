@@ -1,0 +1,8 @@
+[user]
+	email = michaeldmoser@gmail.com
+	name = Michael Moser
+[core]
+	fileMode = false
+	excludesfile = ~/.gitignore_global
+[merge]
+	renamelimit = 42000
