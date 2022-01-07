@@ -1,6 +1,8 @@
+pylint
 Django
 djangorestframework
 django-rest-knox
+django-phonenumber-field[phonenumbers]
 psycopg2-binary
 urllib3
 gunicorn

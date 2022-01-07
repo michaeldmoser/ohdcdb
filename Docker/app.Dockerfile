@@ -3,6 +3,7 @@ FROM python:3.10-slim-buster
 RUN apt update
 RUN apt install -y zsh
 RUN apt install -y git
+RUN apt install -y npm && apt install -y nodejs
 
 RUN useradd -u 1000 -o -s /bin/zsh vscode
 RUN mkdir -p /workspace
