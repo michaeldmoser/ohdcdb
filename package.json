@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development ./ohdccrm/frontend/src/index.js --output-path ./ohdccrm/frontend/static/frontend/main.js",
-    "build": "webpack --mode production ./ohdccrm/frontend/src/index.js --output-path ./ohdccrm/frontend/static/frontend/main.js"
+    "dev": "webpack --mode development ./ohdccrm/frontend/src/index.js --output-path ./ohdccrm/frontend/static/frontend/",
+    "build": "webpack --mode production ./ohdccrm/frontend/src/index.js --output-path ./ohdccrm/frontend/static/frontend/"
   },
   "repository": {
     "type": "git",
