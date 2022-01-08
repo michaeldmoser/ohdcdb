@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development ./ohdccrm/frontend/src/index.js --output-path ./ohdccrm/frontend/static/frontend/",
+    "dev": "webpack --mode development --watch ./ohdccrm/frontend/src/index.js --output-path ./ohdccrm/frontend/static/frontend/",
     "build": "webpack --mode production ./ohdccrm/frontend/src/index.js --output-path ./ohdccrm/frontend/static/frontend/"
   },
   "repository": {
@@ -28,8 +28,13 @@
     "webpack-cli": "^4.9.1"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "redux": "^4.1.2",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.1"
   }
 }
