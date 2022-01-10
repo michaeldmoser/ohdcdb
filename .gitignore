@@ -3,6 +3,8 @@
 __pycache__
 db.sqlite3
 
+ohdccrm/frontend/static/frontend/main.js
+
 
 # Created by https://www.toptal.com/developers/gitignore/api/django,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,node
