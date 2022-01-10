@@ -25,7 +25,6 @@ export class People extends Component {
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
-                            <th>Entered</th>
                             <th></th>
                         </tr>
                     </thead>

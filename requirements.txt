@@ -1,4 +1,6 @@
 pylint
+pytest
+autopep8
 Django
 djangorestframework
 django-rest-knox

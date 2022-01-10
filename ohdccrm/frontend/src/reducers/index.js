@@ -1,7 +1,10 @@
-import {combineReducers, combineReduxers} from 'redux'
+import { combineReducers } from 'redux';
 import people from './people';
-
+import errors from './errors';
+import messages from './messages';
 
 export default combineReducers({
-    people
+    people,
+    errors,
+    messages,
 });
