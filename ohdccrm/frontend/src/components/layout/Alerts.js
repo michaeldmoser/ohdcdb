@@ -20,6 +20,8 @@ export class Alerts extends Component {
             };
 
             for (const property in error.message) {
+                if (!Object.keys(nameMap).includes(property)) continue;
+
                 alert.error(
                     `${nameMap[property]}: ${error.message[property].join()}`
                 );

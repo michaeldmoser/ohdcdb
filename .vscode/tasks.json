@@ -6,7 +6,7 @@
         {
             "label": "Django Make migration",
             "type": "shell",
-            "command": "python manage.py makemigrations",
+            "command": "python manage.py makemigrations && python manage.py migrate",
             "options": {
                 "cwd": "${workspaceFolder}/ohdccrm"
             },

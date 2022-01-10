@@ -3,10 +3,16 @@ from people.models import People
 from rest_framework import viewsets, permissions
 from .serializers import PeopleSerializer
 
+
 class PeopleViewSet(viewsets.ModelViewSet):
-    queryset = People.objects.all()
     permission_classes = [
-        permissions.AllowAny
+        permissions.IsAuthenticated
     ]
+
     serializer_class = PeopleSerializer
-    
+
+    def get_queryset(self):
+        return self.request.user.people.all()
+
+    def perform_create(self, serializer):
+        serializer.save(creator=self.request.user)
