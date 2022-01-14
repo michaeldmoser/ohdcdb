@@ -1,5 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
+import {
+    HashRouter as Router,
+    Route,
+    Routes,
+    Redirect,
+} from 'react-router-dom';
 
 import { Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
@@ -10,6 +16,9 @@ import Alerts from './layout/Alerts';
 
 import { Provider } from 'react-redux';
 import store from '../store';
+import { Login } from './accounts/login';
+import PrivateRoute from './common/PrivateRoute';
+import { loadUser } from '../actions/auth';
 
 const alertOptions = {
     timeout: 3000,
@@ -17,17 +26,31 @@ const alertOptions = {
 };
 
 class App extends Component {
+    componentDidMount() {
+        store.dispatch(loadUser);
+    }
+
     render() {
         return (
             <Provider store={store}>
                 <AlertProvider template={AlertTemplate} {...alertOptions}>
-                    <Fragment>
-                        <Header />
-                        <Alerts />
-                        <div className='container'>
-                            <Dashboard />
-                        </div>
-                    </Fragment>
+                    <Router>
+                        <>
+                            <Header />
+                            <Alerts />
+                            <div className='container'>
+                                <Routes>
+                                    <Route path='/' element={<PrivateRoute />}>
+                                        <Route
+                                            path=''
+                                            element={<Dashboard />}
+                                        />
+                                    </Route>
+                                    <Route path='/login' element={<Login />} />
+                                </Routes>
+                            </div>
+                        </>
+                    </Router>
                 </AlertProvider>
             </Provider>
         );
