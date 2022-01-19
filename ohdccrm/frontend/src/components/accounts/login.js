@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import { login } from '../../actions/auth';
+import { login } from '../../actions/auth';
 
 export class Login extends Component {
     state = {
@@ -11,7 +11,7 @@ export class Login extends Component {
     };
 
     static propTypes = {
-        // login: PropTypes.func.isRequired,
+        login: PropTypes.func.isRequired,
         isAuthenticated: PropTypes.bool,
     };
 
@@ -70,5 +70,4 @@ const mapStateToProps = (state) => ({
     isAuthenticated: state.auth.isAuthenticated,
 });
 
-// export default connect(mapStateToProps, { login })(Login);
-export default Login;
+export default connect(mapStateToProps, { login })(Login);

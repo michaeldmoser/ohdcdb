@@ -26,6 +26,9 @@ export class Alerts extends Component {
                     `${nameMap[property]}: ${error.message[property].join()}`
                 );
             }
+
+            if (error.message.non_field_errors)
+                alert.error(error.message.non_field_errors.join());
         }
 
         if (message !== prevProps.message) {

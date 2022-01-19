@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { createMessage, returnErrors } from './messages';
+import { tokenConfig } from './auth';
 
 import { GET_PEOPLE, DELETE_PERSON, ADD_PERSON, GET_ERRORS } from './types';
 
-export const getPeople = () => (dispatch) => {
+export const getPeople = () => (dispatch, getState) => {
     axios
-        .get('api/people/')
+        .get('api/people/', tokenConfig(getState))
         .then((result) => {
             dispatch({
                 type: GET_PEOPLE,

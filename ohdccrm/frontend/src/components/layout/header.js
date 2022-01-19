@@ -1,8 +1,46 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logout } from '../../actions/auth';
 
 export class Header extends Component {
+    static propTypes = {
+        auth: PropTypes.object.isRequired,
+        logout: PropTypes.func.isRequired,
+    };
+
     render() {
+        const { isAuthenticated, user } = this.props.auth;
+
+        const authLinks = (
+            <>
+                <span className='navbar-text me-3'>
+                    <strong>{user ? `Welcome ${user.username}` : ''}</strong>
+                </span>
+                <ul className='navbar-nav mb-2 mb-lg-0'>
+                    <li className='navItem'>
+                        <button
+                            onClick={this.props.logout}
+                            className='nav-link btn btn-info btn-sm text-light'
+                        >
+                            Logout
+                        </button>
+                    </li>
+                </ul>
+            </>
+        );
+
+        const guestLinks = (
+            <ul className='navbar-nav mb-2 mb-lg-0'>
+                <li className='navItem'>
+                    <Link className='nav-link' to='/login'>
+                        Login
+                    </Link>
+                </li>
+            </ul>
+        );
+
         return (
             <nav className='navbar navbar-expand-sm navbar-light bg-light'>
                 <div className='container-fluid'>
@@ -24,19 +62,7 @@ export class Header extends Component {
                         <a className='navbar-brand me-auto' href='#'>
                             OHDC CRM
                         </a>
-                        <ul className='navbar-nav mb-2 mb-lg-0'>
-                            <li className='navItem'>
-                                <Link to='/login' className='nav-link'>
-                                    Login
-                                </Link>
-                            </li>
-                            <li className='navItem'>
-                                <Link className='nav-link' to='/logout'>
-                                    Logout
-                                </Link>
-                            </li>
-                        </ul>
-                        <ul></ul>
+                        {isAuthenticated ? authLinks : guestLinks}
                     </div>
                 </div>
             </nav>
@@ -44,4 +70,8 @@ export class Header extends Component {
     }
 }
 
-export default Header;
+const mapStateToProps = (state) => ({
+    auth: state.auth,
+});
+
+export default connect(mapStateToProps, { logout })(Header);

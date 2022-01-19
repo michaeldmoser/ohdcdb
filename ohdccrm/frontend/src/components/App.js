@@ -16,7 +16,7 @@ import Alerts from './layout/Alerts';
 
 import { Provider } from 'react-redux';
 import store from '../store';
-import { Login } from './accounts/login';
+import Login from './accounts/login';
 import PrivateRoute from './common/PrivateRoute';
 import { loadUser } from '../actions/auth';
 
@@ -27,7 +27,7 @@ const alertOptions = {
 
 class App extends Component {
     componentDidMount() {
-        store.dispatch(loadUser);
+        store.dispatch(loadUser());
     }
 
     render() {
@@ -40,13 +40,10 @@ class App extends Component {
                             <Alerts />
                             <div className='container'>
                                 <Routes>
-                                    <Route path='/' element={<PrivateRoute />}>
-                                        <Route
-                                            path=''
-                                            element={<Dashboard />}
-                                        />
-                                    </Route>
                                     <Route path='/login' element={<Login />} />
+                                    <Route path='/' element={<PrivateRoute />}>
+                                        <Route index element={<Dashboard />} />
+                                    </Route>
                                 </Routes>
                             </div>
                         </>
