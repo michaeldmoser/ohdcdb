@@ -8,4 +8,23 @@
     "prettier.singleQuote": true,
     "prettier.jsxSingleQuote": true,
     "editor.formatOnSave": true,
+    "sqltools.connections": [
+        {
+            "name": "Container database",
+            "driver": "PostgreSQL",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "database": "postgres",
+            "username": "postgres",
+            "password": "postgres"
+        },
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "workspace/ohdccrm/db.sqlite3",
+            "name": "SQLite DB"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
 }
