@@ -12,7 +12,7 @@ class PeopleViewSet(viewsets.ModelViewSet):
     serializer_class = PeopleSerializer
 
     def get_queryset(self):
-        return self.request.user.people.all()
+        return People.objects.all()
 
     def perform_create(self, serializer):
         serializer.save(creator=self.request.user)
