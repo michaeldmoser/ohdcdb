@@ -18,9 +18,9 @@ export const getPeople = () => (dispatch, getState) => {
         );
 };
 
-export const deletePerson = (id) => (dispatch) => {
+export const deletePerson = (id) => (dispatch, getState) => {
     axios
-        .delete(`api/people/${id}/`)
+        .delete(`api/people/${id}/`, tokenConfig(getState))
         .then((result) => {
             dispatch(createMessage({ personDeleted: 'Deleted person' }));
             dispatch({
@@ -31,9 +31,9 @@ export const deletePerson = (id) => (dispatch) => {
         .catch((err) => console.log(err));
 };
 
-export const addPerson = (person) => (dispatch) => {
+export const addPerson = (person) => (dispatch, getState) => {
     axios
-        .post(`api/people/`, person)
+        .post(`api/people/`, person, tokenConfig(getState))
         .then((result) => {
             dispatch(createMessage({ personAdded: 'Added person' }));
             dispatch({
