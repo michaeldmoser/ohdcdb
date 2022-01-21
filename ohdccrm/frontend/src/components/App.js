@@ -19,6 +19,7 @@ import store from '../store';
 import Login from './accounts/login';
 import PrivateRoute from './common/PrivateRoute';
 import { loadUser } from '../actions/auth';
+import Navigation from './layout/navigation';
 
 const alertOptions = {
     timeout: 3000,
@@ -38,13 +39,30 @@ class App extends Component {
                         <>
                             <Header />
                             <Alerts />
-                            <div className='container'>
-                                <Routes>
-                                    <Route path='/login' element={<Login />} />
-                                    <Route path='/' element={<PrivateRoute />}>
-                                        <Route index element={<Dashboard />} />
-                                    </Route>
-                                </Routes>
+                            <div className='container-fuild'>
+                                <div className='row'>
+                                    <Navigation />
+                                    <div
+                                        role='main'
+                                        className='col-md-9 ml-sm-auto col-lg-10 pt-3 px-4'
+                                    >
+                                        <Routes>
+                                            <Route
+                                                path='/login'
+                                                element={<Login />}
+                                            />
+                                            <Route
+                                                path='/people'
+                                                element={<PrivateRoute />}
+                                            >
+                                                <Route
+                                                    index
+                                                    element={<Dashboard />}
+                                                />
+                                            </Route>
+                                        </Routes>
+                                    </div>
+                                </div>
                             </div>
                         </>
                     </Router>

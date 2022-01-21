@@ -19,13 +19,14 @@ export class Header extends Component {
                     <strong>{user ? `Welcome ${user.username}` : ''}</strong>
                 </span>
                 <ul className='navbar-nav mb-2 mb-lg-0'>
-                    <li className='navItem'>
-                        <button
+                    <li className='nav-item'>
+                        <a
                             onClick={this.props.logout}
-                            className='nav-link btn btn-info btn-sm text-light'
+                            className='nav-link'
+                            href='#'
                         >
                             Logout
-                        </button>
+                        </a>
                     </li>
                 </ul>
             </>
@@ -33,7 +34,7 @@ export class Header extends Component {
 
         const guestLinks = (
             <ul className='navbar-nav mb-2 mb-lg-0'>
-                <li className='navItem'>
+                <li className='nav-item'>
                     <Link className='nav-link' to='/login'>
                         Login
                     </Link>
@@ -42,7 +43,7 @@ export class Header extends Component {
         );
 
         return (
-            <nav className='navbar navbar-expand-sm navbar-light bg-light'>
+            <header className='navbar navbar-expand-lg navbar-dark bg-primary sticky-top flex-md-nowrap p-0 shadow'>
                 <div className='container-fluid'>
                     <button
                         className='navbar-toggler'
@@ -59,13 +60,37 @@ export class Header extends Component {
                         className='collapse navbar-collapse'
                         id='navbarTogglerDemo01'
                     >
-                        <a className='navbar-brand me-auto' href='#'>
+                        <a
+                            className='navbar-brand col-md-3 col-lg-2 me-0 px-3'
+                            href='#'
+                        >
+                            <img
+                                src='/static/imgs/farm-svgrepo-com.svg'
+                                height={20}
+                                width={20}
+                            />
                             OHDC CRM
                         </a>
-                        {isAuthenticated ? authLinks : guestLinks}
+                        <input
+                            class='form-control form-control-dark w-100'
+                            type='text'
+                            placeholder='Search'
+                            aria-label='Search'
+                        ></input>
+                        <div class='navbar-nav'>
+                            <div class='nav-item text-nowrap'>
+                                <a
+                                    onClick={this.props.logout}
+                                    className='nav-link px-3'
+                                    href='#'
+                                >
+                                    Sign out
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </nav>
+            </header>
         );
     }
 }
