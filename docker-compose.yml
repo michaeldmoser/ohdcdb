@@ -7,19 +7,26 @@ services:
       dockerfile: Docker/app.Dockerfile
 
     volumes:
-      - .:/workspace:cached
+      - src:/workspace
 
     # Overrides default command so things don't shut down after the process ends.
-    command: sleep infinity
+    command: /workspace/Docker/start_django
+
+    user: vscode
 
     # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
-    network_mode: service:db
+    # network_mode: service:db
+
+    ports:
+      - "8000:8000"
 
     # Uncomment the next line to use a non-root user for all processes.
     # user: vscode
 
     # Use "forwardPorts" in **devcontainer.json** to forward an app port locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)
+    depends_on:
+      - db
 
   db:
     image: postgres:latest
@@ -30,9 +37,25 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
       POSTGRES_PASSWORD: postgres
-
     # Add "forwardPorts": ["5432"] to **devcontainer.json** to forward PostgreSQL locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
+  dev-environment:
+    build: 
+      context: .
+      dockerfile: Docker/dev-environment.Dockerfile
+    
+    volumes:
+      - src:/workspace
+      - ./Docker/home_vscode:/home/vscode
+
+    command: sleep infinity
+
 volumes:
   postgres-data:
+  src:
+    driver: local
+    driver_opts:
+      type: none
+      device: $PWD/
+      o: bind

@@ -26,5 +26,6 @@
             "name": "SQLite DB"
         }
     ],
-    "sqltools.useNodeRuntime": true
+    "sqltools.useNodeRuntime": true,
+    "robot.language-server.python": "/usr/local/bin/python"
 }

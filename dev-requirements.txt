@@ -1,0 +1,14 @@
+# Robotframework specific tools
+robotframework
+robotframework-requests
+robotframework-selenium2library 
+xvfbwrapper
+robotframework-xvfb
+certifi
+asn1crypto 
+bcrypt
+robotframework-sshlibrary
+cryptography
+pyOpenSSL 
+idna
+requests[security]

@@ -2,7 +2,6 @@ FROM python:3.10-slim-bullseye
 
 RUN apt update
 RUN apt install -y zsh
-RUN apt install -y git
 RUN apt install -y npm && apt install -y nodejs
 
 RUN useradd -u 1000 -o -s /bin/zsh vscode
@@ -17,8 +16,10 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
     -a 'bindkey "\$terminfo[kcud1]" history-substring-search-down'
 RUN chown -R vscode /home/vscode
 
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
+COPY app-requirements.txt ./
+RUN pip install -r app-requirements.txt
 
 WORKDIR /workspace
+
+CMD python manage.py runserver
 

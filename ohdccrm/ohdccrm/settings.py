@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-3e_%#0hwxh+uph3d55lk=lj=_*u^latzj)3q$jop9_xsyp_h66
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'app']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'people',
     'frontend',
+    'django_extensions',
 ]
 
 REST_FRAMEWORK = {
