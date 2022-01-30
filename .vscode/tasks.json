@@ -22,15 +22,6 @@
             "problemMatcher": []
         },
         {
-            "label": "Django run server",
-            "type": "shell",
-            "command": "python manage.py runserver",
-            "options": {
-                "cwd": "${workspaceFolder}/ohdccrm"
-            },
-            "problemMatcher": []
-        },
-        {
             "label": "Npm run dev",
             "type": "shell",
             "command": "npm run dev",
@@ -38,6 +29,6 @@
                 "cwd": "${workspaceFolder}"
             },
             "problemMatcher": []
-        }
+        },
     ]
 }
