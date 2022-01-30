@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "robotframework-lsp",
+            "name": "Robot Framework: Launch template",
+            "request": "launch",
+            "terminal": "integrated",
+            "args": ["--argumentfile", "${workspaceFolder}/testing/arguments.txt"]
+        },
+        {
             "name": "Python: Django",
             "type": "python",
             "request": "launch",
@@ -13,6 +20,6 @@
                 "runserver"
             ],
             "django": true
-        }
+        },
     ]
 }
