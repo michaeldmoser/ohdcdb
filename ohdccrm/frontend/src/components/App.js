@@ -26,7 +26,7 @@ const alertOptions = {
     position: 'top center',
 };
 
-class App extends Component {
+export default class App extends Component {
     componentDidMount() {
         store.dispatch(loadUser());
     }
@@ -71,5 +71,3 @@ class App extends Component {
         );
     }
 }
-
-ReactDOM.render(<App />, document.getElementById('app'));

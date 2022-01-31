@@ -72,13 +72,13 @@ export class Header extends Component {
                             OHDC CRM
                         </a>
                         <input
-                            class='form-control form-control-dark w-100'
+                            className='form-control form-control-dark w-100'
                             type='text'
                             placeholder='Search'
                             aria-label='Search'
                         ></input>
-                        <div class='navbar-nav'>
-                            <div class='nav-item text-nowrap'>
+                        <div className='navbar-nav'>
+                            <div className='nav-item text-nowrap'>
                                 <a
                                     onClick={this.props.logout}
                                     className='nav-link px-3'
