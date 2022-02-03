@@ -310,3 +310,5 @@ dist
 testing/reports
 
 Docker/home_vscode
+
+*.bak

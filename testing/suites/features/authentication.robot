@@ -10,16 +10,16 @@ User with a valid account can login
 
 *** Keywords ***
 ${user} has an account
-    Create User    Michael    michael@example.com    Test1234!
+    Create User    ${user}    michael@example.com    Test1234!
 
 ${user} logs in with valid credentials
     Open the app
-    Wait Until Page Contains    Username
+    Wait Until Page Contains    Email address
     Wait Until Page Contains    Password
     Wait Until Page Contains    Login
-    Input Text    username    ${user}
-    Input Text    password    Test1234!
-    Click Button    Login
+    Input Text    email    ${user}
+    Input Text    current-password    Test1234!
+    Click Link    Login
 
 ${pronoun:s?he} sees the home screen
 

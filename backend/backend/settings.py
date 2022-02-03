@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-5pxgc)kel-@+vt2kp$323gls6xx5f+721gk=reg+x$ealha=$#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'app']
 
 
 # Application definition
@@ -63,7 +63,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         # Tell Django where to find Reacts index.html file
-        "DIRS": [os.path.join(BASE_DIR, "build")],
+        "DIRS": [os.path.join(BASE_DIR, "../frontend/build")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -78,7 +78,7 @@ TEMPLATES = [
 
 STATICFILES_DIRS = [
     # Tell Django where to look for React's static files (css, js)
-    os.path.join(BASE_DIR, "build/static"),
+    os.path.join(BASE_DIR, "../frontend/build/static"),
 ]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"

@@ -45,3 +45,4 @@ Werkzeug==2.0.2
 wrapt==1.13.3
 wsproto==1.0.0
 whitenoise==5.3.0
+pyOpenSSL==21.0.0
