@@ -30,5 +30,32 @@
             },
             "problemMatcher": []
         },
+        {
+            "label": "Start App",
+            "type": "shell",
+            "command": "cd frontend && npm start",
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        },
+        {
+            "label": "Start Test",
+            "type": "shell",
+            "command": "cd frontend && npm run test",
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            },
+            "problemMatcher": []
+        }
     ]
 }
