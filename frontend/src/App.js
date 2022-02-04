@@ -7,20 +7,20 @@ function App() {
             <div id='layoutAuthentication'>
                 <div id='layoutAuthentication_content'>
                     <main>
-                        <div class='container'>
-                            <div class='row justify-content-center'>
-                                <div class='col-lg-5'>
-                                    <div class='card shadow-lg border-0 rounded-lg mt-5'>
-                                        <div class='card-header'>
-                                            <h3 class='text-center font-weight-light my-4'>
+                        <div className='container'>
+                            <div className='row justify-content-center'>
+                                <div className='col-lg-5'>
+                                    <div className='card shadow-lg border-0 rounded-lg mt-5'>
+                                        <div className='card-header'>
+                                            <h3 className='text-center font-weight-light my-4'>
                                                 Login
                                             </h3>
                                         </div>
-                                        <div class='card-body'>
+                                        <div className='card-body'>
                                             <form>
-                                                <div class='form-floating mb-3'>
+                                                <div className='form-floating mb-3'>
                                                     <input
-                                                        class='form-control'
+                                                        className='form-control'
                                                         id='inputEmail'
                                                         type='email'
                                                         placeholder='name@example.com'
@@ -30,9 +30,9 @@ function App() {
                                                         Email address
                                                     </label>
                                                 </div>
-                                                <div class='form-floating mb-3'>
+                                                <div className='form-floating mb-3'>
                                                     <input
-                                                        class='form-control'
+                                                        className='form-control'
                                                         id='inputPassword'
                                                         type='password'
                                                         placeholder='Password'
@@ -42,15 +42,15 @@ function App() {
                                                         Password
                                                     </label>
                                                 </div>
-                                                <div class='d-flex align-items-center justify-content-between mt-4 mb-0'>
+                                                <div className='d-flex align-items-center justify-content-between mt-4 mb-0'>
                                                     <a
-                                                        class='small'
+                                                        className='small'
                                                         href='password.html'
                                                     >
                                                         Forgot Password?
                                                     </a>
                                                     <a
-                                                        class='btn btn-primary'
+                                                        className='btn btn-primary'
                                                         href='index.html'
                                                     >
                                                         Login
@@ -58,8 +58,8 @@ function App() {
                                                 </div>
                                             </form>
                                         </div>
-                                        <div class='card-footer text-center py-3'>
-                                            <div class='small'>Hi!</div>
+                                        <div className='card-footer text-center py-3'>
+                                            <div className='small'>Hi!</div>
                                         </div>
                                     </div>
                                 </div>
@@ -68,10 +68,10 @@ function App() {
                     </main>
                 </div>
                 <div id='layoutAuthentication_footer'>
-                    <footer class='py-4 bg-light mt-auto'>
-                        <div class='container-fluid px-4'>
-                            <div class='d-flex align-items-center justify-content-between small'>
-                                <div class='text-muted'>
+                    <footer className='py-4 bg-light mt-auto'>
+                        <div className='container-fluid px-4'>
+                            <div className='d-flex align-items-center justify-content-between small'>
+                                <div className='text-muted'>
                                     Copyright &copy; ZooTown Apps 2022
                                 </div>
                                 <div>
