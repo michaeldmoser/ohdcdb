@@ -41,7 +41,8 @@
             },
             "runOptions": {
                 "runOn": "folderOpen"
-            }
+            },
+            "problemMatcher": []
         },
         {
             "label": "Start Test",
@@ -51,6 +52,21 @@
             "presentation": {
                 "reveal": "always",
                 "panel": "new"
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Open react snippets cheatsheet",
+            "type": "shell",
+            "command": "$BROWSER https://github.com/dsznajder/vscode-react-javascript-snippets/blob/HEAD/docs/Snippets.md",
+            "group": "none",
+            "presentation": {
+                "reveal": "never",
+                "panel": "shared",
+                "echo": false
             },
             "runOptions": {
                 "runOn": "folderOpen"

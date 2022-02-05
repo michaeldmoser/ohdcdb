@@ -8,7 +8,7 @@
             "type": "robotframework-lsp",
             "name": "Robot Framework: Launch template",
             "request": "launch",
-            "args": ["--argumentfile", "${workspaceFolder}/testing/arguments.txt"]
+            "args": ["--argumentfile", "${workspaceFolder}/testing/arguments.txt"],
         },
         {
             "name": "Python: Django",
@@ -20,5 +20,15 @@
             ],
             "django": true
         },
+        {
+            "name": "Chrome",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/frontend/src",
+            "sourceMapPathOverrides": {
+              "webpack:///frontend/src/*": "${webRoot}/*"
+            }
+          }
     ]
 }
