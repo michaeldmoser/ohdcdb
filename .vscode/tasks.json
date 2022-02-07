@@ -58,20 +58,5 @@
             },
             "problemMatcher": []
         },
-        {
-            "label": "Open react snippets cheatsheet",
-            "type": "shell",
-            "command": "$BROWSER https://github.com/dsznajder/vscode-react-javascript-snippets/blob/HEAD/docs/Snippets.md",
-            "group": "none",
-            "presentation": {
-                "reveal": "never",
-                "panel": "shared",
-                "echo": false
-            },
-            "runOptions": {
-                "runOn": "folderOpen"
-            },
-            "problemMatcher": []
-        }
     ]
 }

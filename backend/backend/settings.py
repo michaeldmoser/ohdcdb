@@ -38,10 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'phonenumber_field',
     'rest_framework',
     'rest_framework.authtoken',
-    'phonenumber_field',
-    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -63,7 +62,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         # Tell Django where to find Reacts index.html file
-        "DIRS": [os.path.join(BASE_DIR, "../frontend/build")],
+        "DIRS": [os.path.join(BASE_DIR, "build")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -78,7 +77,7 @@ TEMPLATES = [
 
 STATICFILES_DIRS = [
     # Tell Django where to look for React's static files (css, js)
-    os.path.join(BASE_DIR, "../frontend/build/static"),
+    os.path.join(BASE_DIR, "build/static"),
 ]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"

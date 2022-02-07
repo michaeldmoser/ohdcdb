@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation     Collection of resources used through nearly all tests
 Library           SeleniumLibrary
-Library           DjangoLibrary
+Library           ohddb.robot.Django    settings=backend.settings    path=backend
 
 *** Variables ***
 ${LOGIN URL}      http://localhost:3000
