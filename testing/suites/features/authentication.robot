@@ -7,7 +7,7 @@ Test Teardown     Flush Database
 User with a valid account can login
     Given Michael has an account
     When Michael logs in with valid credentials
-    Then xe sees the home screen
+    Then he sees the home screen
 
 User with no account cannot login
     Given John does not have an account

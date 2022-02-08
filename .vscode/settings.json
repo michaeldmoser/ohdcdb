@@ -27,5 +27,6 @@
         }
     ],
     "sqltools.useNodeRuntime": true,
-    "robot.language-server.python": "/usr/local/bin/python"
+    "robot.language-server.python": "/usr/local/bin/python",
+    "robot.pythonpath": ["/workspace/testing/libraries"]
 }
