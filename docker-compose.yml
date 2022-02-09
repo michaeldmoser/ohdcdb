@@ -49,6 +49,9 @@ services:
       - src:/workspace
       - ./Docker/home_vscode:/home/vscode
 
+    environment:
+      - PYTHONPATH=/workspace/testing/libraries
+
     command: sleep infinity
 
 volumes:

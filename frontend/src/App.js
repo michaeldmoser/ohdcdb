@@ -1,6 +1,6 @@
 // app.js
 import React from 'react';
-import Login from './login';
+import Login from './auth';
 import { Link, Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 
 const About = () => <div>This is the about page.</div>;

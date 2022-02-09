@@ -16,14 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 from django.shortcuts import render
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView, TokenRefreshView)
 
 
 def render_react(request):
+    '''Render react index.html'''
     return render(request, "index.html")
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     re_path(r"^$", render_react),
     re_path(r"^(?:.*)/?$", render_react),
 ]

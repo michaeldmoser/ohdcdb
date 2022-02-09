@@ -28,5 +28,16 @@
     ],
     "sqltools.useNodeRuntime": true,
     "robot.language-server.python": "/usr/local/bin/python",
-    "robot.pythonpath": ["/workspace/testing/libraries"]
+    "robot.pythonpath": [
+        "/workspace/testing/libraries"
+    ],
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./backend",
+        "-p",
+        "test_*.py"
+    ],
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": true
 }

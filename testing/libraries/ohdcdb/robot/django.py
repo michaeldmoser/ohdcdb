@@ -1,9 +1,12 @@
+'''
+Library for testing with Django
+'''
 import sys
 import os
 import django
 
 
-class Django:
+class Django:  # pylint: disable=no-self-use
     '''
     ohddb.Django is a web testing library to interact with Django
     '''
@@ -21,11 +24,14 @@ class Django:
 
         django.setup()
 
+        from django.core.management import ManagementUtility  # pylint: disable=import-outside-toplevel
+        self.ManagementUtility = ManagementUtility
+
     def create_user(self, email='', username='', password=''):
         '''
         Create a regular Django user
         '''
-        from django.contrib.auth.models import User
+        from django.contrib.auth.models import User  # pylint: disable=import-outside-toplevel
         user = User.objects.create_user(username, email, password)
 
         return {
@@ -37,6 +43,22 @@ class Django:
         '''
         Clears the database of all data.
         '''
-        from django.core.management import ManagementUtility
-        manager = ManagementUtility(['', 'flush', '--noinput'])
+        manager = self.ManagementUtility(['', 'flush', '--noinput'])
+        manager.execute()
+
+    def backup_database(self, path='testing/backups/backup.json'):
+        '''
+        Creates a backup of the database
+        '''
+        manager = self.ManagementUtility(
+            ['', 'dumpdata', '--output', path, '-v', '0'])
+        manager.execute()
+
+    def restore_database(self, path='testing/backups/backup.json'):
+        '''
+        Creates a backup of the database
+        '''
+        self.flush_database()
+        manager = self.ManagementUtility(
+            ['', 'loaddata', '-v', '0', path])
         manager.execute()

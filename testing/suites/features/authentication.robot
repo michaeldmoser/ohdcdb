@@ -38,4 +38,4 @@ ${user} logs in with valid credentials
     Click Button    Login
 
 ${pronoun:(s?h|x)e} sees the home screen
-    Wait Until Page Contains    Orchard Homes Ditch Database - Dashboard
+    Wait Until Page Contains    Orchard Homes Ditch Company Database - Dashboard
