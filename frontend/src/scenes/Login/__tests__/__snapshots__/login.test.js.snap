@@ -37,15 +37,15 @@ exports[`<Login /> renders the login page 1`] = `
                 >
                   <label
                     class="form-label"
-                    for="inputEmail"
+                    for="inputUsername"
                   >
-                    Email address
+                    Username
                   </label>
                   <input
                     class="form-control"
-                    id="inputEmail"
-                    name="email"
-                    placeholder="name@example.com"
+                    id="inputUsername"
+                    name="username"
+                    placeholder="Enter your username"
                     required=""
                     type="email"
                   />
@@ -57,7 +57,7 @@ exports[`<Login /> renders the login page 1`] = `
                   <div
                     class="invalid-feedback"
                   >
-                    Please provide an email address to login.
+                    Please provide a username to login.
                   </div>
                 </div>
                 <div

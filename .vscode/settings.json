@@ -39,5 +39,6 @@
         "test_*.py"
     ],
     "python.testing.pytestEnabled": false,
-    "python.testing.unittestEnabled": true
+    "python.testing.unittestEnabled": true,
+    "python.djangoTestRunner.prefixCommand": "cd /workspace/backend && "
 }

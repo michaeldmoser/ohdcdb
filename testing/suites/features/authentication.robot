@@ -23,7 +23,7 @@ ${user} does not have an account
     Open the login page
 
 ${pronoun:(s?h|x)e} tries to login
-    Input Text    email    nopassword@example.com
+    Input Text    username    nopassword
     Input Text    current-password    Test1234!
     Click Button    Login
 
@@ -32,7 +32,7 @@ ${pronoun:(s?h|x)e} sees a no valid login message
 
 ${user} logs in with valid credentials
     Open the login page
-    Input Text    email    ${newUser}[email]
+    Input Text    username    ${newUser}[username]
     Input Text    current-password    Test1234!
     Capture Page Screenshot
     Click Button    Login

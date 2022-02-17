@@ -1,8 +1,8 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from 'test-utils';
 import '@testing-library/jest-dom';
 
-import { Login } from '../Login';
+import Login from '../';
 
 describe('<Login />', () => {
     const { asFragment } = render(<Login />);

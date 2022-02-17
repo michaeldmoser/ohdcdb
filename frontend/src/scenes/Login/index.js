@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -6,14 +8,19 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-export const Login = () => {
-    const [validated, setValidated] = useState(false);
+import { login } from 'features/User/authSlice';
 
-    const handleSubmit = (event) => {
-        // const form = event.currentTarget;
-        // event.preventDefault();
-        // if (form.checkValidity() === false) event.stopPropagation();
-        // setValidated(true);
+const Login = () => {
+    const [validated, setValidated] = useState(false);
+    const [username, setUsername] = useState();
+    const [password, setPassword] = useState();
+    const dispatch = useDispatch();
+
+    const handleSubmit = async (event) => {
+        const form = event.currentTarget;
+        event.preventDefault();
+        if (form.checkValidity() === false) event.stopPropagation();
+        dispatch(login({ username, password }));
     };
 
     return (
@@ -35,23 +42,24 @@ export const Login = () => {
                                     >
                                         <Form.Group
                                             className='mb-3'
-                                            controlId='inputEmail'
+                                            controlId='inputUsername'
                                         >
-                                            <Form.Label>
-                                                Email address
-                                            </Form.Label>
+                                            <Form.Label>Username</Form.Label>
                                             <Form.Control
                                                 type='email'
-                                                placeholder='name@example.com'
-                                                name='email'
+                                                placeholder='Enter your username'
+                                                name='username'
                                                 required
+                                                onChange={(e) =>
+                                                    setUsername(e.target.value)
+                                                }
                                             />
                                             <Form.Control.Feedback>
                                                 Looks good!
                                             </Form.Control.Feedback>
                                             <Form.Control.Feedback type='invalid'>
-                                                Please provide an email address
-                                                to login.
+                                                Please provide a username to
+                                                login.
                                             </Form.Control.Feedback>
                                         </Form.Group>
                                         <Form.Group
@@ -64,6 +72,9 @@ export const Login = () => {
                                                 placeholder='Password'
                                                 name='current-password'
                                                 required
+                                                onChange={(e) =>
+                                                    setPassword(e.target.value)
+                                                }
                                             />
                                             <Form.Control.Feedback>
                                                 Looks good!
@@ -112,3 +123,5 @@ export const Login = () => {
         </>
     );
 };
+
+export default Login;

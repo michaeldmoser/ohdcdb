@@ -1,15 +1,27 @@
 // app.js
 import React from 'react';
-import Login from './auth';
-import { Link, Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
-const About = () => <div>This is the about page.</div>;
+import Dashboard from 'scenes/Dashboard';
+import Login from 'scenes/Login';
+import { useToken } from 'features/User';
 
-export const App = () => (
-    <Routes>
-        <Route path='/about' element={<About />} />
-        <Route path='' element={<Login />} />
-    </Routes>
-);
+export const App = () => {
+    const token = useToken();
+
+    if (!token) {
+        return (
+            <Routes>
+                <Route path='' element={<Login />} />
+            </Routes>
+        );
+    }
+
+    return (
+        <Routes>
+            <Route path='' element={<Dashboard />} />
+        </Routes>
+    );
+};
 
 export default App;
