@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { MemoryRouter as Router } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 
-import { reducers } from 'app';
+import reducers from 'app/reducers';
 
 function render(ui, { preloadedState, store, ...renderOptions } = {}) {
     store = store || configureStore({ reducer: reducers, preloadedState });

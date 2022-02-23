@@ -1,0 +1,10 @@
+{
+	"pronouns": {
+		"scope": "javascript",
+		"prefix": "imp:test:render",
+		"body": [
+			"import { render } from 'testing/library';"
+		],
+		"description": "Import the test renderer"
+	}
+}
