@@ -8,21 +8,23 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import { useLoginMutation } from 'features/User/api';
+import { useLoginMutation } from './api';
+import { setToken } from './slice';
 
 const Login = () => {
-    const [validated, setValidated] = useState(false);
+    const [validated] = useState(false);
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const dispatch = useDispatch();
-    // const [login] = useLoginMutation();
+    const [login] = useLoginMutation();
 
     const handleSubmit = async (event) => {
         const form = event.currentTarget;
         event.preventDefault();
         if (form.checkValidity() === false) event.stopPropagation();
+        const tokens = await login({ username, password }).unwrap();
 
-        dispatch(login({ username, password }));
+        dispatch(setToken(tokens));
     };
 
     return (

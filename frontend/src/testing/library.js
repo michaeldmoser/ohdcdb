@@ -6,9 +6,17 @@ import { MemoryRouter as Router } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 
 import reducer from 'app/reducers';
+import { api } from 'app/api';
 
 function render(ui, { preloadedState, store, ...renderOptions } = {}) {
-    store = store || configureStore({ reducer, preloadedState });
+    store =
+        store ||
+        configureStore({
+            reducer,
+            preloadedState,
+            middleware: (getDefaultMiddleware) =>
+                getDefaultMiddleware().concat(api.middleware),
+        });
     function Wrapper({ children }) {
         return (
             <Provider store={store}>
