@@ -24,6 +24,7 @@ module.exports = {
     },
     plugins: [
         'import', // eslint-plugin-import plugin. https://www.npmjs.com/package/eslint-plugin-import
+        'testing-library',
     ],
     root: true, // For configuration cascading.
     rules: {
@@ -107,6 +108,10 @@ module.exports = {
                 natural: false,
             },
         ],
+        'testing-library/await-async-query': 'error',
+        'testing-library/no-await-sync-query': 'error',
+        'testing-library/no-debugging-utils': 'warn',
+        'testing-library/no-dom-import': 'off',
     },
     settings: {
         react: {

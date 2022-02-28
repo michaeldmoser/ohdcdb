@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import toast, { Toaster } from 'react-hot-toast';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -10,21 +11,34 @@ import Button from 'react-bootstrap/Button';
 
 import { useLoginMutation } from './api';
 import { setToken } from './slice';
+import { useAuth } from './hooks';
 
 const Login = () => {
-    const [validated] = useState(false);
+    const [validated, setValidated] = useState(false);
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
+    const [rememberMe, setRememberMe] = useState();
     const dispatch = useDispatch();
     const [login] = useLoginMutation();
+    const [, rememberTokens] = useAuth();
 
     const handleSubmit = async (event) => {
         const form = event.currentTarget;
         event.preventDefault();
-        if (form.checkValidity() === false) event.stopPropagation();
-        const tokens = await login({ username, password }).unwrap();
+        event.stopPropagation();
 
-        dispatch(setToken(tokens));
+        const validity = form.checkValidity();
+        setValidated(true);
+        if (validity === false) {
+            return;
+        }
+
+        try {
+            const tokens = await login({ username, password }).unwrap();
+            rememberTokens(tokens, rememberMe);
+        } catch (err) {
+            toast.error(err.data.detail);
+        }
     };
 
     return (
@@ -50,9 +64,10 @@ const Login = () => {
                                         >
                                             <Form.Label>Username</Form.Label>
                                             <Form.Control
-                                                type='email'
+                                                type='text'
                                                 placeholder='Enter your username'
                                                 name='username'
+                                                autoComplete='username'
                                                 required
                                                 onChange={(e) =>
                                                     setUsername(e.target.value)
@@ -75,6 +90,7 @@ const Login = () => {
                                                 type='password'
                                                 placeholder='Password'
                                                 name='current-password'
+                                                autoComplete='current-password'
                                                 required
                                                 onChange={(e) =>
                                                     setPassword(e.target.value)
@@ -88,6 +104,15 @@ const Login = () => {
                                                 login.
                                             </Form.Control.Feedback>
                                         </Form.Group>
+                                        <Form.Check
+                                            type='checkbox'
+                                            label='Remember me'
+                                            name='remember-me'
+                                            id='remember-me'
+                                            onChange={(e) =>
+                                                setRememberMe(e.target.checked)
+                                            }
+                                        />
                                         <div className='d-flex align-items-center justify-content-between mt-4 mb-0'>
                                             <a
                                                 className='small'

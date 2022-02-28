@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "eslint-plugin-testing-library": "^5.0.5",
+    "jest-extended": "^2.0.0"
+  }
+}

@@ -1,4 +1,11 @@
 *** Settings ***
 Resource          ../resources/common.resource
-Suite Setup       Backup Database
-Suite Teardown    Restore Database
+Suite Setup       Setup the Suite
+Suite Teardown    Teardown the Suite
+
+*** Keywords ***
+Setup the Suite
+    Backup Database
+
+Teardown the Suite
+    Restore Database

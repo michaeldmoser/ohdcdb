@@ -1,0 +1,17 @@
+header.pageheader {
+    margin-left: 260px;
+    top: 0;
+    left: 0;
+    width: calc(100% - 260px);
+}
+
+aside.sidebar {
+    width: 260px;
+}
+
+main {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+    margin-top: 72px;
+    background-color: red;
+}

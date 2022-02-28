@@ -1,27 +1,31 @@
 import { Route, Routes } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 
 import { useAuth } from 'features/auth/hooks';
 import Login from 'features/auth/Login';
-
-function Dashboard() {
-    return <div>Dashboard</div>;
-}
+import Dashboard from 'scenes/dashboard';
 
 export const App = () => {
-    const token = useAuth();
+    const [accessToken] = useAuth();
 
-    if (!token) {
+    if (!accessToken) {
         return (
-            <Routes>
-                <Route path='' element={<Login />} />
-            </Routes>
+            <>
+                <Routes>
+                    <Route path='' element={<Login />} />
+                </Routes>
+                <Toaster />
+            </>
         );
     }
 
     return (
-        <Routes>
-            <Route path='' element={<Dashboard />} />
-        </Routes>
+        <>
+            <Routes>
+                <Route path='' element={<Dashboard />} />
+            </Routes>
+            <Toaster />
+        </>
     );
 };
 
