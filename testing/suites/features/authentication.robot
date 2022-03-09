@@ -1,7 +1,7 @@
 *** Settings ***
 Resource          ../resources/authentication.resource
-Test Setup        Flush Database
-Test Teardown     Flush Database
+Test Setup        Setup the test
+Test Teardown     Teardown the test
 
 *** Test Cases ***
 User with a valid account can login
@@ -30,9 +30,9 @@ User can logout
 #    Then he sees the home screen
 
 *** Keywords ***
-${user} has an account
-    &{newUser}=    Create User    ${user}    michael@example.com    Test1234!
-    Set Test Variable    \&{newUser}
+Given ${user} has an account
+    ${newUser}=    Create User    ${user}    email=michael@example.com
+    Set Test Variable    \${newUser}
 
 ${user} does not have an account
     Open the login page
@@ -45,8 +45,9 @@ ${pronoun:(s?h|x)e} sees a no valid login message
 
 ${user} logs in with valid credentials
     Open the login page
-    Input Text    username    ${newUser}[username]
+    Input Text    username    ${newUser.username}
     Input Text    current-password    Test1234!
+    Capture Page Screenshot
     Click Button    Login
 
 ${pronoun:(s?h|x)e} sees the home screen
@@ -65,10 +66,10 @@ ${pronoun:(s?h|x)e} sees a message saying to fill out the form
     Wait Until Page Contains    Please provide a password
 
 ${user} logged in with the remember me box checked
-    &{newUser}=    Create User    ${user}    michael@example.com    Test1234!
-    Set Test Variable    \&{newUser}
+    ${newUser}=    Create User    ${user}    michael@example.com    Test1234!
+    Set Test Variable    \${newUser}
     Open the app
-    Login To App    ${newUser}[username]    Test1234!    True
+    Login To App    ${newUser.username}    Test1234!    True
 
 ${pronoun:(s?h|x)e} closes the browser
     Close Browser
@@ -81,9 +82,16 @@ ${user} is on the home screen
     Run Keyword    ${user} logs in with valid credentials
 
 ${pronoun:(s?h|x)e} logouts
-    Click Button    Logout
+    Capture Page Screenshot
+    Click Button    id:logout
 
 ${pronoun:(s?h|x)e} should see the login screen
     Wait Until Page Contains    Username
     Wait Until Page Contains    Password
     Wait Until Page Contains    Login
+
+Setup the test
+    Flush database
+
+Teardown the test
+    Flush Database

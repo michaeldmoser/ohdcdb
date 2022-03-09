@@ -50,7 +50,7 @@ services:
       - ./Docker/home_vscode:/home/vscode
 
     environment:
-      - PYTHONPATH=/workspace/testing/libraries
+      - PYTHONPATH=/workspace/testing/libraries:/workspace/backend
 
     command: sleep infinity
 

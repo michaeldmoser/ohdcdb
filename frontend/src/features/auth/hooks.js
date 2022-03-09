@@ -27,5 +27,11 @@ export const useAuth = () => {
         dispatch(setToken({ access }));
     };
 
-    return [access, rememberTokens];
+    const forgetTokens = () => {
+        localStorage.removeItem('access');
+        sessionStorage.removeItem('access');
+        dispatch(setToken({ access: null }));
+    };
+
+    return [access, rememberTokens, forgetTokens];
 };

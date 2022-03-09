@@ -12,7 +12,7 @@ export const App = () => {
         return (
             <>
                 <Routes>
-                    <Route path='' element={<Login />} />
+                    <Route path='*' element={<Login />} />
                 </Routes>
                 <Toaster />
             </>
@@ -22,7 +22,7 @@ export const App = () => {
     return (
         <>
             <Routes>
-                <Route path='' element={<Dashboard />} />
+                <Route path='*' element={<Dashboard />} />
             </Routes>
             <Toaster />
         </>

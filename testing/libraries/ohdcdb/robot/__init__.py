@@ -1,1 +1,6 @@
-from .django import Django
+'''
+Robotframework utilities for working with the OHDC DB
+'''
+import django
+
+django.setup()

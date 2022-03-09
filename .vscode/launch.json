@@ -9,6 +9,10 @@
             "name": "Robot Framework: Launch template",
             "request": "launch",
             "args": ["--argumentfile", "${workspaceFolder}/testing/arguments.txt"],
+            "env": {
+                "DJANGO_SETTINGS_MODULE": "backend.settings",
+                "PYTHONPATH": "${env:PYTHONPATH};${workspaceFolder}/backend"
+            }
         },
         {
             "name": "Python: Django",

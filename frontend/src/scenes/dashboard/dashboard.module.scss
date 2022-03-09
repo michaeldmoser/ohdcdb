@@ -1,0 +1,31 @@
+$sidebarWidth: 16.25rem;
+
+header.pageheader {
+    top: 0;
+    left: 0;
+}
+
+footer.pagefooter,
+header.pageheader,
+main.dashboard {
+    margin-left: $sidebarWidth !important;
+    width: calc(100% - $sidebarWidth) !important;
+}
+
+footer.navfooter {
+    bottom: 0;
+    width: $sidebarWidth;
+}
+
+aside.sidebar {
+    width: $sidebarWidth;
+}
+
+main.dashboard {
+    margin-top: 4.5rem;
+    min-height: calc(100vh - 9rem + 1px);
+}
+
+footer.pagefooter {
+    min-height: 4.5rem;
+}
