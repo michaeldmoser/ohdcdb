@@ -1,14 +1,13 @@
 $sidebarWidth: 16.25rem;
 
-header.pageheader {
-    top: 0;
-    left: 0;
+div.mainbody {
+    margin-left: $sidebarWidth !important;
+    width: calc(100% - $sidebarWidth) !important;
 }
 
-footer.pagefooter,
-header.pageheader,
-main.dashboard {
-    margin-left: $sidebarWidth !important;
+header.pageheader {
+    top: 0;
+    left: $sidebarWidth;
     width: calc(100% - $sidebarWidth) !important;
 }
 

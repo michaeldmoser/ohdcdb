@@ -6,54 +6,38 @@ import {
     PieChart,
     BoxArrowDownLeft,
 } from 'react-bootstrap-icons';
-import { NavLink, Route, Routes } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 
 import LogoutButton from 'features/auth/LogoutButton';
 
 import styles from './dashboard.module.scss';
 
-function Properties() {
-    return (
-        <>
-            <p>Properties</p>
-        </>
-    );
-}
-
-function Organizations() {
-    return (
-        <>
-            <p>Organizations</p>
-        </>
-    );
-}
-
-function People() {
-    return (
-        <>
-            <p>People</p>
-        </>
-    );
-}
+import PageHeader from 'components/pageheader';
 
 function Dashboard() {
     const addLinkClasses = ({ isActive }) =>
         'nav-link' + (isActive ? ' active' : '');
+    const location = useLocation();
 
     return (
         <>
-            <header
-                className={
-                    styles.pageheader +
-                    ' position-fixed border-bottom border-secondary'
-                }
-            >
-                <Navbar bg='light' expand='lg'>
-                    <Container fluid>
-                        <Navbar.Brand>Dashboard</Navbar.Brand>
-                    </Container>
-                </Navbar>
-            </header>
+            <div className={styles.mainbody + ' bg-light'}>
+                <PageHeader
+                    className={styles.pageheader + ' position-fixed'}
+                    title={location.state?.pageheader}
+                />
+                <main className={styles.dashboard + ' p-3 '}>
+                    <Outlet />
+                </main>
+                <footer
+                    className={
+                        styles.pagefooter +
+                        ' p-3 border-top border-secondary bg-light'
+                    }
+                >
+                    Footer
+                </footer>
+            </div>
             <aside
                 className={styles.sidebar + ' position-fixed bg-primary vh-100'}
             >
@@ -72,7 +56,11 @@ function Dashboard() {
                         <Container fluid className='flex-column'>
                             <Nav className='flex-column'>
                                 <Nav.Item>
-                                    <NavLink to='/' className={addLinkClasses}>
+                                    <NavLink
+                                        to='/'
+                                        className={addLinkClasses}
+                                        state={{ pageheader: 'Dashboard' }}
+                                    >
                                         <PieChart /> Dashboard
                                     </NavLink>
                                 </Nav.Item>
@@ -80,6 +68,7 @@ function Dashboard() {
                                     <NavLink
                                         to='/properties'
                                         className={addLinkClasses}
+                                        state={{ pageheader: 'Properties' }}
                                     >
                                         <HouseDoor /> Properties
                                     </NavLink>
@@ -88,6 +77,7 @@ function Dashboard() {
                                     <NavLink
                                         to='/people'
                                         className={addLinkClasses}
+                                        state={{ pageheader: 'People' }}
                                     >
                                         <PeopleIcon /> People
                                     </NavLink>
@@ -96,6 +86,7 @@ function Dashboard() {
                                     <NavLink
                                         to='/organizations'
                                         className={addLinkClasses}
+                                        state={{ pageheader: 'Organizations' }}
                                     >
                                         <Building /> Organizations
                                     </NavLink>
@@ -113,21 +104,6 @@ function Dashboard() {
                     <LogoutButton />
                 </footer>
             </aside>
-            <main className={styles.dashboard + ' p-3 bg-light'}>
-                <Routes>
-                    <Route path='/properties' element={<Properties />} />
-                    <Route path='/people' element={<People />} />
-                    <Route path='/organizations' element={<Organizations />} />
-                </Routes>
-            </main>
-            <footer
-                className={
-                    styles.pagefooter +
-                    ' p-3 border-top border-secondary bg-light'
-                }
-            >
-                Footer
-            </footer>
         </>
     );
 }
