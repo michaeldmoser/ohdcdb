@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "async-mutex": "^0.3.2",
+    "jest-extended": "^2.0.0",
+    "react-bootstrap-icons": "^1.7.2"
+  }
+}

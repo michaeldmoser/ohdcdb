@@ -1,8 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { selectToken, setToken } from './slice';
+import { selectToken, setToken, reset, selectRefresh } from './slice';
 
 const getTokenFromStorage = () =>
     sessionStorage.getItem('access') || localStorage.getItem('access');
+
+const getRefreshFromStorage = () =>
+    sessionStorage.getItem('refresh') || localStorage.getItem('refresh');
 
 /*
  * Returns the current access token for authenticated API requests and a function to save token in the appropriate storage mechanism
@@ -14,8 +17,10 @@ export const useAuth = () => {
     const stateToken = useSelector(selectToken);
     const storageToken = getTokenFromStorage();
     const access = stateToken || storageToken;
+    const refresh = useSelector(selectRefresh) || getRefreshFromStorage();
+
     if (!stateToken && storageToken) {
-        dispatch(setToken({ access }));
+        dispatch(setToken({ access, refresh }));
     }
 
     const rememberTokens = (
@@ -24,13 +29,14 @@ export const useAuth = () => {
     ) => {
         const storageMedia = inLocalStorage ? localStorage : sessionStorage;
         storageMedia.setItem('access', access);
-        dispatch(setToken({ access }));
+        storageMedia.setItem('refresh', refresh);
+        dispatch(setToken({ access, refresh }));
     };
 
     const forgetTokens = () => {
         localStorage.removeItem('access');
         sessionStorage.removeItem('access');
-        dispatch(setToken({ access: null }));
+        dispatch(reset());
     };
 
     return [access, rememberTokens, forgetTokens];

@@ -4,8 +4,10 @@ import { setupServer } from 'msw/node';
 // We're using our own custom render function and not RTL's render.
 // Our custom utils also re-export everything from RTL
 // so we can import fireEvent and screen here as well
-import { render, fireEvent, screen } from 'testing/library';
+import { render, waitFor, fireEvent, screen } from 'testing/library';
+
 import App from 'App';
+import { useGetUserQuery } from 'features/auth/api';
 
 afterEach(() => {
     localStorage.clear();
@@ -56,10 +58,8 @@ describe('Test invalid authentication', () => {
 });
 
 describe('Test valid authentication', () => {
-    const access =
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ1MDE2MzI1LCJpYXQiOjE2NDUwMTYwMjUsImp0aSI6IjcwMWMwOWE4NzJkMzRjZmJhN2VhZDJmYThhNmYwMTM2IiwidXNlcl9pZCI6Mn0.voXkCBPx5LffYisQRnmRsieNKKEh9KeFEn0q4j1nBXM';
-    const refresh =
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY0NTEwMjQyNSwiaWF0IjoxNjQ1MDE2MDI1LCJqdGkiOiIwMGQ3MThhOGQxYjI0YTRkOTI5M2MwNjQ3NjFlZDk3MSIsInVzZXJfaWQiOjJ9.Cd__Z2faZ6lmGrIeWzgXzl2jB-Sch8uREzzcbqnK35k';
+    const access = 'access';
+    const refresh = 'refresh';
 
     const handlers = [
         rest.post('/api/auth/token/', (request, response, context) => {
@@ -141,5 +141,77 @@ describe('Test is already authenticated', () => {
         render(<App />);
 
         expect(await screen.findByText(/OHDC DB/)).toBeInTheDocument();
+    });
+});
+
+describe('Testing re-authorization', () => {
+    const handlers = [
+        rest.get('/api/auth/user/', (request, response, context) => {
+            if (request.headers.get('Authorization') === 'Bearer 54321') {
+                return response(
+                    context.status(200),
+                    context.json({
+                        first_name: 'Test',
+                        last_name: 'Tester',
+                    }),
+                    context.delay(1)
+                );
+            }
+
+            return response(
+                context.status(401),
+                context.json({
+                    detail: 'Given token not valid for any token type',
+                    code: 'token_not_valid',
+                    messages: [
+                        {
+                            token_class: 'AccessToken',
+                            token_type: 'access',
+                            message: 'Token is invalid or expired',
+                        },
+                    ],
+                }),
+                context.delay(1)
+            );
+        }),
+        rest.post('/api/auth/token/refresh/', (request, response, context) => {
+            return response(
+                context.status(200),
+                context.json({
+                    access: '54321',
+                }),
+                context.delay(1)
+            );
+        }),
+    ];
+
+    const server = setupServer(...handlers);
+
+    beforeAll(() => {
+        server.listen();
+    });
+
+    afterEach(() => server.resetHandlers());
+
+    afterAll(() => server.close());
+
+    it('should re-authorize when receiving a 401 unauthorized', async () => {
+        function TestComponent() {
+            const { data } = useGetUserQuery();
+            if (!data) return <div>Not logged in</div>;
+            return <div>Test</div>;
+        }
+
+        render(<TestComponent />, {
+            preloadedState: {
+                auth: {
+                    access: '1234',
+                    refresh: '54321',
+                },
+            },
+        });
+
+        await waitFor(() => screen.getByText('Test'));
+        expect(screen.getByText('Test')).toBeInTheDocument();
     });
 });

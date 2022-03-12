@@ -9,8 +9,14 @@ const userApi = api.injectEndpoints({
                 body: credentials,
             }),
         }),
+        getUser: builder.query({
+            query: () => ({
+                url: '/auth/user/',
+                method: 'GET',
+            }),
+        }),
     }),
     overrideExisting: false,
 });
 
-export const { useLoginMutation } = userApi;
+export const { useLoginMutation, useGetUserQuery } = userApi;

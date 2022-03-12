@@ -1,13 +1,17 @@
+import { useGetPeopleQuery } from './api';
+
 function People() {
+    const { data: people, isLoading } = useGetPeopleQuery();
+    if (isLoading) return <div>Loading</div>;
+
+    if (!people) return <div>No people</div>;
+
     return (
         <>
             <section aria-labelledby='people-title'>
-                <h2>People</h2>
-                <h2>People</h2>
-                <h3>People</h3>
-                <h4>People</h4>
-                <h5>People</h5>
-                <h6>People</h6>
+                {people.map(({ id, first_name }) => (
+                    <div key={id}>{first_name}</div>
+                ))}
             </section>
         </>
     );

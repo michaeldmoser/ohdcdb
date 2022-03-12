@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -10,7 +9,6 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import { useLoginMutation } from './api';
-import { setToken } from './slice';
 import { useAuth } from './hooks';
 
 const Login = () => {
@@ -18,7 +16,6 @@ const Login = () => {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [rememberMe, setRememberMe] = useState();
-    const dispatch = useDispatch();
     const [login] = useLoginMutation();
     const [, rememberTokens] = useAuth();
 
@@ -142,9 +139,11 @@ const Login = () => {
                             Copyright &copy; ZooTown Apps 2022
                         </div>
                         <div>
-                            <a href='#'>Privacy Policy</a>
+                            <a href='/privacy'>Privacy Policy</a>
                             &middot;
-                            <a href='#'>Terms &amp; Conditions</a>
+                            <a href='/terms-and-conditions'>
+                                Terms &amp; Conditions
+                            </a>
                         </div>
                     </div>
                 </div>

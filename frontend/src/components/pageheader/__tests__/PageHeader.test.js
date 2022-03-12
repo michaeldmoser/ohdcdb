@@ -2,7 +2,7 @@ import { render } from 'testing/library';
 import PageHeader from '../PageHeader';
 
 describe('Rendering the page header', () => {
-    it('should render with defaults', async () => {
+    it('should render with defaults', () => {
         const pageheader = render(<PageHeader />);
 
         expect(pageheader).toMatchSnapshot();
