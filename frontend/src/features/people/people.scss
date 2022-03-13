@@ -1,0 +1,14 @@
+section {
+    .card-body {
+        table.table {
+            td,
+            th {
+                padding: 0.9rem 0.7rem;
+
+                &:last-child {
+                    text-align: right;
+                }
+            }
+        }
+    }
+}

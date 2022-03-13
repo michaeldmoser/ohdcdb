@@ -40,4 +40,6 @@ When Rachel navigates to the people screen
 ${pronoun:(s?h|x)e} sees a list of people
     FOR    ${PERSON}    IN    @{PEOPLE_IN_DATABASE}
         Wait Until Page Contains    ${PERSON.first_name}
+        Wait Until Page Contains    ${PERSON.last_name}
+        Wait Until Page Contains    ${PERSON.email}
     END
