@@ -51,6 +51,7 @@ services:
 
     environment:
       - PYTHONPATH=/workspace/testing/libraries:/workspace/backend
+      - DJANGO_SETTINGS_MODULE=backend.settings
 
     command: sleep infinity
 

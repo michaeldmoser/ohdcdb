@@ -67,5 +67,19 @@
             },
             "problemMatcher": []
         },
+        {
+            "label": "Run Robot",
+            "type": "shell",
+            "command": "testing/scripts/run_suite.sh",
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            },
+            "problemMatcher": []
+        },
     ]
 }

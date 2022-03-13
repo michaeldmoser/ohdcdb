@@ -6,6 +6,7 @@ if [ -z "$TEST_SUITE" ]; then
     TEST_SUITE=""
 fi
 
+export DJANGO_SETTINGS_MODULE=backend.settings
 CMD="robot --console verbose --outputdir testing/reports testing/suites/$TEST_SUITE"
 
 echo ${CMD}
