@@ -8,8 +8,14 @@ export const peopleApi = api.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        getPerson: builder.query({
+            query: (personId) => ({
+                url: `/people/${personId}/`,
+                method: 'GET',
+            }),
+        }),
     }),
     overrideExisting: false,
 });
 
-export const { useGetPeopleQuery } = peopleApi;
+export const { useGetPeopleQuery, useGetPersonQuery } = peopleApi;

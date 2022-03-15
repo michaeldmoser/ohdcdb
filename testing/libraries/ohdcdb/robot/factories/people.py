@@ -17,5 +17,7 @@ class PeopleFactory(DjangoModelFactory):
 
     first_name = factory.Faker('first_name')
     last_name = factory.Faker('last_name')
-    email = factory.Faker('email')
+    email = factory.Faker('email'),
+    mobile = factory.Sequence(lambda n: f'406-555-{n:04}')
+    home = factory.Sequence(lambda n: f'406-555-{n:04}')
     date_entered = factory.Faker('past_datetime')

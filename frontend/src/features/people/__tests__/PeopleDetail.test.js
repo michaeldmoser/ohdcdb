@@ -1,11 +1,18 @@
 import React from 'react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { render, screen, waitFor } from 'testing/library';
+import {
+    render,
+    screen,
+    within,
+    waitForElementToBeRemoved,
+    getByText,
+} from 'testing/library';
 import People from '../index';
+import userEvent from '@testing-library/user-event';
 
-describe('Test displaying a list of people', () => {
-    const peopleList = [
+describe('Test displaying a person', () => {
+    const data = [
         {
             id: 1,
             first_name: 'Patty',
@@ -46,6 +53,8 @@ describe('Test displaying a list of people', () => {
             first_name: 'Nathan',
             last_name: 'Williams',
             email: 'burgessangela@example.org',
+            home: '4065552345',
+            mobile: '4065559876',
             date_entered: '2022-03-06T13:18:39.084000Z',
         },
         {
@@ -82,8 +91,16 @@ describe('Test displaying a list of people', () => {
         rest.get('/api/people/', (request, response, context) => {
             return response(
                 context.status(200),
-                context.json(peopleList),
-                context.delay(1)
+                context.json(data),
+                context.delay(100)
+            );
+        }),
+
+        rest.get('/api/people/6/', (request, response, context) => {
+            return response(
+                context.status(200),
+                context.json(data[5]),
+                context.delay(100)
             );
         }),
     ];
@@ -101,11 +118,34 @@ describe('Test displaying a list of people', () => {
     // Disable API mocking after the tests are done.
     afterAll(() => server.close());
 
-    it.each(peopleList)(
-        'should show each person from the data returned in the api',
-        async (person) => {
-            render(<People />);
-            expect(await screen.findByText(person.email)).toBeInTheDocument();
-        }
-    );
+    it('should display the details of the person clicked on', async () => {
+        render(<People />);
+
+        const person = data[5]; // Nathan Williams
+        await waitForElementToBeRemoved(() => screen.getByText('Loading'));
+
+        const regx = new RegExp(
+            `${person.first_name} ${person.last_name}`,
+            'i'
+        );
+
+        const row = screen.getByRole('row', {
+            name: regx,
+        });
+        userEvent.click(within(row).getByText(/view/i));
+
+        const container = (
+            await screen.findByRole('heading', { name: regx, level: 4 })
+        ).closest('article');
+
+        expect(
+            getByText(container, new RegExp(person.email, 'i'))
+        ).toBeInTheDocument();
+        expect(
+            getByText(container, new RegExp(person.home, 'i'))
+        ).toBeInTheDocument();
+        expect(
+            getByText(container, new RegExp(person.mobile, 'i'))
+        ).toBeInTheDocument();
+    });
 });

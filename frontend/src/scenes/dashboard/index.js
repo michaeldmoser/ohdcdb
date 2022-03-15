@@ -22,10 +22,6 @@ function Dashboard() {
     return (
         <>
             <div className={styles.mainbody + ' bg-light'}>
-                <PageHeader
-                    className={styles.pageheader + ' position-fixed'}
-                    title={location.state?.pageheader}
-                />
                 <main className={styles.dashboard + ' p-3 '}>
                     <Outlet />
                 </main>
@@ -37,6 +33,10 @@ function Dashboard() {
                 >
                     Footer
                 </footer>
+                <PageHeader
+                    className={styles.pageheader + ' position-fixed'}
+                    title={location.state?.pageheader}
+                />
             </div>
             <aside
                 className={styles.sidebar + ' position-fixed bg-primary vh-100'}

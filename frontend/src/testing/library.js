@@ -2,11 +2,14 @@
 import React from 'react';
 import { render as rtlRender } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { MemoryRouter as Router } from 'react-router-dom';
+import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 
 import configureStore from 'app/configureStore';
 
-function render(ui, { preloadedState, store, ...renderOptions } = {}) {
+function render(
+    ui,
+    { preloadedState, store, initialEntries = [], ...renderOptions } = {}
+) {
     store =
         store ||
         configureStore({
@@ -15,7 +18,11 @@ function render(ui, { preloadedState, store, ...renderOptions } = {}) {
     function Wrapper({ children }) {
         return (
             <Provider store={store}>
-                <Router>{children}</Router>
+                <Router>
+                    <Routes>
+                        <Route path='/*' element={children} />
+                    </Routes>
+                </Router>
             </Provider>
         );
     }
