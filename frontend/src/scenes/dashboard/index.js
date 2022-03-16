@@ -64,13 +64,16 @@ const Navbar = () => {
                     </NavLink>
                 </Nav.Item>
             </Nav>
+            <footer>
+                <LogoutButton />
+            </footer>
         </BootstrapNavBar>
     );
 };
 
 function Dashboard() {
     return (
-        <>
+        <div className='d-flex min-vh-100 bg-primary'>
             <Navbar />
             <Main>
                 <Outlet />
@@ -94,7 +97,7 @@ function Dashboard() {
                     <LogoutButton />
                 </footer>
             </aside> */}
-        </>
+        </div>
     );
 }
 

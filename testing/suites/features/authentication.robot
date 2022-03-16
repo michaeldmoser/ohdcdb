@@ -101,7 +101,6 @@ ${pronoun:(s?h|x)e} should see the login screen
     Wait Until Page Contains    Username
     Wait Until Page Contains    Password
     Wait Until Page Contains    Login
-
 ${user} previously logged in
     Open the app for    Rachel
 
