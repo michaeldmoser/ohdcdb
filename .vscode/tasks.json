@@ -76,9 +76,6 @@
                 "reveal": "always",
                 "panel": "new"
             },
-            "runOptions": {
-                "runOn": "folderOpen"
-            },
             "problemMatcher": []
         },
     ]
