@@ -1,6 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getTokenFromStorage, getRefreshFromStorage } from './storage';
 
-const initialState = { access: null, refresh: null };
+const initialState = {
+    access: getTokenFromStorage() || null,
+    refresh: getRefreshFromStorage() || null,
+};
 
 const slice = createSlice({
     name: 'auth',

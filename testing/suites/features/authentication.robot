@@ -23,11 +23,17 @@ User can logout
     Given Michael is on the home screen
     When he logouts
     Then he should see the login screen
-# User logs in with the remember me
-#    Given Michael logged in with the remember me box checked
-#    When he closes the browser
-#    and returns to the app
-#    Then he sees the home screen
+
+Refresh the page stays logged in
+    Given Kiran previously logged in
+    When she reloads the app
+    Then she sees the home screen
+
+User logs in with the remember me
+    Given Michael logged in with the remember me box checked
+    When he closes the browser
+    and returns to the app
+    Then he sees the home screen
 
 *** Keywords ***
 Given ${user} has an account
@@ -66,16 +72,22 @@ ${pronoun:(s?h|x)e} sees a message saying to fill out the form
     Wait Until Page Contains    Please provide a password
 
 ${user} logged in with the remember me box checked
-    ${newUser}=    Create User    ${user}    michael@example.com    Test1234!
+    ${newUser}=    Create User    ${user}    email=michael@example.com
     Set Test Variable    \${newUser}
     Open the app
     Login To App    ${newUser.username}    Test1234!    True
 
 ${pronoun:(s?h|x)e} closes the browser
+    # We just pretend we close the browser as seleniumm by default won't save localStorage for the next run
+    ${REFRESH}    Execute Javascript    localStorage.getItem('refresh')
+    ${ACCESS}    Execute Javascript    localStorage.getItem('access')
     Close Browser
+    Open the app
+    Execute Javascript    ARGUMENTS    ${REFRESH}    JAVASCRIPT    localStorage.setItem('refresh', arguments[0])
+    Execute Javascript    ARGUMENTS    ${ACCESS}    JAVASCRIPT    localStorage.setItem('access', arguments[0])
 
 returns to the app
-    Open the app
+    Reload Page
 
 ${user} is on the home screen
     Run Keyword    ${user} has an account
@@ -89,6 +101,12 @@ ${pronoun:(s?h|x)e} should see the login screen
     Wait Until Page Contains    Username
     Wait Until Page Contains    Password
     Wait Until Page Contains    Login
+
+${user} previously logged in
+    Open the app for    Rachel
+
+${pronoun:(s?h|x)e} reloads the app
+    Reload Page
 
 Setup the test
     Flush database

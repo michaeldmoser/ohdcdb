@@ -30,6 +30,9 @@ class UsersLib:
         '''
         Create a new token and add it to the sessionStorage in the brower. Note that a browser window must be open
         '''
-        tokens = RefreshToken.for_user(user)
+        refresh = RefreshToken.for_user(user)
 
-        return str(tokens.access_token)
+        return {
+            'refresh_token': str(refresh),
+            'access_token': str(refresh.access_token),
+        }

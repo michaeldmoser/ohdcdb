@@ -95,19 +95,6 @@ describe('Test valid authentication', () => {
         expect(await screen.findByText(/OHDC DB/)).toBeInTheDocument();
     });
 
-    it('should save token to localstorage when remember me is checked', async () => {
-        render(<App />);
-
-        screen.getByLabelText('Username').value = 'username';
-        screen.getByLabelText('Password').value = 'Test1234!';
-        screen.getByLabelText('Remember me').click();
-
-        fireEvent.click(screen.getByRole('button', { name: /Login/i }));
-
-        await screen.findByText(/OHDC DB/);
-        expect(localStorage.getItem('access')).toBe(access);
-    });
-
     it('should save token to sessionStorage when remember me is not checked', async () => {
         render(<App />);
 
@@ -118,29 +105,6 @@ describe('Test valid authentication', () => {
 
         await screen.findByText(/OHDC DB/);
         expect(sessionStorage.getItem('access')).toBe(access);
-    });
-});
-
-describe('Test is already authenticated', () => {
-    afterEach(() => {
-        sessionStorage.removeItem('access');
-        localStorage.removeItem('access');
-    });
-
-    it('should show the Dashboard if already authenticated via sessionStorage', async () => {
-        sessionStorage.setItem('access', '12345');
-
-        render(<App />);
-
-        expect(await screen.findByText(/OHDC DB/)).toBeInTheDocument();
-    });
-
-    it('should show the Dashboard if already authenticated via localStorage', async () => {
-        localStorage.setItem('access', '12345');
-
-        render(<App />);
-
-        expect(await screen.findByText(/OHDC DB/)).toBeInTheDocument();
     });
 });
 

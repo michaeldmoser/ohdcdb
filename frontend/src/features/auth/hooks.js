@@ -1,11 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { selectToken, setToken, reset, selectRefresh } from './slice';
-
-const getTokenFromStorage = () =>
-    sessionStorage.getItem('access') || localStorage.getItem('access');
-
-const getRefreshFromStorage = () =>
-    sessionStorage.getItem('refresh') || localStorage.getItem('refresh');
+import * as storage from './storage';
 
 /*
  * Returns the current access token for authenticated API requests and a function to save token in the appropriate storage mechanism
@@ -14,28 +9,21 @@ const getRefreshFromStorage = () =>
  */
 export const useAuth = () => {
     const dispatch = useDispatch();
-    const stateToken = useSelector(selectToken);
-    const storageToken = getTokenFromStorage();
-    const access = stateToken || storageToken;
-    const refresh = useSelector(selectRefresh) || getRefreshFromStorage();
-
-    if (!stateToken && storageToken) {
-        dispatch(setToken({ access, refresh }));
-    }
+    const access = useSelector(selectToken);
+    const refresh = useSelector(selectRefresh);
 
     const rememberTokens = (
         { access, refresh } = {},
-        inLocalStorage = false
+        inLocalStorage = storage.rememberMe()
     ) => {
         const storageMedia = inLocalStorage ? localStorage : sessionStorage;
-        storageMedia.setItem('access', access);
-        storageMedia.setItem('refresh', refresh);
+
+        storage.saveTokensToStorage({ access, refresh });
         dispatch(setToken({ access, refresh }));
     };
 
     const forgetTokens = () => {
-        localStorage.removeItem('access');
-        sessionStorage.removeItem('access');
+        storage.removeTokensFromStorage();
         dispatch(reset());
     };
 

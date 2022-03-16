@@ -7,7 +7,9 @@ import { Route, Routes } from 'react-router-dom';
 const People = () => {
     return (
         <section className='container-fluid'>
-            <h3>People</h3>
+            <header>
+                <h3>People</h3>
+            </header>
             <div className='row'>
                 <div className='col-7'>
                     <PeopleList />

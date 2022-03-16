@@ -1,44 +1,81 @@
-import { Button, Container, Nav, Navbar } from 'react-bootstrap';
+import { Container, Nav, Navbar as BootstrapNavBar } from 'react-bootstrap';
 import {
     People as PeopleIcon,
     Building,
     HouseDoor,
     PieChart,
-    BoxArrowDownLeft,
 } from 'react-bootstrap-icons';
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 
 import LogoutButton from 'features/auth/LogoutButton';
 
 import styles from './dashboard.module.scss';
 
-import PageHeader from 'components/pageheader';
+const Main = ({ children }) => (
+    <main className='col-10 bg-light p-3'>{children}</main>
+);
 
-function Dashboard() {
+const Navbar = () => {
     const addLinkClasses = ({ isActive }) =>
         'nav-link' + (isActive ? ' active' : '');
-    const location = useLocation();
 
     return (
+        <BootstrapNavBar
+            className='col-2 flex-column align-items-start p-3'
+            bg='primary'
+            variant='dark'
+        >
+            <BootstrapNavBar.Brand href='/'>OHDC DB</BootstrapNavBar.Brand>
+            <Nav className='flex-column'>
+                <Nav.Item>
+                    <NavLink
+                        to='/'
+                        className={addLinkClasses}
+                        state={{ pageheader: 'Dashboard' }}
+                    >
+                        <PieChart /> Dashboard
+                    </NavLink>
+                </Nav.Item>
+                <Nav.Item>
+                    <NavLink
+                        to='/properties'
+                        className={addLinkClasses}
+                        state={{ pageheader: 'Properties' }}
+                    >
+                        <HouseDoor /> Properties
+                    </NavLink>
+                </Nav.Item>
+                <Nav.Item>
+                    <NavLink
+                        to='/people'
+                        className={addLinkClasses}
+                        state={{ pageheader: 'People' }}
+                    >
+                        <PeopleIcon /> People
+                    </NavLink>
+                </Nav.Item>
+                <Nav.Item>
+                    <NavLink
+                        to='/organizations'
+                        className={addLinkClasses}
+                        state={{ pageheader: 'Organizations' }}
+                    >
+                        <Building /> Organizations
+                    </NavLink>
+                </Nav.Item>
+            </Nav>
+        </BootstrapNavBar>
+    );
+};
+
+function Dashboard() {
+    return (
         <>
-            <div className={styles.mainbody + ' bg-light'}>
-                <main className={styles.dashboard + ' p-3 '}>
-                    <Outlet />
-                </main>
-                <footer
-                    className={
-                        styles.pagefooter +
-                        ' p-3 border-top border-secondary bg-light'
-                    }
-                >
-                    Footer
-                </footer>
-                <PageHeader
-                    className={styles.pageheader + ' position-fixed'}
-                    title={location.state?.pageheader}
-                />
-            </div>
-            <aside
+            <Navbar />
+            <Main>
+                <Outlet />
+            </Main>
+            {/* <aside
                 className={styles.sidebar + ' position-fixed bg-primary vh-100'}
             >
                 <Container
@@ -47,54 +84,7 @@ function Dashboard() {
                 >
                     <h1 className='text-light navbar-brand'>OHDC DB</h1>
                 </Container>
-                <Container fluid className='d-flex'>
-                    <Navbar
-                        className='d-flex flex-column'
-                        bg='primary'
-                        variant='dark'
-                    >
-                        <Container fluid className='flex-column'>
-                            <Nav className='flex-column'>
-                                <Nav.Item>
-                                    <NavLink
-                                        to='/'
-                                        className={addLinkClasses}
-                                        state={{ pageheader: 'Dashboard' }}
-                                    >
-                                        <PieChart /> Dashboard
-                                    </NavLink>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <NavLink
-                                        to='/properties'
-                                        className={addLinkClasses}
-                                        state={{ pageheader: 'Properties' }}
-                                    >
-                                        <HouseDoor /> Properties
-                                    </NavLink>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <NavLink
-                                        to='/people'
-                                        className={addLinkClasses}
-                                        state={{ pageheader: 'People' }}
-                                    >
-                                        <PeopleIcon /> People
-                                    </NavLink>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <NavLink
-                                        to='/organizations'
-                                        className={addLinkClasses}
-                                        state={{ pageheader: 'Organizations' }}
-                                    >
-                                        <Building /> Organizations
-                                    </NavLink>
-                                </Nav.Item>
-                            </Nav>
-                        </Container>
-                    </Navbar>
-                </Container>
+
                 <footer
                     className={
                         styles.navfooter +
@@ -103,7 +93,7 @@ function Dashboard() {
                 >
                     <LogoutButton />
                 </footer>
-            </aside>
+            </aside> */}
         </>
     );
 }
