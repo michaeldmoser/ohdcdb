@@ -16,14 +16,16 @@ const PeopleDetail = () => {
                     {person.first_name} {person.last_name}
                 </h4>
             </header>
-            <dl className='row'>
-                <dt className='col-sm-3'>Mobile Phone</dt>
-                <dd className='col-sm-9'>{person.mobile}</dd>
-                <dt className='col-sm-3'>Home Phone</dt>
-                <dd className='col-sm-9'>{person.home}</dd>
-                <dt className='col-sm-3'>Email</dt>
-                <dd className='col-sm-9'>{person.email}</dd>
-            </dl>
+            <div className='card-body'>
+                <dl className='row'>
+                    <dt className='col-sm-3'>Mobile Phone</dt>
+                    <dd className='col-sm-9'>{person.mobile}</dd>
+                    <dt className='col-sm-3'>Home Phone</dt>
+                    <dd className='col-sm-9'>{person.home}</dd>
+                    <dt className='col-sm-3'>Email</dt>
+                    <dd className='col-sm-9'>{person.email}</dd>
+                </dl>
+            </div>
         </article>
     );
 };

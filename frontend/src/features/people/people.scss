@@ -19,8 +19,11 @@ article.list-view {
 }
 
 article.detail-view {
-    @extend .p-3;
     @extend .card;
     @extend .shadow-sm;
     @extend .rounded;
+
+    header {
+        @extend .card-header;
+    }
 }

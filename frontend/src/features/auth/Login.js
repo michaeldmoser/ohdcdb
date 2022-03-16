@@ -39,7 +39,7 @@ const Login = () => {
     };
 
     return (
-        <>
+        <div className='bg-primary d-flex flex-column min-vh-100'>
             <main>
                 <Container>
                     <Row className='justify-content-center'>
@@ -148,7 +148,7 @@ const Login = () => {
                     </div>
                 </div>
             </footer>
-        </>
+        </div>
     );
 };
 
