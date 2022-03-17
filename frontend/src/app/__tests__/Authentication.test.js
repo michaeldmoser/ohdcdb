@@ -8,6 +8,7 @@ import { render, waitFor, fireEvent, screen } from 'testing/library';
 
 import App from 'App';
 import { useGetUserQuery } from 'features/auth/api';
+import userEvent from '@testing-library/user-event';
 
 afterEach(() => {
     localStorage.clear();
@@ -87,10 +88,10 @@ describe('Test valid authentication', () => {
     it('should show the dashboard after logging in with valid credentials', async () => {
         render(<App />);
 
-        screen.getByLabelText('Username').value = 'username';
-        screen.getByLabelText('Password').value = 'Test1234!';
+        userEvent.type(screen.getByLabelText('Username'), 'username');
+        userEvent.type(screen.getByLabelText('Password'), 'Test1234!');
 
-        fireEvent.click(screen.getByRole('button', { name: /Login/i }));
+        userEvent.click(screen.getByRole('button', { name: /Login/i }));
 
         expect(await screen.findByText(/OHDC DB/)).toBeInTheDocument();
     });
@@ -98,13 +99,28 @@ describe('Test valid authentication', () => {
     it('should save token to sessionStorage when remember me is not checked', async () => {
         render(<App />);
 
-        screen.getByLabelText('Username').value = 'username';
-        screen.getByLabelText('Password').value = 'Test1234!';
+        userEvent.type(screen.getByLabelText('Username'), 'username');
+        userEvent.type(screen.getByLabelText('Password'), 'Test1234!');
 
-        fireEvent.click(screen.getByRole('button', { name: /Login/i }));
+        userEvent.click(screen.getByRole('button', { name: /Login/i }));
 
         await screen.findByText(/OHDC DB/);
         expect(sessionStorage.getItem('access')).toBe(access);
+        expect(sessionStorage.getItem('refresh')).toBe(refresh);
+    });
+
+    it('should save token to localStorage when remember me is checked', async () => {
+        render(<App />);
+
+        userEvent.type(screen.getByLabelText('Username'), 'username');
+        userEvent.type(screen.getByLabelText('Password'), 'Test1234!');
+        userEvent.click(screen.getByLabelText('Remember me'));
+
+        userEvent.click(screen.getByRole('button', { name: /Login/i }));
+
+        await screen.findByText(/OHDC DB/);
+        expect(localStorage.getItem('access')).toBe(access);
+        expect(localStorage.getItem('refresh')).toBe(refresh);
     });
 });
 

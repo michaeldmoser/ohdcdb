@@ -8,9 +8,9 @@ export const rememberMe = () => !!localStorage.getItem('access');
 
 export const saveTokensToStorage = (
     { access = getTokenFromStorage(), refresh = getRefreshFromStorage() },
-    remember
+    remember = rememberMe()
 ) => {
-    const storage = rememberMe() ? localStorage : sessionStorage;
+    const storage = remember ? localStorage : sessionStorage;
 
     storage.setItem('access', access);
     storage.setItem('refresh', refresh);
