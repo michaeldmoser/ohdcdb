@@ -8,7 +8,13 @@ import configureStore from 'app/configureStore';
 
 function render(
     ui,
-    { preloadedState, store, initialEntries = [], ...renderOptions } = {}
+    {
+        preloadedState,
+        store,
+        initialEntries = ['/'],
+        rootPath = '*',
+        ...renderOptions
+    } = {}
 ) {
     store =
         store ||
@@ -18,9 +24,9 @@ function render(
     function Wrapper({ children }) {
         return (
             <Provider store={store}>
-                <Router>
+                <Router initialEntries={initialEntries}>
                     <Routes>
-                        <Route path='/*' element={children} />
+                        <Route path={rootPath} element={children} />
                     </Routes>
                 </Router>
             </Provider>
