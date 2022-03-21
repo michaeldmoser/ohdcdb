@@ -1,54 +1,10 @@
 {
-	"imp:test:render": {
-		"scope": "javascript",
-		"prefix": "imp:test:render",
-		"body": [
-			"import { render } from 'testing/library';"
-		],
-		"description": "Import the test renderer"
-	},
+
     "useState hook": {
         "scope": "javascript",
         "prefix": "usestate",
         "body": "const [ ${1:variable}, set${1/(.*)/${1:/pascalcase}/} ] = useState();"
     },
-    "testFile": {
-        "scope": "javascript",
-        "prefix": "tintf",
-        "description": "Snipprt to create a new test file with MSW",
-        "body": [
-            "import React from 'react';",
-            "import { rest } from 'msw';",
-            "import { setupServer } from 'msw/node';",
-            "import { render, screen } from 'testing/library';",
-            "",
-            "import ${2:Sut} from '${1:/sut/path}';",
-            "",
-            "describe('${3:Describe the block of tests}', () => {",
-            "\tconst handlers = [",
-            "\t\trest.get('/api/people/', (request, response, context) => {",
-            "\t\t\treturn response(",
-            "\t\t\t\tcontext.status(200),",
-            "\t\t\t\tcontext.json(peopleList),",
-            "\t\t\t\tcontext.delay(1)",
-            "\t\t\t);",
-            "\t\t}),",
-            "\t];",
-            "\t",
-            "\tconst server = setupServer(...handlers);",
-            "\t",
-            "\tbeforeAll(() => { server.listen(); });",
-            "\t",
-            "\tafterEach(() => server.resetHandlers());",
-            "\t",
-            "\tafterAll(() => server.close());",
-            "\t",
-            "\tit('should ${4:do something interesting}', () => {",
-            "\t\trender(<${2:Sut} />);",
-            "\t\t${5:expect};",
-            "\t});",
-            "});",
-        ]
-    }
+    
 
 }

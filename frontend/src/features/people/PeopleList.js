@@ -1,13 +1,13 @@
-import { Button, Dropdown, Stack, Table } from 'react-bootstrap';
-import { ThreeDots, Eyeglasses } from 'react-bootstrap-icons';
+import { Button, Dropdown, Table } from 'react-bootstrap';
+import { ThreeDots, Eye } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 import { useGetPeopleQuery } from './api';
 
 const PeopleList = ({ className, showDetailFor }) => {
-    const { data: people, isLoading } = useGetPeopleQuery();
+    const { data: people, isLoading, isFetching } = useGetPeopleQuery();
     const navigate = useNavigate();
 
-    if (isLoading) return <div>Loading</div>;
+    if (isLoading || isFetching) return <div>Loading</div>;
 
     if (!people) return <div>No people</div>;
 
@@ -57,7 +57,7 @@ const PeopleList = ({ className, showDetailFor }) => {
                                     </Dropdown.Menu>
                                 </Dropdown>
                                 <Button onClick={() => navigate(`${id}`)}>
-                                    <Eyeglasses /> View
+                                    <Eye /> View
                                 </Button>
                             </td>
                         </tr>

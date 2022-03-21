@@ -18,12 +18,19 @@ article.list-view {
     }
 }
 
-article.detail-view {
+article.detail-view,
+article.add-view {
     @extend .card;
     @extend .shadow-sm;
     @extend .rounded;
 
-    header {
+    > header {
         @extend .card-header;
+    }
+
+    .form-floating.col {
+        > label {
+            padding-left: 1.5rem;
+        }
     }
 }
