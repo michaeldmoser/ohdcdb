@@ -129,10 +129,11 @@ describe('Test displaying a person', () => {
             'i'
         );
 
-        const row = screen.getByRole('row', {
-            name: regx,
-        });
-        userEvent.click(within(row).getByText(/view/i));
+        userEvent.click(
+            screen.getByRole('link', {
+                name: regx,
+            })
+        );
 
         const container = (
             await screen.findByRole('heading', { name: regx, level: 4 })

@@ -9,17 +9,22 @@ import AddPerson from './AddPerson';
 
 const People = () => {
     return (
-        <section className='container-fluid'>
+        <section className='container-fluid data-view'>
             <PeopleHeader />
-            <div className='row'>
-                <div className='col-7'>
-                    <PeopleList />
-                </div>
-                <div className='col-5'>
-                    <Routes>
-                        <Route path='add-person' element={<AddPerson />} />
-                        <Route path=':personId' element={<PeopleDetail />} />
-                    </Routes>
+            <div className='card'>
+                <div className='row'>
+                    <div className='col-3'>
+                        <PeopleList />
+                    </div>
+                    <div className='col-9'>
+                        <Routes>
+                            <Route path='add-person' element={<AddPerson />} />
+                            <Route
+                                path=':personId'
+                                element={<PeopleDetail />}
+                            />
+                        </Routes>
+                    </div>
                 </div>
             </div>
         </section>

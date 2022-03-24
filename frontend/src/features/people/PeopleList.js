@@ -1,6 +1,6 @@
-import { Button, Dropdown, Table } from 'react-bootstrap';
+import { Button, Dropdown, ListGroup, Table } from 'react-bootstrap';
 import { ThreeDots, Eye } from 'react-bootstrap-icons';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useGetPeopleQuery } from './api';
 
 const PeopleList = ({ className, showDetailFor }) => {
@@ -13,57 +13,21 @@ const PeopleList = ({ className, showDetailFor }) => {
 
     return (
         <article className='list-view'>
-            <h4>People</h4>
-            <Table
-                striped
-                hover
-                borderless
-                className='align-middle align-items-center'
-            >
-                <thead>
-                    <tr className='d-md-table-row d-none'>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th> </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {people.map(({ id, first_name, last_name, email }) => (
-                        <tr key={id}>
-                            <td>
+            <header className='card-header'>
+                <h4>People</h4>
+            </header>
+            <ListGroup as='ul' variant='flush'>
+                {people.map(({ id, first_name, last_name, email }) => (
+                    <ListGroup.Item as='li' className='nav-item' key={id}>
+                        <NavLink to={`${id}`} className='lh-sm'>
+                            <h5>
                                 {first_name} {last_name}
-                            </td>
-                            <td className='d-md-table-cell d-none'>
-                                <address>
-                                    <a
-                                        href={'mailto:' + email}
-                                        target='_blank'
-                                        rel='noreferrer'
-                                    >
-                                        {email}
-                                    </a>
-                                </address>
-                            </td>
-                            <td className='d-md-flex flex-row-reverse d-none'>
-                                <Dropdown>
-                                    <Dropdown.Toggle id={id}>
-                                        <ThreeDots />
-                                    </Dropdown.Toggle>
-                                    <Dropdown.Menu>
-                                        <Dropdown.Item>Remove</Dropdown.Item>
-                                        <Dropdown.Item>
-                                            Something else
-                                        </Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                                <Button onClick={() => navigate(`${id}`)}>
-                                    <Eye /> View
-                                </Button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
+                            </h5>
+                            <span className='text-muted'>{email}</span>
+                        </NavLink>
+                    </ListGroup.Item>
+                ))}
+            </ListGroup>
         </article>
     );
 };

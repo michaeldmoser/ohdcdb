@@ -1,7 +1,7 @@
 *** Settings ***
 Resource          ../resources/common.resource
 Resource          ../resources/authentication.resource
-Resource          ../resources/authentication.resource
+Resource          ../resources/locators.resource
 Library           ohdcdb.robot.django.Django
 Suite Setup       Flush Database
 Test Teardown     Flush Database
@@ -15,7 +15,7 @@ Can view a list of people
 
 Can view the details of a person
     Given Rachel is viewing the list of people
-    When she clicks the view button for a person
+    When she clicks to view the details of a person
     Then she sees the details screen for that person
 
 Can add a new person to the database
@@ -59,26 +59,27 @@ Rachel is viewing the list of people
     Rachel has the app open
     Rachel navigates to the people screen
 
-${pronoun:(s?h|x)e} clicks the view button for a person
-    Click Button    //*[contains(text(), "${PEOPLE_IN_DATABASE[0].email}")]/ancestor::tr//button[contains(text(), "View")]
+${pronoun:(s?h|x)e} clicks to view the details of a person
+    Wait Until Page Contains Element    //*[contains(text(), '${PEOPLE_IN_DATABASE[0].email}')]
+    Click Element    //*[contains(text(), '${PEOPLE_IN_DATABASE[0].email}')]
 
 ${pronoun:(s?h|x)e} sees the details screen for that person
-    Wait Until Element Contains    //article//header//h4    ${PEOPLE_IN_DATABASE[0].first_name}${SPACE}${PEOPLE_IN_DATABASE[0].last_name}
-    Page Should Contain Element    //article//dl/dt[contains(text(), 'Email')]
-    Page Should Contain Element    //article//dl/dd[contains(text(), '${PEOPLE_IN_DATABASE[0].email}')]
-    Page Should Contain Element    //article//dl/dt[contains(text(), 'Home Phone')]
-    Page Should Contain Element    //article//dl/dd[contains(text(), '${PEOPLE_IN_DATABASE[0].home}')]
-    Page Should Contain Element    //article//dl/dt[contains(text(), 'Mobile Phone')]
-    Page Should Contain Element    //article//dl/dd[contains(text(), '${PEOPLE_IN_DATABASE[0].mobile}')]
+    Wait Until Element Contains    ${DETAIL_ARTICLE}    ${PEOPLE_IN_DATABASE[0].first_name}${SPACE}${PEOPLE_IN_DATABASE[0].last_name}
+    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dt[contains(., 'Email')]
+    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., '${PEOPLE_IN_DATABASE[0].email}')]
+    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dt[contains(., 'Home Phone')]
+    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., '${PEOPLE_IN_DATABASE[0].home}')]
+    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dt[contains(., 'Mobile Phone')]
+    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., '${PEOPLE_IN_DATABASE[0].mobile}')]
 
 ${pronoun:(s?h|x)e} sees the details screen for the new person
-    Wait Until Element Contains    //article//header//h4    Bill${SPACE}Billson
-    Page Should Contain Element    //article//dl/dt[contains(text(), 'Email')]
-    Page Should Contain Element    //article//dl/dd[contains(text(), 'bill.billson@example.com')]
-    Page Should Contain Element    //article//dl/dt[contains(text(), 'Mobile Phone')]
-    Page Should Contain Element    //article//dl/dd[contains(text(), '406')]
-    Page Should Contain Element    //article//dl/dd[contains(text(), '555')]
-    Page Should Contain Element    //article//dl/dd[contains(text(), '1234')]
+    Wait Until Element Contains    ${DETAIL_ARTICLE}    Bill${SPACE}Billson
+    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dt[contains(., 'Email')]
+    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., 'bill.billson@example.com')]
+    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dt[contains(., 'Mobile Phone')]
+    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., '406')]
+    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., '555')]
+    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., '1234')]
 
 ${pronoun:(s?h|x)e} adds a new person to the database
     Click Button    Add Person
@@ -90,4 +91,4 @@ ${pronoun:(s?h|x)e} adds a new person to the database
     Click Button    Save
 
 ${pronoun:(s?h|x)e} sees the person in the list view
-    Wait Until Element Contains    xpath://article//table    Billson
+    Wait Until Element Contains    ${LIST_ARTICLE}    Billson

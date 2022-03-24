@@ -120,7 +120,7 @@ describe('Adding a person to the database', () => {
         });
 
         expect(
-            await screen.findByRole('row', {
+            await screen.findByRole('link', {
                 name: regx,
             })
         ).toBeInTheDocument();
