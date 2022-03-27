@@ -48,6 +48,7 @@ export const peopleList = [
         first_name: 'Alicia',
         last_name: 'Carter',
         email: 'bnelson@example.net',
+        mobile: '406-555-1234',
         date_entered: '2022-03-06T13:18:39.106000Z',
     },
     {

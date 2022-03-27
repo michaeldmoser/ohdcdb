@@ -13,8 +13,8 @@ const PeopleList = ({ className, showDetailFor }) => {
 
     return (
         <article className='list-view'>
-            <header className='card-header'>
-                <h4>People</h4>
+            <header className='visually-hidden'>
+                <h4>List of People</h4>
             </header>
             <ListGroup as='ul' variant='flush'>
                 {people.map(({ id, first_name, last_name, email }) => (

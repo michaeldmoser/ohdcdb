@@ -58,7 +58,7 @@
     article.detail-view,
     article.add-view {
         > header {
-            @extend .card-header;
+            @extend .p-3;
         }
 
         .form-floating.col {

@@ -3,9 +3,10 @@ import './people.scss';
 import { Route, Routes } from 'react-router-dom';
 
 import PeopleList from './PeopleList';
-import PeopleDetail from './PeopleDetail';
+import PersonDetail from './PersonDetail';
 import PeopleHeader from './PeopleHeader';
 import AddPerson from './AddPerson';
+import EditPerson from './EditPerson';
 
 const People = () => {
     return (
@@ -21,7 +22,11 @@ const People = () => {
                             <Route path='add-person' element={<AddPerson />} />
                             <Route
                                 path=':personId'
-                                element={<PeopleDetail />}
+                                element={<PersonDetail />}
+                            />
+                            <Route
+                                path=':personId/edit'
+                                element={<EditPerson />}
                             />
                         </Routes>
                     </div>

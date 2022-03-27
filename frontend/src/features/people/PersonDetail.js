@@ -1,7 +1,8 @@
-import { useParams } from 'react-router-dom';
+import { Nav } from 'react-bootstrap';
+import { NavLink, useParams } from 'react-router-dom';
 import { useGetPersonQuery } from './api';
 
-const PeopleDetail = () => {
+const PersonDetail = () => {
     const { personId } = useParams();
     const { data: person, isLoading } = useGetPersonQuery(personId);
 
@@ -11,10 +12,23 @@ const PeopleDetail = () => {
 
     return (
         <article className='detail-view'>
-            <header>
+            <header className='d-flex'>
                 <h4>
                     {person.first_name} {person.last_name}
                 </h4>
+                <nav className='ms-auto'>
+                    <Nav as='ul'>
+                        <Nav.Item as='li'>
+                            <NavLink
+                                to='edit'
+                                className='btn btn-primary'
+                                role='button'
+                            >
+                                Edit
+                            </NavLink>
+                        </Nav.Item>
+                    </Nav>
+                </nav>
             </header>
             <div className='card-body'>
                 <dl className='row'>
@@ -30,4 +44,4 @@ const PeopleDetail = () => {
     );
 };
 
-export default PeopleDetail;
+export default PersonDetail;

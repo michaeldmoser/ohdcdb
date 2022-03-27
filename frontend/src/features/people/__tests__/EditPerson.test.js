@@ -1,0 +1,166 @@
+import React from 'react';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+import { render, screen, getByText } from 'testing/library';
+import { peopleList, baseHandlers } from './utils';
+
+import People from '../index';
+import userEvent from '@testing-library/user-event';
+
+describe('Change some details about a person', () => {
+    let person = { ...peopleList[6] };
+
+    const handlers = [
+        rest.get(`/api/people/${person.id}/`, (request, response, context) => {
+            return response(
+                context.status(200),
+                context.json(person),
+                context.delay(1)
+            );
+        }),
+        rest.put(`/api/people/${person.id}/`, (req, res, ctx) => {
+            person = { ...person, ...req.body };
+            return res(ctx.json(person));
+        }),
+        rest.get('/api/people/', (request, response, context) => {
+            return response(context.json([person]));
+        }),
+    ];
+
+    const server = setupServer(...handlers);
+
+    beforeAll(() => {
+        server.listen();
+    });
+
+    beforeEach(() => {
+        person = { ...peopleList[6] };
+    });
+
+    afterEach(() => server.resetHandlers());
+
+    afterAll(() => server.close());
+
+    it("should be able to change a person's details", async () => {
+        render(<People />, {
+            rootPath: '/people/*',
+            initialEntries: [`/people/${person.id}/edit`],
+        });
+
+        const updatedDetails = {
+            first_name: 'Firstname',
+            last_name: 'Lastname',
+            email: 'email@example.com',
+            mobile: '406-555-7474',
+        };
+
+        userEvent.type(
+            await screen.findByLabelText(/First Name/i),
+            updatedDetails.first_name
+        );
+        userEvent.type(
+            await screen.findByLabelText(/Last Name/i),
+            updatedDetails.last_name
+        );
+        userEvent.type(
+            await screen.findByLabelText(/Email/i),
+            updatedDetails.email
+        );
+        userEvent.type(
+            await screen.findByLabelText(/Mobile/i),
+            updatedDetails.mobile
+        );
+
+        userEvent.click(screen.getByRole('button', { name: /Save/i }));
+
+        const regx = new RegExp(
+            `${updatedDetails.first_name} ${updatedDetails.last_name}`,
+            'i'
+        );
+        const container = (
+            await screen.findByRole('heading', {
+                name: regx,
+                level: 4,
+            })
+        ).closest('article');
+
+        expect(
+            getByText(container, new RegExp(updatedDetails.email, 'i'))
+        ).toBeInTheDocument();
+        expect(
+            getByText(container, new RegExp(updatedDetails.mobile, 'i'))
+        ).toBeInTheDocument();
+    });
+
+    it("should populate the form fields with the person's data", async () => {
+        render(<People />, {
+            rootPath: '/people/*',
+            initialEntries: [`/people/${person.id}/edit`],
+        });
+
+        expect(
+            await screen.findByRole('textbox', {
+                name: /first name/i,
+            })
+        ).toHaveValue(person.first_name);
+        expect(
+            await screen.findByRole('textbox', {
+                name: /last name/i,
+            })
+        ).toHaveValue(person.last_name);
+        expect(
+            await screen.findByRole('textbox', {
+                name: /email address/i,
+            })
+        ).toHaveValue(person.email);
+        expect(
+            await screen.findByRole('textbox', {
+                name: /mobile phone/i,
+            })
+        ).toHaveValue(person.mobile);
+    });
+
+    it('should update the list of people', async () => {
+        render(<People />, {
+            rootPath: '/people/*',
+            initialEntries: [`/people/${person.id}/edit`],
+        });
+
+        const updatedDetails = {
+            first_name: 'Firstname',
+            last_name: 'Lastname',
+            email: 'email@example.com',
+            mobile: '406-555-7474',
+        };
+
+        userEvent.type(
+            await screen.findByLabelText(/First Name/i),
+            updatedDetails.first_name
+        );
+        userEvent.type(
+            await screen.findByLabelText(/Last Name/i),
+            updatedDetails.last_name
+        );
+        userEvent.type(
+            await screen.findByLabelText(/Email/i),
+            updatedDetails.email
+        );
+        userEvent.type(
+            await screen.findByLabelText(/Mobile/i),
+            updatedDetails.mobile
+        );
+
+        userEvent.click(screen.getByRole('button', { name: /Save/i }));
+
+        const regx = new RegExp(
+            `${updatedDetails.first_name} ${updatedDetails.last_name}`,
+            'i'
+        );
+
+        expect(
+            await screen.findByRole('link', {
+                name: regx,
+            })
+        ).toBeInTheDocument();
+    });
+});

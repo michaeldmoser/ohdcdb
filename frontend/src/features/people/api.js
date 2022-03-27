@@ -9,7 +9,13 @@ export const peopleApi = api.injectEndpoints({
                     method: 'GET',
                 };
             },
-            providesTags: ['People'],
+            providesTags: (result, error, arg) =>
+                result
+                    ? [
+                          ...result.map(({ id }) => ({ type: 'People', id })),
+                          'People',
+                      ]
+                    : ['People'],
         }),
         getPerson: builder.query({
             query: (personId) => ({
@@ -26,9 +32,21 @@ export const peopleApi = api.injectEndpoints({
             }),
             invalidatesTags: ({ id }) => ['People', { type: 'People', id }],
         }),
+        editPerson: builder.mutation({
+            query: (person) => ({
+                url: `/people/${person.id}/`,
+                method: 'PUT',
+                body: person,
+            }),
+            invalidatesTags: ({ id }) => [{ type: 'People', id }],
+        }),
     }),
     overrideExisting: false,
 });
 
-export const { useGetPeopleQuery, useGetPersonQuery, useAddPersonMutation } =
-    peopleApi;
+export const {
+    useGetPeopleQuery,
+    useGetPersonQuery,
+    useAddPersonMutation,
+    useEditPersonMutation,
+} = peopleApi;

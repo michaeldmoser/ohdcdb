@@ -26,17 +26,17 @@ Can add a new person to the database
 
 Can edit a person in the database
     Given Rachel is viewing a person
-    When she changes somes details for that person
-    Then she sees the details screen for that person
+    When she changes some details for the person
+    Then she sees the updated details screen for that person
 
 Can search for people
 # Should be more specific about the search, ie: search by first name, search by last name, email, etc... What criteria do we want?
     Given Rachel is viewing the list of people
-    When she enters a search
+    When She enters a search
     Then she should see a list of people matching the search
 
 *** Keywords ***
-there are people in the database
+There are people in the database
     @{PEOPLE_IN_DATABASE}    Add people to database    10
     Set Test Variable    \@{PEOPLE_IN_DATABASE}
 
@@ -92,3 +92,28 @@ ${pronoun:(s?h|x)e} adds a new person to the database
 
 ${pronoun:(s?h|x)e} sees the person in the list view
     Wait Until Element Contains    ${LIST_ARTICLE}    Billson
+
+Rachel is viewing a person
+    there are people in the database
+    Open the app for    Rachel
+    Set Test Variable    ${PERSON}    ${PEOPLE_IN_DATABASE[0]}
+    Go To    ${APP_URL}/people/${PERSON.id}
+    Wait Until Element Contains    ${DETAIL_ARTICLE}    ${PERSON.first_name}
+
+${pronoun:(s?h|x)e} changes some details for the person
+    Click Link    ${DETAIL_ARTICLE}//a[contains(., 'Edit')]
+    Wait Until Page Contains    Update ${PERSON.first_name} ${PERSON.last_name}
+    Textfield Should Contain    first_name    ${PERSON.first_name}
+    Textfield Should Contain    last_name    ${PERSON.last_name}
+    Textfield Should Contain    email    ${PERSON.email}
+    Textfield Should Contain    mobile    ${PERSON.mobile}
+    Input Text    email    person1@example.com
+    Input Text    mobile    406-555-9876
+    Click Button    Save
+
+${pronoun:(s?h|x)e} sees the updated details screen for that person
+    Wait Until Element Contains    ${DETAIL_ARTICLE}    ${PERSON.first_name}${SPACE}${PERSON.last_name}
+    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., 'person1@example.com')]
+    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., '406')]
+    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., '555')]
+    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., '9876')]
