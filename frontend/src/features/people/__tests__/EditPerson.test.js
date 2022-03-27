@@ -2,10 +2,9 @@ import React from 'react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import { render, screen, getByText } from 'testing/library';
-import { peopleList, baseHandlers } from './utils';
+import { peopleList, fillOutFormTheForm, submitTheForm } from './utils';
 
 import People from '../index';
-import userEvent from '@testing-library/user-event';
 
 describe('Change some details about a person', () => {
     let person = { ...peopleList[6] };
@@ -54,24 +53,8 @@ describe('Change some details about a person', () => {
             mobile: '406-555-7474',
         };
 
-        userEvent.type(
-            await screen.findByLabelText(/First Name/i),
-            updatedDetails.first_name
-        );
-        userEvent.type(
-            await screen.findByLabelText(/Last Name/i),
-            updatedDetails.last_name
-        );
-        userEvent.type(
-            await screen.findByLabelText(/Email/i),
-            updatedDetails.email
-        );
-        userEvent.type(
-            await screen.findByLabelText(/Mobile/i),
-            updatedDetails.mobile
-        );
-
-        userEvent.click(screen.getByRole('button', { name: /Save/i }));
+        await fillOutFormTheForm(updatedDetails);
+        submitTheForm();
 
         const regx = new RegExp(
             `${updatedDetails.first_name} ${updatedDetails.last_name}`,
@@ -133,24 +116,8 @@ describe('Change some details about a person', () => {
             mobile: '406-555-7474',
         };
 
-        userEvent.type(
-            await screen.findByLabelText(/First Name/i),
-            updatedDetails.first_name
-        );
-        userEvent.type(
-            await screen.findByLabelText(/Last Name/i),
-            updatedDetails.last_name
-        );
-        userEvent.type(
-            await screen.findByLabelText(/Email/i),
-            updatedDetails.email
-        );
-        userEvent.type(
-            await screen.findByLabelText(/Mobile/i),
-            updatedDetails.mobile
-        );
-
-        userEvent.click(screen.getByRole('button', { name: /Save/i }));
+        await fillOutFormTheForm(updatedDetails);
+        submitTheForm();
 
         const regx = new RegExp(
             `${updatedDetails.first_name} ${updatedDetails.last_name}`,

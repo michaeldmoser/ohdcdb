@@ -1,4 +1,6 @@
 import { rest } from 'msw';
+import userEvent from '@testing-library/user-event';
+import { screen } from '@testing-library/react';
 
 export const peopleList = [
     {
@@ -83,3 +85,26 @@ export const baseHandlers = [
         );
     }),
 ];
+
+export const openAddPersonForm = () => {
+    userEvent.click(screen.getByRole('button', { name: 'Add Person' }));
+};
+
+export const fillOutFormTheForm = async ({
+    first_name,
+    last_name,
+    email,
+    mobile,
+}) => {
+    first_name &&
+        userEvent.type(await screen.findByLabelText(/First Name/i), first_name);
+    last_name &&
+        userEvent.type(await screen.findByLabelText(/Last Name/i), last_name);
+    mobile &&
+        userEvent.type(await screen.findByLabelText(/Mobile Phone/i), mobile);
+    email && userEvent.type(await screen.findByLabelText(/Email/i), email);
+};
+
+export const submitTheForm = () => {
+    userEvent.click(screen.getByRole('button', { name: /Save/i }));
+};

@@ -12,6 +12,8 @@ import userEvent from '@testing-library/user-event';
 import AddPerson from '../AddPerson';
 import People from '../index';
 
+import { openAddPersonForm, fillOutFormTheForm, submitTheForm } from './utils';
+
 it('should add a person to the database', () => {
     render(<AddPerson />);
 });
@@ -43,27 +45,6 @@ describe('Adding a person to the database', () => {
 
     const server = setupServer(...handlers);
 
-    const fillOutFormTheForm = async () => {
-        userEvent.click(screen.getByRole('button', { name: 'Add Person' }));
-        userEvent.type(
-            await screen.findByLabelText(/First Name/i),
-            person.first_name
-        );
-        userEvent.type(
-            await screen.findByLabelText(/Last Name/i),
-            person.last_name
-        );
-        userEvent.type(
-            await screen.findByLabelText(/Mobile Phone/i),
-            person.mobile
-        );
-        userEvent.type(await screen.findByLabelText(/Email/i), person.email);
-    };
-
-    const submitTheForm = () => {
-        userEvent.click(screen.getByRole('button', { name: /Save/i }));
-    };
-
     beforeAll(() => {
         server.listen();
     });
@@ -82,7 +63,8 @@ describe('Adding a person to the database', () => {
             initialEntries: ['/people'],
         });
 
-        await fillOutFormTheForm();
+        openAddPersonForm();
+        await fillOutFormTheForm(person);
         submitTheForm();
         const regx = new RegExp(
             `${person.first_name} ${person.last_name}`,
@@ -109,8 +91,8 @@ describe('Adding a person to the database', () => {
             initialEntries: ['/people'],
         });
 
-        await waitForElementToBeRemoved(() => screen.queryByText(/loading/i));
-        await fillOutFormTheForm();
+        openAddPersonForm();
+        await fillOutFormTheForm(person);
         submitTheForm();
 
         const regx = new RegExp(person.first_name, 'i');
