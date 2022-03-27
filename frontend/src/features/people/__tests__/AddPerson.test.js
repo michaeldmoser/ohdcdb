@@ -1,13 +1,7 @@
 import React from 'react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import {
-    render,
-    screen,
-    getByText,
-    waitForElementToBeRemoved,
-} from 'testing/library';
-import userEvent from '@testing-library/user-event';
+import { render, screen, getByText } from 'testing/library';
 
 import AddPerson from '../AddPerson';
 import People from '../index';
