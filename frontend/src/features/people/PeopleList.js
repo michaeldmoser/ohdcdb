@@ -1,13 +1,11 @@
-import { Button, Dropdown, ListGroup, Table } from 'react-bootstrap';
-import { ThreeDots, Eye } from 'react-bootstrap-icons';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { ListGroup } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 import { useGetPeopleQuery } from './api';
 
 const PeopleList = ({ className, showDetailFor }) => {
-    const { data: people, isLoading, isFetching } = useGetPeopleQuery();
-    const navigate = useNavigate();
+    const { data: people, isLoading } = useGetPeopleQuery();
 
-    if (isLoading || isFetching) return <div>Loading</div>;
+    if (isLoading) return <div>Loading</div>;
 
     if (!people) return <div>No people</div>;
 
