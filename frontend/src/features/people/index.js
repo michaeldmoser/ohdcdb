@@ -1,4 +1,5 @@
 import './people.scss';
+import { useState } from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 
@@ -9,13 +10,15 @@ import AddPerson from './AddPerson';
 import EditPerson from './EditPerson';
 
 const People = () => {
+    const [query, setSearchQuery] = useState('');
+
     return (
         <section className='container-fluid data-view'>
-            <PeopleHeader />
+            <PeopleHeader query={query} setSearchQuery={setSearchQuery} />
             <div className='card'>
                 <div className='row'>
                     <div className='col-3'>
-                        <PeopleList />
+                        <PeopleList query={query} />
                     </div>
                     <div className='col-9'>
                         <Routes>

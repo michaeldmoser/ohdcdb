@@ -78,9 +78,17 @@ export const peopleList = [
 
 export const baseHandlers = [
     rest.get('/api/people/', (request, response, context) => {
+        const search = request.url.searchParams.get('search');
+
+        const results = search
+            ? peopleList.filter(({ first_name, last_name, email }) =>
+                  [first_name, last_name, email].join(' ').includes(search)
+              )
+            : peopleList;
+
         return response(
             context.status(200),
-            context.json(peopleList),
+            context.json(results),
             context.delay(1)
         );
     }),

@@ -117,3 +117,13 @@ ${pronoun:(s?h|x)e} sees the updated details screen for that person
     Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., '406')]
     Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., '555')]
     Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., '9876')]
+
+${pronoun:(s?h|x)e} enters a search
+    Set Test Variable    ${PERSON}    ${PEOPLE_IN_DATABASE[1]}
+    Input Text    search    ${PERSON.email}
+
+${pronoun:(s?h|x)e} should see a list of people matching the search
+    Wait Until Page Does Not Contain    ${PEOPLE_IN_DATABASE[0].email}
+    Wait Until Page Contains    ${PERSON.email}
+
+

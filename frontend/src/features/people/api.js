@@ -3,9 +3,9 @@ import { api } from 'app/api';
 export const peopleApi = api.injectEndpoints({
     endpoints: (builder) => ({
         getPeople: builder.query({
-            query: () => {
+            query: (search) => {
                 return {
-                    url: '/people/',
+                    url: '/people/' + (search && `?search=${search}`),
                     method: 'GET',
                 };
             },

@@ -2,8 +2,8 @@ import { ListGroup } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { useGetPeopleQuery } from './api';
 
-const PeopleList = ({ className, showDetailFor }) => {
-    const { data: people, isLoading } = useGetPeopleQuery();
+const PeopleList = ({ className, showDetailFor, query = '' }) => {
+    const { data: people, isLoading } = useGetPeopleQuery(query);
 
     if (isLoading) return <div>Loading</div>;
 
