@@ -28,18 +28,9 @@
     ],
     "sqltools.useNodeRuntime": true,
     "robot.language-server.python": "/usr/local/bin/python",
-    "robot.pythonpath": [
-        "/workspace/testing/libraries",
-        "/workspace/backend"
-    ],
-    "python.testing.unittestArgs": [
-        "-v",
-        "-s",
-        "./backend",
-        "-p",
-        "test_*.py"
-    ],
-    "python.testing.pytestEnabled": false,
+    "robot.pythonpath": ["/workspace/testing/libraries", "/workspace/backend"],
+    "python.testing.unittestArgs": ["-v", "-s", "./backend", "-p", "test_*.py"],
+    "python.testing.pytestEnabled": true,
     "python.testing.unittestEnabled": true,
     "python.djangoTestRunner.prefixCommand": "cd /workspace/backend && ",
     "zenMode.hideLineNumbers": false
