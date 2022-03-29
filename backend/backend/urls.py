@@ -29,7 +29,7 @@ urlpatterns = [
          name='token_obtain_pair'),
     path('api/auth/token/refresh/',
          TokenRefreshView.as_view(), name='token_refresh'),
-    path('', include('people.urls')),
+    path('', include('people.urls'), name='people'),
     re_path(r"^$", render_react),
     re_path(r"^(?:.*)/?$", render_react),
 ]

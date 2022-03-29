@@ -1,8 +1,8 @@
 '''
 People objects api
 '''
-from rest_framework import viewsets, permissions
 import django_filters.rest_framework
+from rest_framework import viewsets, permissions
 from rest_framework import filters
 
 from .models import People
@@ -20,7 +20,8 @@ class PeopleViewSet(viewsets.ModelViewSet):
 
     filter_backends = [filters.SearchFilter]
     search_fields = ['first_name', 'last_name', 'email']
-    queryset = People.objects.all()
+    queryset = People.objects.all().order_by('first_name',
+                                             'last_name')  # pylint: disable=no-member
 
     def perform_create(self, serializer):
         serializer.save()

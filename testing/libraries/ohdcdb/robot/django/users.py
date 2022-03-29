@@ -3,7 +3,7 @@ from robotlibcore import keyword
 
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from ..factories.users import UserFactory
+from ...factories.users import UserFactory
 
 
 class UsersLib:

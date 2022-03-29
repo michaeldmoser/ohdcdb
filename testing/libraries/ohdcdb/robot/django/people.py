@@ -1,6 +1,6 @@
 '''Tools for working with Django People objects in Robotframework'''
 from robotlibcore import keyword
-from ..factories.people import PeopleFactory
+from ...factories.people import PeopleFactory
 
 
 class PeopleLib:  # pylint: disable=too-few-public-methods

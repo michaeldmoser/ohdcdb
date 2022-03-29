@@ -33,5 +33,6 @@
     "python.testing.pytestEnabled": true,
     "python.testing.unittestEnabled": true,
     "python.djangoTestRunner.prefixCommand": "cd /workspace/backend && ",
-    "zenMode.hideLineNumbers": false
+    "zenMode.hideLineNumbers": false,
+    "robot.lint.undefinedKeywords": false
 }

@@ -125,5 +125,3 @@ ${pronoun:(s?h|x)e} enters a search
 ${pronoun:(s?h|x)e} should see a list of people matching the search
     Wait Until Page Does Not Contain    ${PEOPLE_IN_DATABASE[0].email}
     Wait Until Page Contains    ${PERSON.email}
-
-
