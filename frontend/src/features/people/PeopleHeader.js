@@ -16,31 +16,29 @@ const PeopleHeader = ({ query, setSearchQuery }) => {
     };
 
     return (
-        <Container as='header' fluid className='mb-3'>
-            <Row>
-                <Col as='h3' sm={2}>
-                    People
-                </Col>
-                <Col sm={8}>
-                    <Form.Control
-                        type='search'
-                        name='search'
-                        placeholder='Search people'
-                        required
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        value={query}
-                    />
-                </Col>
-                <Col sm={2} className='d-flex align-items-center'>
-                    <Button
-                        className='ms-auto'
-                        size='sm'
-                        onClick={navigateToAddPersonForm}
-                    >
-                        Add Person
-                    </Button>
-                </Col>
-            </Row>
+        <Container as='header' fluid className='mb-3 row'>
+            <Col as='h3' sm={2}>
+                People
+            </Col>
+            <Col sm={8}>
+                <Form.Control
+                    type='search'
+                    name='search'
+                    placeholder='Search people'
+                    required
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    value={query}
+                />
+            </Col>
+            <Col sm={2} className='d-flex align-items-center'>
+                <Button
+                    className='ms-auto'
+                    size='sm'
+                    onClick={navigateToAddPersonForm}
+                >
+                    Add Person
+                </Button>
+            </Col>
         </Container>
     );
 };

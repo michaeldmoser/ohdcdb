@@ -1,46 +1,23 @@
-import { Nav } from 'react-bootstrap';
-import { NavLink, useParams } from 'react-router-dom';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import { useGetPersonQuery } from './api';
+
+import DetailsView, { Body, Field, Header } from 'components/detailsview';
 
 const PersonDetail = () => {
     const { personId } = useParams();
     const { data: person, isLoading } = useGetPersonQuery(personId);
 
-    if (isLoading) return <h4>Loading...</h4>;
-
-    if (!person) return <div>Not found</div>;
-
     return (
-        <article className='detail-view'>
-            <header className='d-flex'>
-                <h4>
-                    {person.first_name} {person.last_name}
-                </h4>
-                <nav className='ms-auto'>
-                    <Nav as='ul'>
-                        <Nav.Item as='li'>
-                            <NavLink
-                                to='edit'
-                                className='btn btn-primary'
-                                role='button'
-                            >
-                                Edit
-                            </NavLink>
-                        </Nav.Item>
-                    </Nav>
-                </nav>
-            </header>
-            <div className='card-body'>
-                <dl className='row'>
-                    <dt className='col-sm-3'>Mobile Phone</dt>
-                    <dd className='col-sm-9'>{person.mobile}</dd>
-                    <dt className='col-sm-3'>Home Phone</dt>
-                    <dd className='col-sm-9'>{person.home}</dd>
-                    <dt className='col-sm-3'>Email</dt>
-                    <dd className='col-sm-9'>{person.email}</dd>
-                </dl>
-            </div>
-        </article>
+        <DetailsView data={person} isLoading={isLoading}>
+            <Body>
+                <Field value={person?.mobile} label='Mobile phone' />
+                <Field value={person?.email} label='Email' />
+            </Body>
+            <Header>
+                {person?.first_name} {person?.last_name}
+            </Header>
+        </DetailsView>
     );
 };
 
