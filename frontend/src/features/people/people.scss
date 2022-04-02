@@ -1,7 +1,13 @@
 @import 'index.scss';
 
 .data-view {
+    > header:first-child {
+        height: 3.125rem;
+    }
+
     > .card {
+        height: calc(100% - 4.125rem);
+
         > .row {
             --bs-gutter-x: 0;
 
@@ -32,9 +38,6 @@
                         --bs-bg-opacity: 0.15;
                         @extend .bg-success;
                         color: $green-700;
-
-                        span.text-muted {
-                        }
                     }
 
                     * {

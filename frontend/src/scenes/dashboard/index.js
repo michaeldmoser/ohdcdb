@@ -12,7 +12,9 @@ import LogoutButton from 'features/auth/LogoutButton';
 import styles from './dashboard.module.scss';
 
 const Main = ({ children }) => (
-    <main className='col-10 bg-light p-3'>{children}</main>
+    <main className='col-10 bg-light p-3 vh-100 overflow-hidden'>
+        {children}
+    </main>
 );
 
 const Navbar = () => {

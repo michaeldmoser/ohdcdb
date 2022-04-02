@@ -1,13 +1,7 @@
 import './people.scss';
 import { useState } from 'react';
 
-import {
-    Route,
-    Routes,
-    useLocation,
-    useMatch,
-    matchPath,
-} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import PeopleList from './PeopleList';
 import PersonDetail from './PersonDetail';
@@ -18,7 +12,7 @@ import EditPerson from './EditPerson';
 const ListOnly = ({ query }) => {
     return (
         <>
-            <div className='col-md-3 col-12'>
+            <div className='col-lg-3 col-12 h-100 overflow-scroll'>
                 <PeopleList query={query} />
             </div>
         </>
@@ -28,7 +22,7 @@ const ListOnly = ({ query }) => {
 const ListWithDetails = ({ query }) => {
     return (
         <>
-            <div className='col-3 d-none d-lg-block'>
+            <div className='col-3 d-none d-lg-block h-100 overflow-scroll'>
                 <PeopleList query={query} />
             </div>
             <div className='col-12 col-lg-9'>
@@ -46,10 +40,10 @@ const People = ({ rootPath }) => {
     const [query, setSearchQuery] = useState('');
 
     return (
-        <section className='container-fluid data-view'>
+        <section className='container-fluid data-view h-100 overflow-hidden'>
             <PeopleHeader query={query} setSearchQuery={setSearchQuery} />
             <div className='card'>
-                <div className='row'>
+                <div className='row h-100 overflow-hidden'>
                     <Routes>
                         <Route index element={<ListOnly query={query} />} />
                         <Route

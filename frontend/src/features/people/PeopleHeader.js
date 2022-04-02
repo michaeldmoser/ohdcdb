@@ -1,12 +1,5 @@
 import { useState } from 'react';
-import {
-    Button,
-    Form,
-    FloatingLabel,
-    Container,
-    Row,
-    Col,
-} from 'react-bootstrap';
+import { Button, Form, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 const PeopleHeader = ({ query, setSearchQuery }) => {
@@ -16,7 +9,7 @@ const PeopleHeader = ({ query, setSearchQuery }) => {
     };
 
     return (
-        <Container as='header' fluid className='mb-3 row'>
+        <header className='mb-3 row'>
             <Col as='h3' sm={2}>
                 People
             </Col>
@@ -39,7 +32,7 @@ const PeopleHeader = ({ query, setSearchQuery }) => {
                     Add Person
                 </Button>
             </Col>
-        </Container>
+        </header>
     );
 };
 
