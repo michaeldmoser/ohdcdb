@@ -67,16 +67,14 @@ ${pronoun:(s?h|x)e} sees the details screen for that person
     Wait Until Element Contains    ${DETAIL_ARTICLE}    ${PEOPLE_IN_DATABASE[0].first_name}${SPACE}${PEOPLE_IN_DATABASE[0].last_name}
     Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dt[contains(., 'Email')]
     Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., '${PEOPLE_IN_DATABASE[0].email}')]
-    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dt[contains(., 'Home Phone')]
-    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., '${PEOPLE_IN_DATABASE[0].home}')]
-    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dt[contains(., 'Mobile Phone')]
+    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dt[contains(., 'Mobile phone')]
     Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., '${PEOPLE_IN_DATABASE[0].mobile}')]
 
 ${pronoun:(s?h|x)e} sees the details screen for the new person
     Wait Until Element Contains    ${DETAIL_ARTICLE}    Bill${SPACE}Billson
     Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dt[contains(., 'Email')]
     Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., 'bill.billson@example.com')]
-    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dt[contains(., 'Mobile Phone')]
+    Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dt[contains(., 'Mobile phone')]
     Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., '406')]
     Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., '555')]
     Page Should Contain Element    ${DETAIL_ARTICLE}//dl/dd[contains(., '1234')]

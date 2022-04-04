@@ -142,9 +142,6 @@ describe('Test displaying a person', () => {
             getByText(container, new RegExp(person.email, 'i'))
         ).toBeInTheDocument();
         expect(
-            getByText(container, new RegExp(person.home, 'i'))
-        ).toBeInTheDocument();
-        expect(
             getByText(container, new RegExp(person.mobile, 'i'))
         ).toBeInTheDocument();
     });
