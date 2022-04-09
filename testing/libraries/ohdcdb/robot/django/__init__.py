@@ -12,6 +12,7 @@ from django.core.management import ManagementUtility
 
 from .users import UsersLib
 from .people import PeopleLib
+from .properties import PropertiesLib
 
 
 class Django(DynamicCore):  # pylint: disable=no-self-use
@@ -24,7 +25,7 @@ class Django(DynamicCore):  # pylint: disable=no-self-use
         `path` is the path to the directory containing the manage.py file.
         `settings` module import containing the django settings
         '''
-        libraries = [UsersLib(), PeopleLib()]
+        libraries = [UsersLib(), PeopleLib(), PropertiesLib()]
         DynamicCore.__init__(self, libraries)
 
         self.ManagementUtility = ManagementUtility  # pylint: disable=invalid-name
@@ -43,7 +44,7 @@ class Django(DynamicCore):  # pylint: disable=no-self-use
         Creates a backup of the database
         '''
         manager = self.ManagementUtility(
-            ['', 'dumpdata', '--output', path, '-v', '0'])
+            ['', 'dumpdata', '--output', path, '-v', '0', '-e', 'contenttypes', '-e', 'auth.permission'])
         manager.execute()
 
     @keyword

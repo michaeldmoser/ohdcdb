@@ -20,6 +20,9 @@ services:
     ports:
       - "8000:8000"
 
+    environment:
+      - GOOGLE_API_KEY=AIzaSyBXWOyt-o2xmDixRBQhjaXVpJcuWgCGHWI
+
     # Uncomment the next line to use a non-root user for all processes.
     # user: vscode
 
@@ -52,6 +55,7 @@ services:
     environment:
       - PYTHONPATH=/workspace/testing/libraries:/workspace/backend
       - DJANGO_SETTINGS_MODULE=backend.settings
+      - GOOGLE_API_KEY=AIzaSyBXWOyt-o2xmDixRBQhjaXVpJcuWgCGHWI
 
     command: sleep infinity
 

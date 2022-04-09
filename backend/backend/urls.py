@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.contrib import admin
 from django.urls import path, re_path, include
 from django.shortcuts import render
 from rest_framework_simplejwt.views import (
@@ -25,11 +26,13 @@ def render_react(request):
 
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('api/auth/token/', TokenObtainPairView.as_view(),
          name='token_obtain_pair'),
     path('api/auth/token/refresh/',
          TokenRefreshView.as_view(), name='token_refresh'),
     path('', include('people.urls'), name='people'),
+    path('', include('properties.urls'), name='properties'),
     re_path(r"^$", render_react),
     re_path(r"^(?:.*)/?$", render_react),
 ]

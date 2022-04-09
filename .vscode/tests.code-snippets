@@ -85,5 +85,15 @@
             "\treturn res(ctx.json({});",
             "}),"
         ]
+    },
+    "python_test": {
+        "scope": "python",
+        "prefix": "t",
+        "description": "Test method",
+        "body": [
+            "def test_${1:name}(self):",
+            "\t'''Should ${2:do something special}'''",
+            "\t${0}"
+        ]
     }
 }

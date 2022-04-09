@@ -47,3 +47,5 @@ pyOpenSSL==21.0.0
 djangorestframework-simplejwt==5.0.0
 pyjwt==2.3.0
 django-filter==21.1
+django-address==0.2.6
+drf-writable-nested==0.6.3

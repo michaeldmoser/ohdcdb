@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_filters',
     'phonenumber_field',
+    'address',
     'rest_framework',
     'rest_framework_simplejwt',
     'people',
+    'properties'
 ]
 
 MIDDLEWARE = [
@@ -150,3 +152,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 PHONENUMBER_DB_FORMAT = 'NATIONAL'
 PHONENUMBER_DEFAULT_REGION = 'US'
 PHONENUMBER_DEFAULT_FORMAT = 'NATIONAL'
+
+GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
