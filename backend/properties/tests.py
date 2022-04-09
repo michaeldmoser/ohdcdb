@@ -22,10 +22,15 @@ class PropertiesTestCase(TestCase):
 
         return super().setUp()
 
-    def test_can_list_properties(self):
-        '''Test the list of properties doesnt't blow up'''
+    def test_list_of_properties_is_ordered(self):
+        '''Test the list of people is order by first/last name'''
         PropertiesFactory.create_batch(10)
         response = self.client.get(
             reverse('properties-list'))
 
-        self.assertEquals({}, response.json()[0]['address'])
+        properties = response.json()
+
+        names = [property.address1 for property in properties]
+        expected_order = sorted(names)
+
+        self.assertEqual(expected_order, names)
