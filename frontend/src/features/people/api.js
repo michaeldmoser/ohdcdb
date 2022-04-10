@@ -1,5 +1,7 @@
 import { api } from 'app/api';
 
+api.enhanceEndpoints({ addTagTypes: ['People'] });
+
 export const peopleApi = api.injectEndpoints({
     endpoints: (builder) => ({
         getPeople: builder.query({
