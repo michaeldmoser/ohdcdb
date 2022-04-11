@@ -24,7 +24,7 @@ export const peopleApi = api.injectEndpoints({
                 url: `/people/${personId}/`,
                 method: 'GET',
             }),
-            providesTags: ({ id }) => [{ type: 'People', id }],
+            providesTags: ({ id }, error, args) => [{ type: 'People', id }],
         }),
         addPerson: builder.mutation({
             query: (details) => ({

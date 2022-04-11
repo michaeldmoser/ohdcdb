@@ -26,4 +26,21 @@ export const baseHandlers = [
             context.delay(1)
         );
     }),
+    rest.get('/api/properties/:recordId/', (request, response, context) => {
+        const { recordId } = request.params;
+
+        const property = propertyList.find(
+            (property) => property.id === parseInt(recordId)
+        );
+
+        return response(
+            context.status(property ? 200 : 404),
+            context.json(
+                property || {
+                    detail: 'Not found.',
+                }
+            ),
+            context.delay(1)
+        );
+    }),
 ];

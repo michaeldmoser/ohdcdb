@@ -21,11 +21,13 @@ export const propertiesApi = api.injectEndpoints({
                     : ['Properties'],
         }),
         getProperty: builder.query({
-            query: (propertyId) => ({
-                url: `/properties/${propertyId}/`,
+            query: (recordId) => ({
+                url: `/properties/${recordId}/`,
                 method: 'GET',
             }),
-            providesTags: ({ id }) => [{ type: 'Properties', id }],
+            providesTags: ({ id }, errors, args) => [
+                { type: 'Properties', id },
+            ],
         }),
         addProperty: builder.mutation({
             query: (details) => ({

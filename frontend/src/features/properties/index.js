@@ -28,15 +28,34 @@ const ListWithDetails = ({ search }) => {
             <div className='col-12 col-lg-9'>
                 <Routes>
                     <Route path='add-person' element={<AddProperty />} />
-                    <Route path=':personId' element={<PropertyDetail />} />
-                    <Route path=':personId/edit' element={<EditProperty />} />
+                    <Route path=':recordId' element={<PropertyDetail />} />
+                    <Route path=':recordId/edit' element={<EditProperty />} />
                 </Routes>
             </div>
         </>
     );
 };
 
-const Properties = ({ rootPath }) => {
+const CrudApp = ({ search, setSearchQuery, ...rest }) => {
+    return (
+        <section className='container-fluid data-view h-100 overflow-hidden'>
+            <PropertiesHeader search={search} setSearchQuery={setSearchQuery} />
+            <div className='card'>
+                <div className='row h-100 overflow-hidden'>
+                    <Routes>
+                        <Route index element={<ListOnly search={search} />} />
+                        <Route
+                            path='*'
+                            element={<ListWithDetails search={search} />}
+                        />
+                    </Routes>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+const Properties = () => {
     const [search, setSearchQuery] = useState('');
 
     return (
