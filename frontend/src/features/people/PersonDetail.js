@@ -2,7 +2,11 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetPersonQuery } from './api';
 
-import DetailsView, { Body, Field, Header } from 'components/detailsview';
+import DetailsView, {
+    Body,
+    Field,
+    Header,
+} from 'components/crudapp/detailsview';
 
 const PersonDetail = () => {
     const { personId } = useParams();
