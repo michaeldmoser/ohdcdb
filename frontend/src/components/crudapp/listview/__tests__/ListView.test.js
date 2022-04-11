@@ -1,5 +1,5 @@
 import { render } from 'testing/library';
-import { ListView, ListItem } from '../index';
+import { ListView } from '../index';
 
 describe('Render the list view', () => {
     it('should render with defaults', () => {

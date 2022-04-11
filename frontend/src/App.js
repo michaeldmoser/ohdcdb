@@ -5,13 +5,7 @@ import { useAuth } from 'features/auth/hooks';
 import Login from 'features/auth/Login';
 import Dashboard from 'scenes/dashboard';
 import People from 'features/people';
-function Properties() {
-    return (
-        <>
-            <p>Properties</p>
-        </>
-    );
-}
+import Properties from 'features/properties';
 
 function Organizations() {
     return (
