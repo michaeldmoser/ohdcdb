@@ -6,14 +6,11 @@ import DetailsView, {
     Body,
     Field,
     Header,
-} from 'components/crudapp/detailsview';
+} from 'components/crudapp/DetailsView';
 
-const PropertyDetail = () => {
-    const { recordId } = useParams();
-    const { data: property, isLoading } = useGetPropertyQuery(recordId);
-
+const PropertyDetail = ({ data: property, isLoading, ...rest }) => {
     return (
-        <DetailsView data={property} isLoading={isLoading}>
+        <DetailsView>
             <Body>
                 <Field value={property?.acres} label='Acres' />
                 <Field value={property?.postalcode} label='Zipcode' />

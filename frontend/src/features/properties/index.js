@@ -1,78 +1,31 @@
 import './properties.scss';
-import { useState } from 'react';
+import React from 'react';
 
-import { Route, Routes } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import PropertiesList from './PropertiesList';
+import CrudApp, { ListOfRecords, RecordDetail } from 'components/crudapp';
+
+import { useGetPropertiesQuery, useGetPropertyQuery } from './api';
 import PropertyDetail from './PropertyDetail';
 import PropertiesHeader from './PropertiesHeader';
 import AddProperty from './AddProperty';
 import EditProperty from './EditProperty';
-
-const ListOnly = ({ search }) => {
-    return (
-        <>
-            <div className='col-lg-3 col-12 h-100 overflow-scroll'>
-                <PropertiesList search={search} />
-            </div>
-        </>
-    );
-};
-
-const ListWithDetails = ({ search }) => {
-    return (
-        <>
-            <div className='col-3 d-none d-lg-block h-100 overflow-scroll'>
-                <PropertiesList search={search} />
-            </div>
-            <div className='col-12 col-lg-9'>
-                <Routes>
-                    <Route path='add-person' element={<AddProperty />} />
-                    <Route path=':recordId' element={<PropertyDetail />} />
-                    <Route path=':recordId/edit' element={<EditProperty />} />
-                </Routes>
-            </div>
-        </>
-    );
-};
-
-const CrudApp = ({ search, setSearchQuery, ...rest }) => {
-    return (
-        <section className='container-fluid data-view h-100 overflow-hidden'>
-            <PropertiesHeader search={search} setSearchQuery={setSearchQuery} />
-            <div className='card'>
-                <div className='row h-100 overflow-hidden'>
-                    <Routes>
-                        <Route index element={<ListOnly search={search} />} />
-                        <Route
-                            path='*'
-                            element={<ListWithDetails search={search} />}
-                        />
-                    </Routes>
-                </div>
-            </div>
-        </section>
-    );
-};
+import PropertiesList from './PropertiesList';
 
 const Properties = () => {
-    const [search, setSearchQuery] = useState('');
-
     return (
-        <section className='container-fluid data-view h-100 overflow-hidden'>
-            <PropertiesHeader search={search} setSearchQuery={setSearchQuery} />
-            <div className='card'>
-                <div className='row h-100 overflow-hidden'>
-                    <Routes>
-                        <Route index element={<ListOnly search={search} />} />
-                        <Route
-                            path='*'
-                            element={<ListWithDetails search={search} />}
-                        />
-                    </Routes>
-                </div>
-            </div>
-        </section>
+        <CrudApp
+            useGetListQuery={useGetPropertiesQuery}
+            useGetRecordQuery={useGetPropertyQuery}
+        >
+            <ListOfRecords>
+                {(query) => <PropertiesList {...query} />}
+            </ListOfRecords>
+
+            <RecordDetail>
+                {(query) => <PropertyDetail {...query} />}
+            </RecordDetail>
+        </CrudApp>
     );
 };
 

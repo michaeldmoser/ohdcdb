@@ -1,19 +1,10 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useGetPersonQuery } from './api';
 
-import DetailsView, {
-    Body,
-    Field,
-    Header,
-} from 'components/crudapp/detailsview';
+import { DetailsView, Body, Field, Header } from 'components/crudapp';
 
-const PersonDetail = () => {
-    const { personId } = useParams();
-    const { data: person, isLoading } = useGetPersonQuery(personId);
-
+const PersonDetail = ({ data: person, isLoading }) => {
     return (
-        <DetailsView data={person} isLoading={isLoading}>
+        <DetailsView>
             <Body>
                 <Field value={person?.mobile} label='Mobile phone' />
                 <Field value={person?.email} label='Email' />

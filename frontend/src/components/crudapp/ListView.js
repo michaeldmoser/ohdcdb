@@ -1,6 +1,9 @@
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { ListGroup } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+
+import Context from './context';
 
 export const ListItem = ({ name, additionalInfo }) => {
     return (
@@ -63,8 +66,10 @@ const Article = ({ listName, children, ...rest }) => {
  * @param query  The result of an rtk-query useGet.*Query() hook
  * @param children A function which will be passed individual records and should return the rendered record.
  */
-export const ListView = ({ listName, query, children, ...rest }) => {
-    const { data: records, isLoading } = query;
+export const ListView = ({ listName, children, ...rest }) => {
+    const {
+        listQuery: { data: records, isLoading },
+    } = useContext(Context);
 
     return (
         <Article listName={listName} {...rest}>
@@ -84,5 +89,6 @@ export const ListView = ({ listName, query, children, ...rest }) => {
 ListView.propTypes = {
     listName: PropTypes.string,
     children: PropTypes.func.isRequired,
-    query: PropTypes.object.isRequired,
 };
+
+export default ListView;

@@ -121,7 +121,9 @@ describe('Test displaying a person', () => {
         render(<People />);
 
         const person = data[5]; // Nathan Williams
-        await waitForElementToBeRemoved(() => screen.getByText('Loading'));
+        await waitForElementToBeRemoved(() =>
+            screen.getByText('Loading results...')
+        );
 
         const regx = new RegExp(
             `${person.first_name} ${person.last_name}`,

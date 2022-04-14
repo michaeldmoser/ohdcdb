@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+
+import Context from './context';
 
 export const ActionsMenu = () => {
     return (
@@ -41,14 +43,17 @@ export const Field = ({ label, value, ...props }) => {
     );
 };
 
-const DetailsView = ({ data, isLoading, ...props }) => {
+export const DetailsView = ({ children }) => {
+    const {
+        detailQuery: { data, isLoading },
+    } = useContext(Context);
     if (isLoading) return <h4>Loading...</h4>;
 
     if (!data) return <div>Not found</div>;
 
-    const children = React.Children.toArray(props.children);
-    const header = children.find(({ type }) => type === Header);
-    const body = children.find(({ type }) => type === Body);
+    const kids = React.Children.toArray(children);
+    const header = kids.find(({ type }) => type === Header);
+    const body = kids.find(({ type }) => type === Body);
 
     return (
         <article className='detail-view'>

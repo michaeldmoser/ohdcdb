@@ -5,6 +5,10 @@
         "prefix": "usestate",
         "body": "const [ ${1:variable}, set${1/(.*)/${1:/pascalcase}/} ] = useState();"
     },
-    
+    "return only children": {
+        "scope": "javascript",
+        "prefix": "kidsonly",
+        "body": "const ${1:ComponentName} = ({ children }) => React.Children.only(children);"
+    }
 
 }
