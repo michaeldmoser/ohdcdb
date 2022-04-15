@@ -8,6 +8,37 @@ Object {
       <section
         class="container-fluid data-view h-100 overflow-hidden"
       >
+        <header
+          class="mb-3 row"
+        >
+          <h3
+            class="col-sm-2"
+          >
+            Records
+          </h3>
+          <div
+            class="col-sm-8"
+          >
+            <input
+              class="form-control"
+              name="search"
+              placeholder="Search..."
+              required=""
+              type="search"
+              value="LLC"
+            />
+          </div>
+          <div
+            class="d-flex align-items-center col-sm-2"
+          >
+            <button
+              class="ms-auto btn btn-primary btn-sm"
+              type="button"
+            >
+              Add record
+            </button>
+          </div>
+        </header>
         <div
           class="card"
         >
@@ -35,40 +66,6 @@ Object {
                   >
                     <a
                       class="lh-sm"
-                      href="/1"
-                    >
-                      <h5>
-                        Schumm Group
-                      </h5>
-                      <span
-                        class="text-muted"
-                      >
-                        Pre-emptive system-worthy alliance
-                      </span>
-                    </a>
-                  </li>
-                  <li
-                    class="nav-item list-group-item"
-                  >
-                    <a
-                      class="lh-sm"
-                      href="/2"
-                    >
-                      <h5>
-                        Wiza - Crist
-                      </h5>
-                      <span
-                        class="text-muted"
-                      >
-                        Decentralized intangible structure
-                      </span>
-                    </a>
-                  </li>
-                  <li
-                    class="nav-item list-group-item"
-                  >
-                    <a
-                      class="lh-sm"
                       href="/3"
                     >
                       <h5>
@@ -78,74 +75,6 @@ Object {
                         class="text-muted"
                       >
                         Multi-channelled 3rd generation attitude
-                      </span>
-                    </a>
-                  </li>
-                  <li
-                    class="nav-item list-group-item"
-                  >
-                    <a
-                      class="lh-sm"
-                      href="/4"
-                    >
-                      <h5>
-                        O'Keefe - Funk
-                      </h5>
-                      <span
-                        class="text-muted"
-                      >
-                        Front-line clear-thinking support
-                      </span>
-                    </a>
-                  </li>
-                  <li
-                    class="nav-item list-group-item"
-                  >
-                    <a
-                      class="lh-sm"
-                      href="/5"
-                    >
-                      <h5>
-                        Kling, Koch and Zulauf
-                      </h5>
-                      <span
-                        class="text-muted"
-                      >
-                        Devolved discrete contingency
-                      </span>
-                    </a>
-                  </li>
-                  <li
-                    class="nav-item list-group-item"
-                  >
-                    <a
-                      class="lh-sm"
-                      href="/6"
-                    >
-                      <h5>
-                        Heaney Group
-                      </h5>
-                      <span
-                        class="text-muted"
-                      >
-                        Vision-oriented reciprocal synergy
-                      </span>
-                    </a>
-                  </li>
-                  <li
-                    class="nav-item list-group-item"
-                  >
-                    <a
-                      class="lh-sm"
-                      href="/7"
-                    >
-                      <h5>
-                        Turcotte, Upton and Koch
-                      </h5>
-                      <span
-                        class="text-muted"
-                      >
-                        Grass-roots tertiary website
                       </span>
                     </a>
                   </li>
@@ -171,142 +100,6 @@ Object {
                   >
                     <a
                       class="lh-sm"
-                      href="/9"
-                    >
-                      <h5>
-                        Emard Group
-                      </h5>
-                      <span
-                        class="text-muted"
-                      >
-                        Polarised fresh-thinking model
-                      </span>
-                    </a>
-                  </li>
-                  <li
-                    class="nav-item list-group-item"
-                  >
-                    <a
-                      class="lh-sm"
-                      href="/10"
-                    >
-                      <h5>
-                        Powlowski, Weber and Mosciski
-                      </h5>
-                      <span
-                        class="text-muted"
-                      >
-                        Enhanced 24 hour knowledge user
-                      </span>
-                    </a>
-                  </li>
-                  <li
-                    class="nav-item list-group-item"
-                  >
-                    <a
-                      class="lh-sm"
-                      href="/11"
-                    >
-                      <h5>
-                        Wolff, Armstrong and Dooley
-                      </h5>
-                      <span
-                        class="text-muted"
-                      >
-                        Re-contextualized incremental functionalities
-                      </span>
-                    </a>
-                  </li>
-                  <li
-                    class="nav-item list-group-item"
-                  >
-                    <a
-                      class="lh-sm"
-                      href="/12"
-                    >
-                      <h5>
-                        Toy and Sons
-                      </h5>
-                      <span
-                        class="text-muted"
-                      >
-                        Self-enabling intermediate support
-                      </span>
-                    </a>
-                  </li>
-                  <li
-                    class="nav-item list-group-item"
-                  >
-                    <a
-                      class="lh-sm"
-                      href="/13"
-                    >
-                      <h5>
-                        Gusikowski - Cummerata
-                      </h5>
-                      <span
-                        class="text-muted"
-                      >
-                        Business-focused disintermediate superstructure
-                      </span>
-                    </a>
-                  </li>
-                  <li
-                    class="nav-item list-group-item"
-                  >
-                    <a
-                      class="lh-sm"
-                      href="/14"
-                    >
-                      <h5>
-                        Bogisich - Greenfelder
-                      </h5>
-                      <span
-                        class="text-muted"
-                      >
-                        Public-key clear-thinking protocol
-                      </span>
-                    </a>
-                  </li>
-                  <li
-                    class="nav-item list-group-item"
-                  >
-                    <a
-                      class="lh-sm"
-                      href="/15"
-                    >
-                      <h5>
-                        Ebert - Mann
-                      </h5>
-                      <span
-                        class="text-muted"
-                      >
-                        Seamless secondary application
-                      </span>
-                    </a>
-                  </li>
-                  <li
-                    class="nav-item list-group-item"
-                  >
-                    <a
-                      class="lh-sm"
-                      href="/16"
-                    >
-                      <h5>
-                        Bartoletti, Baumbach and Smitham
-                      </h5>
-                      <span
-                        class="text-muted"
-                      >
-                        Switchable solution-oriented monitoring
-                      </span>
-                    </a>
-                  </li>
-                  <li
-                    class="nav-item list-group-item"
-                  >
-                    <a
-                      class="lh-sm"
                       href="/17"
                     >
                       <h5>
@@ -316,57 +109,6 @@ Object {
                         class="text-muted"
                       >
                         Reverse-engineered encompassing monitoring
-                      </span>
-                    </a>
-                  </li>
-                  <li
-                    class="nav-item list-group-item"
-                  >
-                    <a
-                      class="lh-sm"
-                      href="/18"
-                    >
-                      <h5>
-                        Hirthe - Fritsch
-                      </h5>
-                      <span
-                        class="text-muted"
-                      >
-                        Expanded empowering adapter
-                      </span>
-                    </a>
-                  </li>
-                  <li
-                    class="nav-item list-group-item"
-                  >
-                    <a
-                      class="lh-sm"
-                      href="/19"
-                    >
-                      <h5>
-                        Roberts, Schmidt and Morar
-                      </h5>
-                      <span
-                        class="text-muted"
-                      >
-                        Object-based stable paradigm
-                      </span>
-                    </a>
-                  </li>
-                  <li
-                    class="nav-item list-group-item"
-                  >
-                    <a
-                      class="lh-sm"
-                      href="/20"
-                    >
-                      <h5>
-                        Brown, Wolf and Terry
-                      </h5>
-                      <span
-                        class="text-muted"
-                      >
-                        Customizable methodical intranet
                       </span>
                     </a>
                   </li>
@@ -385,6 +127,37 @@ Object {
     <section
       class="container-fluid data-view h-100 overflow-hidden"
     >
+      <header
+        class="mb-3 row"
+      >
+        <h3
+          class="col-sm-2"
+        >
+          Records
+        </h3>
+        <div
+          class="col-sm-8"
+        >
+          <input
+            class="form-control"
+            name="search"
+            placeholder="Search..."
+            required=""
+            type="search"
+            value="LLC"
+          />
+        </div>
+        <div
+          class="d-flex align-items-center col-sm-2"
+        >
+          <button
+            class="ms-auto btn btn-primary btn-sm"
+            type="button"
+          >
+            Add record
+          </button>
+        </div>
+      </header>
       <div
         class="card"
       >
@@ -412,40 +185,6 @@ Object {
                 >
                   <a
                     class="lh-sm"
-                    href="/1"
-                  >
-                    <h5>
-                      Schumm Group
-                    </h5>
-                    <span
-                      class="text-muted"
-                    >
-                      Pre-emptive system-worthy alliance
-                    </span>
-                  </a>
-                </li>
-                <li
-                  class="nav-item list-group-item"
-                >
-                  <a
-                    class="lh-sm"
-                    href="/2"
-                  >
-                    <h5>
-                      Wiza - Crist
-                    </h5>
-                    <span
-                      class="text-muted"
-                    >
-                      Decentralized intangible structure
-                    </span>
-                  </a>
-                </li>
-                <li
-                  class="nav-item list-group-item"
-                >
-                  <a
-                    class="lh-sm"
                     href="/3"
                   >
                     <h5>
@@ -455,74 +194,6 @@ Object {
                       class="text-muted"
                     >
                       Multi-channelled 3rd generation attitude
-                    </span>
-                  </a>
-                </li>
-                <li
-                  class="nav-item list-group-item"
-                >
-                  <a
-                    class="lh-sm"
-                    href="/4"
-                  >
-                    <h5>
-                      O'Keefe - Funk
-                    </h5>
-                    <span
-                      class="text-muted"
-                    >
-                      Front-line clear-thinking support
-                    </span>
-                  </a>
-                </li>
-                <li
-                  class="nav-item list-group-item"
-                >
-                  <a
-                    class="lh-sm"
-                    href="/5"
-                  >
-                    <h5>
-                      Kling, Koch and Zulauf
-                    </h5>
-                    <span
-                      class="text-muted"
-                    >
-                      Devolved discrete contingency
-                    </span>
-                  </a>
-                </li>
-                <li
-                  class="nav-item list-group-item"
-                >
-                  <a
-                    class="lh-sm"
-                    href="/6"
-                  >
-                    <h5>
-                      Heaney Group
-                    </h5>
-                    <span
-                      class="text-muted"
-                    >
-                      Vision-oriented reciprocal synergy
-                    </span>
-                  </a>
-                </li>
-                <li
-                  class="nav-item list-group-item"
-                >
-                  <a
-                    class="lh-sm"
-                    href="/7"
-                  >
-                    <h5>
-                      Turcotte, Upton and Koch
-                    </h5>
-                    <span
-                      class="text-muted"
-                    >
-                      Grass-roots tertiary website
                     </span>
                   </a>
                 </li>
@@ -548,142 +219,6 @@ Object {
                 >
                   <a
                     class="lh-sm"
-                    href="/9"
-                  >
-                    <h5>
-                      Emard Group
-                    </h5>
-                    <span
-                      class="text-muted"
-                    >
-                      Polarised fresh-thinking model
-                    </span>
-                  </a>
-                </li>
-                <li
-                  class="nav-item list-group-item"
-                >
-                  <a
-                    class="lh-sm"
-                    href="/10"
-                  >
-                    <h5>
-                      Powlowski, Weber and Mosciski
-                    </h5>
-                    <span
-                      class="text-muted"
-                    >
-                      Enhanced 24 hour knowledge user
-                    </span>
-                  </a>
-                </li>
-                <li
-                  class="nav-item list-group-item"
-                >
-                  <a
-                    class="lh-sm"
-                    href="/11"
-                  >
-                    <h5>
-                      Wolff, Armstrong and Dooley
-                    </h5>
-                    <span
-                      class="text-muted"
-                    >
-                      Re-contextualized incremental functionalities
-                    </span>
-                  </a>
-                </li>
-                <li
-                  class="nav-item list-group-item"
-                >
-                  <a
-                    class="lh-sm"
-                    href="/12"
-                  >
-                    <h5>
-                      Toy and Sons
-                    </h5>
-                    <span
-                      class="text-muted"
-                    >
-                      Self-enabling intermediate support
-                    </span>
-                  </a>
-                </li>
-                <li
-                  class="nav-item list-group-item"
-                >
-                  <a
-                    class="lh-sm"
-                    href="/13"
-                  >
-                    <h5>
-                      Gusikowski - Cummerata
-                    </h5>
-                    <span
-                      class="text-muted"
-                    >
-                      Business-focused disintermediate superstructure
-                    </span>
-                  </a>
-                </li>
-                <li
-                  class="nav-item list-group-item"
-                >
-                  <a
-                    class="lh-sm"
-                    href="/14"
-                  >
-                    <h5>
-                      Bogisich - Greenfelder
-                    </h5>
-                    <span
-                      class="text-muted"
-                    >
-                      Public-key clear-thinking protocol
-                    </span>
-                  </a>
-                </li>
-                <li
-                  class="nav-item list-group-item"
-                >
-                  <a
-                    class="lh-sm"
-                    href="/15"
-                  >
-                    <h5>
-                      Ebert - Mann
-                    </h5>
-                    <span
-                      class="text-muted"
-                    >
-                      Seamless secondary application
-                    </span>
-                  </a>
-                </li>
-                <li
-                  class="nav-item list-group-item"
-                >
-                  <a
-                    class="lh-sm"
-                    href="/16"
-                  >
-                    <h5>
-                      Bartoletti, Baumbach and Smitham
-                    </h5>
-                    <span
-                      class="text-muted"
-                    >
-                      Switchable solution-oriented monitoring
-                    </span>
-                  </a>
-                </li>
-                <li
-                  class="nav-item list-group-item"
-                >
-                  <a
-                    class="lh-sm"
                     href="/17"
                   >
                     <h5>
@@ -693,57 +228,6 @@ Object {
                       class="text-muted"
                     >
                       Reverse-engineered encompassing monitoring
-                    </span>
-                  </a>
-                </li>
-                <li
-                  class="nav-item list-group-item"
-                >
-                  <a
-                    class="lh-sm"
-                    href="/18"
-                  >
-                    <h5>
-                      Hirthe - Fritsch
-                    </h5>
-                    <span
-                      class="text-muted"
-                    >
-                      Expanded empowering adapter
-                    </span>
-                  </a>
-                </li>
-                <li
-                  class="nav-item list-group-item"
-                >
-                  <a
-                    class="lh-sm"
-                    href="/19"
-                  >
-                    <h5>
-                      Roberts, Schmidt and Morar
-                    </h5>
-                    <span
-                      class="text-muted"
-                    >
-                      Object-based stable paradigm
-                    </span>
-                  </a>
-                </li>
-                <li
-                  class="nav-item list-group-item"
-                >
-                  <a
-                    class="lh-sm"
-                    href="/20"
-                  >
-                    <h5>
-                      Brown, Wolf and Terry
-                    </h5>
-                    <span
-                      class="text-muted"
-                    >
-                      Customizable methodical intranet
                     </span>
                   </a>
                 </li>

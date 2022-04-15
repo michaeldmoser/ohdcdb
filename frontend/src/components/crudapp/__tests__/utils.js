@@ -112,3 +112,14 @@ export function queryResult(data) {
         isError: false,
     };
 }
+
+export const useGetListQuery = (search) => {
+    const filtered = search
+        ? database.filter((record) => record.title.includes(search))
+        : database;
+
+    return queryResult(filtered);
+};
+
+export const useGetRecordQuery = (recordId, { skip }) =>
+    queryResult(skip ? undefined : database[1]);

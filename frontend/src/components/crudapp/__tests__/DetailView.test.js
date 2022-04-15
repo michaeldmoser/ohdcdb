@@ -1,21 +1,13 @@
 import React from 'react';
 import { render } from 'testing/library';
 
-import { queryResult, database } from './utils';
+import { useGetListQuery, useGetRecordQuery } from './utils';
 
 import CrudApp from '../index';
 import { ListOfRecords, RecordDetail } from '../containers';
 import DetailsView from '../DetailsView';
 
 describe('Test displaying a record', () => {
-    const useGetListQuery = (search) => {
-        return queryResult(database);
-    };
-
-    const useGetRecordQuery = (recordId) => {
-        return queryResult([1]);
-    };
-
     it('should display the details of a record', async () => {
         const details = render(
             <CrudApp {...{ useGetListQuery, useGetRecordQuery }}>

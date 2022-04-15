@@ -2,35 +2,26 @@ import React from 'react';
 import { render, screen } from 'testing/library';
 import userEvent from '@testing-library/user-event';
 
-import { queryResult, database } from './utils';
+import { useGetListQuery, useGetRecordQuery } from './utils';
 
-import CrudApp from '../index';
-import { ListOfRecords, RecordDetail } from '../containers';
-
-import ListView, { ListItem } from '../ListView';
+import CrudApp, {
+    ListOfRecords,
+    RecordDetail,
+    ListView,
+    Header,
+} from '../index';
 
 describe('Test filtering the list of records', () => {
-    const useGetListQuery = (search) => {
-        const filtered = search
-            ? search.filter((record) => record.title.includes(search))
-            : database;
-
-        return queryResult(filtered);
-    };
-
-    const useGetRecordQuery = (recordId, options) => {
-        return queryResult(options?.skip ? undefined : database[1]);
-    };
-
     it('should display a filtered list of a records', async () => {
-        const search = render(
+        const details = render(
             <CrudApp {...{ useGetListQuery, useGetRecordQuery }}>
+                <Header />
                 <ListOfRecords>
                     {(data, isLoading) => {
                         return (
                             <ListView listName='List of records'>
                                 {({ title, description }) => (
-                                    <ListItem
+                                    <ListView.Item
                                         name={title}
                                         additionalInfo={description}
                                     />
@@ -52,12 +43,6 @@ describe('Test filtering the list of records', () => {
 
         userEvent.type(screen.getByPlaceholderText(/Search.../i), 'LLC');
 
-        const container = (
-            await screen.findByRole('heading', {
-                name: /list of people/i,
-            })
-        ).closest('article');
-
-        expect(container).toMatchSnapshot();
+        expect(details).toMatchSnapshot();
     });
 });

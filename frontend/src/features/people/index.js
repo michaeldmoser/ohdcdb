@@ -3,13 +3,16 @@ import { useState } from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 
-import CrudApp, { ListOfRecords, RecordDetail } from 'components/crudapp';
+import CrudApp, {
+    ListOfRecords,
+    RecordDetail,
+    Header,
+} from 'components/crudapp';
 
 import { useGetPeopleQuery, useGetPersonQuery } from './api';
 
 import PeopleList from './PeopleList';
 import PersonDetail from './PersonDetail';
-import PeopleHeader from './PeopleHeader';
 import AddPerson from './AddPerson';
 import EditPerson from './EditPerson';
 
@@ -19,6 +22,11 @@ const People = () => {
             useGetListQuery={useGetPeopleQuery}
             useGetRecordQuery={useGetPersonQuery}
         >
+            <Header
+                title='People'
+                addButtonText='Add Person'
+                searchPlaceholder='Search people'
+            />
             <ListOfRecords>
                 {(query) => <PeopleList {...query} />}
             </ListOfRecords>

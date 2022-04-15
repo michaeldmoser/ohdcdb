@@ -9,6 +9,8 @@ import {
     RecordWithSearchResults,
 } from './containers';
 
+import Header from './Header';
+
 const CrudApp = ({ children, useGetListQuery, useGetRecordQuery, ...rest }) => {
     const [search, setSearch] = useState('');
     const [recordId, setRecordId] = useState(null);
@@ -18,6 +20,7 @@ const CrudApp = ({ children, useGetListQuery, useGetRecordQuery, ...rest }) => {
     const kids = React.Children.toArray(children);
     const recordlist = kids.find(({ type }) => type === ListOfRecords);
     const recordview = kids.find(({ type }) => type === RecordDetail);
+    const header = kids.find(({ type }) => type === Header);
 
     return (
         <Context.Provider
@@ -32,7 +35,7 @@ const CrudApp = ({ children, useGetListQuery, useGetRecordQuery, ...rest }) => {
             }}
         >
             <section className='container-fluid data-view h-100 overflow-hidden'>
-                {/* <PropertiesHeader search={search} setSearchQuery={setSearch} /> */}
+                {header}
                 <div className='card'>
                     <div className='row h-100 overflow-hidden'>
                         <Routes>
