@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 import Context from './context';
 
-export const ActionsMenu = () => {
+const ActionsMenu = () => {
     return (
         <nav className='ms-auto'>
             <Nav as='ul'>
@@ -22,11 +22,11 @@ export const ActionsMenu = () => {
     );
 };
 
-export const Header = ({ children, ...props }) => {
+const Header = ({ children, ...props }) => {
     return <h4>{children}</h4>;
 };
 
-export const Body = ({ children, ...props }) => {
+const Body = ({ children, ...props }) => {
     return (
         <div className='card-body'>
             <dl className='row'>{children}</dl>
@@ -34,7 +34,7 @@ export const Body = ({ children, ...props }) => {
     );
 };
 
-export const Field = ({ label, value, ...props }) => {
+const Field = ({ label, value, ...props }) => {
     return (
         <>
             <dt className='col-sm-3'>{label}</dt>
@@ -66,4 +66,10 @@ export const DetailsView = ({ children }) => {
     );
 };
 
+Object.assign(DetailsView, {
+    Header,
+    Body,
+    ActionsMenu,
+    Field,
+});
 export default DetailsView;

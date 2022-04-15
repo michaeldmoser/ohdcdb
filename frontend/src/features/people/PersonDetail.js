@@ -1,8 +1,10 @@
 import React from 'react';
 
-import { DetailsView, Body, Field, Header } from 'components/crudapp';
+import { DetailsView } from 'components/crudapp';
 
 const PersonDetail = ({ data: person, isLoading }) => {
+    const { Body, Header, Field } = DetailsView;
+
     return (
         <DetailsView>
             <Body>

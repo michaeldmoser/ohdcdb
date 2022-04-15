@@ -6,7 +6,7 @@ import { queryResult, database } from './utils';
 import CrudApp from '../index';
 import { ListOfRecords, RecordDetail } from '../containers';
 
-import ListView, { ListItem } from '../ListView';
+import ListView from '../ListView';
 
 describe('Test displaying the list of records', () => {
     const useGetListQuery = (search) => {
@@ -25,7 +25,7 @@ describe('Test displaying the list of records', () => {
                         return (
                             <ListView listName='List of records'>
                                 {({ title, description }) => (
-                                    <ListItem
+                                    <ListView.Item
                                         name={title}
                                         additionalInfo={description}
                                     />

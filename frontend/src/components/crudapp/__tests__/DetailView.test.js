@@ -5,7 +5,7 @@ import { queryResult, database } from './utils';
 
 import CrudApp from '../index';
 import { ListOfRecords, RecordDetail } from '../containers';
-import DetailsView, { Body, Field, Header } from '../DetailsView';
+import DetailsView from '../DetailsView';
 
 describe('Test displaying a record', () => {
     const useGetListQuery = (search) => {
@@ -28,14 +28,19 @@ describe('Test displaying a record', () => {
                     {({ data, isLoading }) => {
                         return (
                             <DetailsView>
-                                <Body>
-                                    <Field value={data.title} label='Title' />
-                                    <Field
+                                <DetailsView.Body>
+                                    <DetailsView.Field
+                                        value={data.title}
+                                        label='Title'
+                                    />
+                                    <DetailsView.Field
                                         value={data.description}
                                         label='Description'
                                     />
-                                </Body>
-                                <Header>{data.title}</Header>
+                                </DetailsView.Body>
+                                <DetailsView.Header>
+                                    {data.title}
+                                </DetailsView.Header>
                             </DetailsView>
                         );
                     }}

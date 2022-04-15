@@ -1,14 +1,9 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useGetPropertyQuery } from './api';
 
-import DetailsView, {
-    Body,
-    Field,
-    Header,
-} from 'components/crudapp/DetailsView';
+import { DetailsView } from 'components/crudapp';
 
 const PropertyDetail = ({ data: property, isLoading, ...rest }) => {
+    const { Body, Header, Field } = DetailsView;
     return (
         <DetailsView>
             <Body>

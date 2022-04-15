@@ -1,5 +1,6 @@
 import React from 'react';
-import { render } from 'testing/library';
+import { render, screen } from 'testing/library';
+import userEvent from '@testing-library/user-event';
 
 import { queryResult, database } from './utils';
 
@@ -21,8 +22,8 @@ describe('Test filtering the list of records', () => {
         return queryResult(options?.skip ? undefined : database[1]);
     };
 
-    xit('should display a filtered list of a records', async () => {
-        const details = render(
+    it('should display a filtered list of a records', async () => {
+        const search = render(
             <CrudApp {...{ useGetListQuery, useGetRecordQuery }}>
                 <ListOfRecords>
                     {(data, isLoading) => {
@@ -49,6 +50,14 @@ describe('Test filtering the list of records', () => {
             }
         );
 
-        expect(details).toMatchSnapshot();
+        userEvent.type(screen.getByPlaceholderText(/Search.../i), 'LLC');
+
+        const container = (
+            await screen.findByRole('heading', {
+                name: /list of people/i,
+            })
+        ).closest('article');
+
+        expect(container).toMatchSnapshot();
     });
 });

@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 import Context from './context';
 
-export const ListItem = ({ name, additionalInfo }) => {
+const Item = ({ name, additionalInfo }) => {
     return (
         <>
             <h5>{name}</h5>
@@ -21,7 +21,7 @@ export const ListItem = ({ name, additionalInfo }) => {
  * @param {function} children renderer for the individual list items.
  * @returns JSX
  */
-export const ListResults = ({ records, children }) => {
+const ListResults = ({ records, children }) => {
     return (
         <ListGroup as='ul' variant='flush'>
             {records.map(({ id, ...rest }) => (
@@ -90,5 +90,8 @@ ListView.propTypes = {
     listName: PropTypes.string,
     children: PropTypes.func.isRequired,
 };
+Object.assign(ListView, {
+    Item,
+});
 
 export default ListView;

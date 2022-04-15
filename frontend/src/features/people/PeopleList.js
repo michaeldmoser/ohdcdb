@@ -1,10 +1,10 @@
-import { ListView, ListItem } from 'components/crudapp';
+import { ListView } from 'components/crudapp';
 
 const PeopleList = (props) => {
     return (
         <ListView listName='List of people'>
             {({ first_name, last_name, email }) => (
-                <ListItem
+                <ListView.Item
                     name={`${first_name} ${last_name}`}
                     additionalInfo={email}
                 />
