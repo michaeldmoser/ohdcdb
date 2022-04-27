@@ -1,17 +1,11 @@
-import { Children } from 'react';
-import { useContext, useEffect } from 'react';
-import { useParams, Outlet } from 'react-router-dom';
+import { useContext } from 'react';
+import { Outlet } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import Context from './context';
 
 export const RecordDetail = ({ children }) => {
-    const { recordId } = useParams();
-    const { detailQuery, setRecordId } = useContext(Context);
-
-    useEffect(() => {
-        setRecordId(recordId);
-    }, [recordId, setRecordId]);
+    const { detailQuery } = useContext(Context);
 
     return children(detailQuery);
 };

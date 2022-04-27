@@ -1,7 +1,11 @@
 import React from 'react';
 import { render } from 'testing/library';
 
-import { useGetListQuery, useGetRecordQuery } from './utils';
+import {
+    useGetListQuery,
+    useGetRecordQuery,
+    useAddRecordMutation,
+} from './utils';
 
 import CrudApp from '../index';
 import { ListOfRecords, RecordDetail } from '../containers';
@@ -10,7 +14,13 @@ import DetailsView from '../DetailsView';
 describe('Test displaying a record', () => {
     it('should display the details of a record', async () => {
         const details = render(
-            <CrudApp {...{ useGetListQuery, useGetRecordQuery }}>
+            <CrudApp
+                {...{
+                    useGetListQuery,
+                    useGetRecordQuery,
+                    useAddRecordMutation,
+                }}
+            >
                 <ListOfRecords>
                     {(props) => {
                         return <div />;

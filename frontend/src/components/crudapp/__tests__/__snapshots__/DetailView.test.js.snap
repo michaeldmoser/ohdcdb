@@ -28,7 +28,9 @@ Object {
                 <header
                   class="d-flex"
                 >
-                  <h4 />
+                  <h4>
+                    Wiza - Crist
+                  </h4>
                   <nav
                     class="ms-auto"
                   >
@@ -56,21 +58,29 @@ Object {
                     class="row"
                   >
                     <dt
+                      aria-label="Title"
                       class="col-sm-3"
                     >
                       Title
                     </dt>
                     <dd
+                      aria-label="Wiza - Crist"
                       class="col-sm-9"
-                    />
+                    >
+                      Wiza - Crist
+                    </dd>
                     <dt
+                      aria-label="Description"
                       class="col-sm-3"
                     >
                       Description
                     </dt>
                     <dd
+                      aria-label="Decentralized intangible structure"
                       class="col-sm-9"
-                    />
+                    >
+                      Decentralized intangible structure
+                    </dd>
                   </dl>
                 </div>
               </article>
@@ -104,7 +114,9 @@ Object {
               <header
                 class="d-flex"
               >
-                <h4 />
+                <h4>
+                  Wiza - Crist
+                </h4>
                 <nav
                   class="ms-auto"
                 >
@@ -132,21 +144,29 @@ Object {
                   class="row"
                 >
                   <dt
+                    aria-label="Title"
                     class="col-sm-3"
                   >
                     Title
                   </dt>
                   <dd
+                    aria-label="Wiza - Crist"
                     class="col-sm-9"
-                  />
+                  >
+                    Wiza - Crist
+                  </dd>
                   <dt
+                    aria-label="Description"
                     class="col-sm-3"
                   >
                     Description
                   </dt>
                   <dd
+                    aria-label="Decentralized intangible structure"
                     class="col-sm-9"
-                  />
+                  >
+                    Decentralized intangible structure
+                  </dd>
                 </dl>
               </div>
             </article>

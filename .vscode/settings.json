@@ -34,5 +34,12 @@
     "python.testing.unittestEnabled": true,
     "python.djangoTestRunner.prefixCommand": "cd /workspace/backend && ",
     "zenMode.hideLineNumbers": false,
-    "robot.lint.undefinedKeywords": false
+    "robot.lint.undefinedKeywords": false,
+    "jest.jestCommandLine": " /workspace/frontend/node_modules/.bin/react-scripts test",
+    "jest.rootPath": "/workspace/frontend",
+    "jest.debugMode": true,
+    "jest.testExplorer": {
+    
+        "enabled": true
+    }
 }

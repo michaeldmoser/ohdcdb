@@ -3,14 +3,9 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import { render, screen, getByText } from 'testing/library';
 
-import AddPerson from '../AddPerson';
 import People from '../index';
 
 import { openAddPersonForm, fillOutFormTheForm, submitTheForm } from './utils';
-
-it('should add a person to the database', () => {
-    render(<AddPerson />);
-});
 
 describe('Adding a person to the database', () => {
     const person = {

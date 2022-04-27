@@ -7,9 +7,14 @@ import CrudApp, {
     ListOfRecords,
     RecordDetail,
     Header,
+    AddRecordView,
 } from 'components/crudapp';
 
-import { useGetPropertiesQuery, useGetPropertyQuery } from './api';
+import {
+    useGetPropertiesQuery,
+    useGetPropertyQuery,
+    useAddPropertyMutation,
+} from './api';
 import PropertyDetail from './PropertyDetail';
 import AddProperty from './AddProperty';
 import EditProperty from './EditProperty';
@@ -20,6 +25,7 @@ const Properties = () => {
         <CrudApp
             useGetListQuery={useGetPropertiesQuery}
             useGetRecordQuery={useGetPropertyQuery}
+            useAddRecordMutation={useAddPropertyMutation}
         >
             <Header
                 title='Properties'

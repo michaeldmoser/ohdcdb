@@ -1,26 +1,38 @@
 import './people.scss';
 import { useState } from 'react';
 
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useResolvedPath } from 'react-router-dom';
 
 import CrudApp, {
     ListOfRecords,
     RecordDetail,
     Header,
+    RecordForm,
+    AddRecord,
+    EditRecord,
 } from 'components/crudapp';
 
-import { useGetPeopleQuery, useGetPersonQuery } from './api';
+import {
+    useGetPeopleQuery,
+    useGetPersonQuery,
+    useAddPersonMutation,
+    useEditPersonMutation,
+} from './api';
 
 import PeopleList from './PeopleList';
 import PersonDetail from './PersonDetail';
-import AddPerson from './AddPerson';
-import EditPerson from './EditPerson';
+import PersonForm from './PersonForm';
 
 const People = () => {
+    const path = useResolvedPath('./');
+    console.debug(path);
     return (
         <CrudApp
-            useGetListQuery={useGetPeopleQuery}
+            to={path.pathname}
+            useGetRecordsQuery={useGetPeopleQuery}
             useGetRecordQuery={useGetPersonQuery}
+            useAddRecordMutation={useAddPersonMutation}
+            useEditRecordMutation={useEditPersonMutation}
         >
             <Header
                 title='People'
@@ -33,25 +45,24 @@ const People = () => {
             <RecordDetail>
                 {(query) => <PersonDetail {...query} />}
             </RecordDetail>
+            <AddRecord title='Add Person' />
+            <EditRecord
+                title={(record) =>
+                    `Update ${record.first_name} ${record.last_name}`
+                }
+            ></EditRecord>
+            <RecordForm
+                initialValues={{
+                    first_name: '',
+                    last_name: '',
+                    email: '',
+                    mobile: '',
+                }}
+            >
+                <PersonForm />
+            </RecordForm>
         </CrudApp>
     );
-
-    // return (
-    //     <section className='container-fluid data-view h-100 overflow-hidden'>
-    //         <PeopleHeader query={query} setSearchQuery={setSearchQuery} />
-    //         <div className='card'>
-    //             <div className='row h-100 overflow-hidden'>
-    //                 <Routes>
-    //                     <Route index element={<ListOnly query={query} />} />
-    //                     <Route
-    //                         path='*'
-    //                         element={<ListWithDetails query={query} />}
-    //                     />
-    //                 </Routes>
-    //             </div>
-    //         </div>
-    //     </section>
-    // );
 };
 
 export default People;

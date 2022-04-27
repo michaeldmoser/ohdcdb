@@ -3,6 +3,7 @@ import React from 'react';
 import { render as rtlRender } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 
 import configureStore from 'app/configureStore';
 
@@ -38,4 +39,4 @@ function render(
 // re-export everything
 export * from '@testing-library/react';
 // override render method
-export { render };
+export { render, userEvent };

@@ -1,4 +1,22 @@
-export const database = [
+import _ from 'lodash';
+import * as Yup from 'yup';
+import { rest } from 'msw';
+
+import { api } from 'app/api';
+
+import CrudApp, {
+    ListView,
+    RecordDetail,
+    DetailsView,
+    ListOfRecords,
+    Header,
+    RecordForm,
+    AddRecord,
+    EditRecord,
+} from '../index';
+import { TextInput } from 'components/forms';
+
+export const initialData = [
     {
         id: 1,
         title: 'Schumm Group',
@@ -24,82 +42,13 @@ export const database = [
         title: 'Kling, Koch and Zulauf',
         description: 'Devolved discrete contingency',
     },
-    {
-        id: 6,
-        title: 'Heaney Group',
-        description: 'Vision-oriented reciprocal synergy',
-    },
-    {
-        id: 7,
-        title: 'Turcotte, Upton and Koch',
-        description: 'Grass-roots tertiary website',
-    },
-    {
-        id: 8,
-        title: 'Wuckert LLC',
-        description: 'Advanced national core',
-    },
-    {
-        id: 9,
-        title: 'Emard Group',
-        description: 'Polarised fresh-thinking model',
-    },
-    {
-        id: 10,
-        title: 'Powlowski, Weber and Mosciski',
-        description: 'Enhanced 24 hour knowledge user',
-    },
-    {
-        id: 11,
-        title: 'Wolff, Armstrong and Dooley',
-        description: 'Re-contextualized incremental functionalities',
-    },
-    {
-        id: 12,
-        title: 'Toy and Sons',
-        description: 'Self-enabling intermediate support',
-    },
-    {
-        id: 13,
-        title: 'Gusikowski - Cummerata',
-        description: 'Business-focused disintermediate superstructure',
-    },
-    {
-        id: 14,
-        title: 'Bogisich - Greenfelder',
-        description: 'Public-key clear-thinking protocol',
-    },
-    {
-        id: 15,
-        title: 'Ebert - Mann',
-        description: 'Seamless secondary application',
-    },
-    {
-        id: 16,
-        title: 'Bartoletti, Baumbach and Smitham',
-        description: 'Switchable solution-oriented monitoring',
-    },
-    {
-        id: 17,
-        title: 'Ullrich LLC',
-        description: 'Reverse-engineered encompassing monitoring',
-    },
-    {
-        id: 18,
-        title: 'Hirthe - Fritsch',
-        description: 'Expanded empowering adapter',
-    },
-    {
-        id: 19,
-        title: 'Roberts, Schmidt and Morar',
-        description: 'Object-based stable paradigm',
-    },
-    {
-        id: 20,
-        title: 'Brown, Wolf and Terry',
-        description: 'Customizable methodical intranet',
-    },
 ];
+
+export let database = initialData;
+
+export function resetDatabase() {
+    database = JSON.parse(JSON.stringify(initialData));
+}
 
 export function queryResult(data) {
     return {
@@ -113,13 +62,165 @@ export function queryResult(data) {
     };
 }
 
-export const useGetListQuery = (search) => {
-    const filtered = search
-        ? database.filter((record) => record.title.includes(search))
-        : database;
+export const handlers = [
+    rest.get(`/api/records/:recordId/`, (request, response, context) => {
+        const { recordId } = request.params;
+        const record = database.find(
+            (record) => record.id === parseInt(recordId)
+        );
 
-    return queryResult(filtered);
+        return response(context.json(record));
+    }),
+    rest.put(`/api/records/:recordId/`, (request, response, context) => {
+        const { recordId } = request.params;
+        let recordToEdit = database.find(
+            (candidate) => candidate.id === parseInt(recordId)
+        );
+        Object.assign(recordToEdit, request.body);
+        return response(context.json(recordToEdit));
+    }),
+    rest.post(`/api/records/`, (request, response, context) => {
+        const newRecord = {
+            id: (_.maxBy(database, (record) => record.id)?.id ?? 0) + 1,
+            ...request.body,
+        };
+        database.push(newRecord);
+
+        return response(context.json(newRecord));
+    }),
+    rest.get('/api/records/', (request, response, context) => {
+        const search = request.url.searchParams.get('search');
+        const filtered = search
+            ? database.filter((record) => record.title.includes(search))
+            : database;
+        return response(context.json(filtered));
+    }),
+];
+
+export const SUT = () => {
+    const {
+        useGetRecordsQuery,
+        useGetRecordQuery,
+        useAddRecordMutation,
+        useEditRecordMutation,
+    } = recordApi;
+
+    const to = '/';
+
+    return (
+        <CrudApp
+            {...{
+                to,
+                useGetRecordsQuery,
+                useGetRecordQuery,
+                useAddRecordMutation,
+                useEditRecordMutation,
+            }}
+        >
+            <Header />
+            <ListOfRecords>
+                {(data, isLoading) => {
+                    return (
+                        <ListView listName='List of records'>
+                            {({ title, description }) => (
+                                <ListView.Item
+                                    name={title}
+                                    additionalInfo={description}
+                                />
+                            )}
+                        </ListView>
+                    );
+                }}
+            </ListOfRecords>
+            <RecordDetail>
+                {({ data, isLoading }) => {
+                    return (
+                        <DetailsView>
+                            <DetailsView.Body>
+                                <DetailsView.Field
+                                    value={data?.title}
+                                    label='Title'
+                                />
+                                <DetailsView.Field
+                                    value={data?.description}
+                                    label='Description'
+                                />
+                            </DetailsView.Body>
+                            <DetailsView.Header>
+                                {data?.title}
+                            </DetailsView.Header>
+                        </DetailsView>
+                    );
+                }}
+            </RecordDetail>
+            <AddRecord title='Add Record' />
+            <EditRecord title={(record) => `Update ${record?.title}`} />
+            <RecordForm
+                initialValues={{
+                    title: '',
+                    description: '',
+                }}
+                validationSchema={Yup.object({
+                    title: Yup.string().required('Required'),
+                    description: Yup.string().required('Required'),
+                })}
+            >
+                <TextInput name='title' label='Title' />
+                <TextInput name='description' label='Description' />
+            </RecordForm>
+        </CrudApp>
+    );
 };
 
-export const useGetRecordQuery = (recordId, { skip }) =>
-    queryResult(skip ? undefined : database[1]);
+api.enhanceEndpoints({ addTagTypes: ['Records'] });
+
+export const recordApi = api.injectEndpoints({
+    endpoints: (builder) => ({
+        getRecords: builder.query({
+            query: (search) => {
+                return {
+                    url: '/records/' + (search && `?search=${search}`),
+                    method: 'GET',
+                };
+            },
+            providesTags: (result, error, arg) =>
+                result
+                    ? [
+                          ...result.map(({ id }) => ({ type: 'Records', id })),
+                          'Records',
+                      ]
+                    : ['Records'],
+        }),
+        getRecord: builder.query({
+            query: (recordId) => ({
+                url: `/records/${recordId}/`,
+                method: 'GET',
+            }),
+            providesTags: ({ id }) => [{ type: 'Records', id }],
+        }),
+        addRecord: builder.mutation({
+            query: (details) => ({
+                url: '/records/',
+                method: 'POST',
+                body: details,
+            }),
+            invalidatesTags: ({ id }) => ['Records', { type: 'Records', id }],
+        }),
+        editRecord: builder.mutation({
+            query: (record) => ({
+                url: `/records/${record.id}/`,
+                method: 'PUT',
+                body: record,
+            }),
+            invalidatesTags: ({ id }) => [{ type: 'Records', id }],
+        }),
+    }),
+    overrideExisting: false,
+});
+
+export const {
+    useGetRecordsQuery,
+    useGetRecordQuery,
+    useAddRecordMutation,
+    useEditRecordMutation,
+} = recordApi;

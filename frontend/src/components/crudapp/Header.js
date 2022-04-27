@@ -8,8 +8,8 @@ export const Header = ({ title, addButtonText, searchPlaceholder }) => {
     const { setSearch, search } = useContext(Context);
 
     const navigate = useNavigate();
-    const navigateToAddPersonForm = () => {
-        navigate('/add');
+    const navigateToAddRecordForm = () => {
+        navigate('add');
     };
 
     return (
@@ -31,7 +31,7 @@ export const Header = ({ title, addButtonText, searchPlaceholder }) => {
                 <Button
                     className='ms-auto'
                     size='sm'
-                    onClick={navigateToAddPersonForm}
+                    onClick={navigateToAddRecordForm}
                 >
                     {addButtonText ?? 'Add record'}
                 </Button>

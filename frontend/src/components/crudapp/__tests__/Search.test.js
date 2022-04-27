@@ -2,7 +2,11 @@ import React from 'react';
 import { render, screen } from 'testing/library';
 import userEvent from '@testing-library/user-event';
 
-import { useGetListQuery, useGetRecordQuery } from './utils';
+import {
+    useGetListQuery,
+    useGetRecordQuery,
+    useAddRecordMutation,
+} from './utils';
 
 import CrudApp, {
     ListOfRecords,
@@ -14,7 +18,13 @@ import CrudApp, {
 describe('Test filtering the list of records', () => {
     it('should display a filtered list of a records', async () => {
         const details = render(
-            <CrudApp {...{ useGetListQuery, useGetRecordQuery }}>
+            <CrudApp
+                {...{
+                    useGetListQuery,
+                    useGetRecordQuery,
+                    useAddRecordMutation,
+                }}
+            >
                 <Header />
                 <ListOfRecords>
                     {(data, isLoading) => {

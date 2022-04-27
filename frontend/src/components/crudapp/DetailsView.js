@@ -37,8 +37,12 @@ const Body = ({ children, ...props }) => {
 const Field = ({ label, value, ...props }) => {
     return (
         <>
-            <dt className='col-sm-3'>{label}</dt>
-            <dd className='col-sm-9'>{value}</dd>
+            <dt className='col-sm-3' aria-label={label}>
+                {label}
+            </dt>
+            <dd className='col-sm-9' aria-label={value}>
+                {value}
+            </dd>
         </>
     );
 };
