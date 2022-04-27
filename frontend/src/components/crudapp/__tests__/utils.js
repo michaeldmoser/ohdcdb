@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import * as Yup from 'yup';
 import { rest } from 'msw';
+import { setupServer as mswSetupServer } from 'msw/node';
 
 import { api } from 'app/api';
 
@@ -96,6 +97,10 @@ export const handlers = [
         return response(context.json(filtered));
     }),
 ];
+
+export const setupServer = () => {
+    return mswSetupServer(...handlers);
+};
 
 export const SUT = () => {
     const {

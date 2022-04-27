@@ -1,50 +1,32 @@
 import React from 'react';
-import { render } from 'testing/library';
+import { render, screen, findAllByRole } from 'testing/library';
 
-import {
-    useGetListQuery,
-    useGetRecordQuery,
-    useAddRecordMutation,
-} from './utils';
-
-import CrudApp, { ListView } from '../index';
-import { ListOfRecords, RecordDetail } from '../containers';
+import { SUT, database, setupServer } from './utils';
 
 describe('Test displaying the list of records', () => {
-    it('should display a list of a records', async () => {
-        const details = render(
-            <CrudApp
-                {...{
-                    useGetListQuery,
-                    useGetRecordQuery,
-                    useAddRecordMutation,
-                }}
-            >
-                <ListOfRecords>
-                    {(data, isLoading) => {
-                        return (
-                            <ListView listName='List of records'>
-                                {({ title, description }) => (
-                                    <ListView.Item
-                                        name={title}
-                                        additionalInfo={description}
-                                    />
-                                )}
-                            </ListView>
-                        );
-                    }}
-                </ListOfRecords>
-                <RecordDetail>
-                    {({ data, isLoading }) => {
-                        return <div />;
-                    }}
-                </RecordDetail>
-            </CrudApp>,
-            {
-                initialEntries: ['/'],
-            }
-        );
+    const server = setupServer();
 
-        expect(details).toMatchSnapshot();
+    beforeAll(() => {
+        server.listen();
+    });
+
+    afterEach(() => {
+        server.resetHandlers();
+    });
+
+    afterAll(() => server.close());
+
+    it('should display a list of a records', async () => {
+        render(<SUT />, {
+            initialEntries: ['/'],
+        });
+
+        const articleHeading = await screen.findByRole('heading', {
+            name: /list of records/i,
+        });
+        const article = articleHeading.closest('article');
+        const records = await findAllByRole(article, 'listitem');
+
+        expect(records.length).toEqual(database.length);
     });
 });
