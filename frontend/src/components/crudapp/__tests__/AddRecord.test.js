@@ -9,7 +9,7 @@ import {
 import { setupServer } from 'msw/node';
 import { act } from 'react-dom/test-utils';
 
-import { resetDatabase, SUT, handlers, database } from './utils';
+import { resetDatabase, SUT, handlers } from './utils';
 
 const openAddPersonForm = () => {
     userEvent.click(screen.getByRole('button', { name: /Add record/i }));
