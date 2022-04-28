@@ -1,58 +1,35 @@
 import React from 'react';
-import { render, screen } from 'testing/library';
+import { render, screen, findAllByRole } from 'testing/library';
 import userEvent from '@testing-library/user-event';
 
-import {
-    useGetListQuery,
-    useGetRecordQuery,
-    useAddRecordMutation,
-} from './utils';
-
-import CrudApp, {
-    ListOfRecords,
-    RecordDetail,
-    ListView,
-    Header,
-} from '../index';
+import { SUT, database, setupServer } from './utils';
 
 describe('Test filtering the list of records', () => {
+    const server = setupServer();
+
+    beforeAll(() => {
+        server.listen();
+    });
+
+    afterEach(() => {
+        server.resetHandlers();
+    });
+
+    afterAll(() => server.close());
+
     it('should display a filtered list of a records', async () => {
-        const details = render(
-            <CrudApp
-                {...{
-                    useGetListQuery,
-                    useGetRecordQuery,
-                    useAddRecordMutation,
-                }}
-            >
-                <Header />
-                <ListOfRecords>
-                    {(data, isLoading) => {
-                        return (
-                            <ListView listName='List of records'>
-                                {({ title, description }) => (
-                                    <ListView.Item
-                                        name={title}
-                                        additionalInfo={description}
-                                    />
-                                )}
-                            </ListView>
-                        );
-                    }}
-                </ListOfRecords>
-                <RecordDetail>
-                    {({ data, isLoading }) => {
-                        return <div />;
-                    }}
-                </RecordDetail>
-            </CrudApp>,
-            {
-                initialEntries: ['/'],
-            }
-        );
+        render(<SUT />, {
+            initialEntries: ['/'],
+        });
 
         userEvent.type(screen.getByPlaceholderText(/Search.../i), 'LLC');
 
-        expect(details).toMatchSnapshot();
+        const articleHeading = await screen.findByRole('heading', {
+            name: /list of records/i,
+        });
+        const article = articleHeading.closest('article');
+        const records = await findAllByRole(article, 'listitem');
+
+        expect(records.length).toEqual(1);
     });
 });
