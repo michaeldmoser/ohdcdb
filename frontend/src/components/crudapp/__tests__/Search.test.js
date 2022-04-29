@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, findAllByRole } from 'testing/library';
 import userEvent from '@testing-library/user-event';
 
-import { SUT, database, setupServer } from './utils';
+import { SUT, setupServer } from './utils';
 
 describe('Test filtering the list of records', () => {
     const server = setupServer();

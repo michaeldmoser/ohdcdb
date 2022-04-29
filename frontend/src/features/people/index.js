@@ -25,7 +25,6 @@ import PersonForm from './PersonForm';
 
 const People = () => {
     const path = useResolvedPath('./');
-    console.debug(path);
     return (
         <CrudApp
             to={path.pathname}

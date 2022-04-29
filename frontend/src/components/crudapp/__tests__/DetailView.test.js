@@ -1,58 +1,35 @@
 import React from 'react';
-import { render } from 'testing/library';
+import { render, screen, getByText, getAllByText } from 'testing/library';
 
-import {
-    useGetListQuery,
-    useGetRecordQuery,
-    useAddRecordMutation,
-} from './utils';
-
-import CrudApp from '../index';
-import { ListOfRecords, RecordDetail } from '../containers';
-import DetailsView from '../DetailsView';
+import { SUT, database, setupServer } from './utils';
 
 describe('Test displaying a record', () => {
-    it('should display the details of a record', async () => {
-        const details = render(
-            <CrudApp
-                {...{
-                    useGetListQuery,
-                    useGetRecordQuery,
-                    useAddRecordMutation,
-                }}
-            >
-                <ListOfRecords>
-                    {(props) => {
-                        return <div />;
-                    }}
-                </ListOfRecords>
-                <RecordDetail>
-                    {({ data, isLoading }) => {
-                        return (
-                            <DetailsView>
-                                <DetailsView.Body>
-                                    <DetailsView.Field
-                                        value={data.title}
-                                        label='Title'
-                                    />
-                                    <DetailsView.Field
-                                        value={data.description}
-                                        label='Description'
-                                    />
-                                </DetailsView.Body>
-                                <DetailsView.Header>
-                                    {data.title}
-                                </DetailsView.Header>
-                            </DetailsView>
-                        );
-                    }}
-                </RecordDetail>
-            </CrudApp>,
-            {
-                initialEntries: ['/2'],
-            }
-        );
+    const server = setupServer();
 
-        expect(details).toMatchSnapshot();
+    beforeAll(() => {
+        server.listen();
+    });
+
+    afterEach(() => {
+        server.resetHandlers();
+    });
+
+    afterAll(() => server.close());
+
+    it('should display the details of a record', async () => {
+        const record = database[1];
+
+        render(<SUT />, {
+            initialEntries: [`/${record.id}`],
+        });
+
+        const title = await screen.findByText('Title');
+        const container = title.closest('article');
+
+        expect(title).toBeInTheDocument();
+        expect(getByText(container, 'Description')).toBeInTheDocument();
+
+        expect(getAllByText(container, record.title)[0]).toBeInTheDocument();
+        expect(getByText(container, record.description)).toBeInTheDocument();
     });
 });
