@@ -4,8 +4,10 @@ import { render as rtlRender } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
+import { screen } from '@testing-library/react';
 
 import configureStore from 'app/configureStore';
+import { act } from 'react-dom/test-utils';
 
 function render(
     ui,

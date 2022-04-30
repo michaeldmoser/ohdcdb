@@ -3,6 +3,8 @@ import * as Yup from 'yup';
 import { rest } from 'msw';
 import { setupServer as mswSetupServer } from 'msw/node';
 
+import { render } from 'testing/library';
+
 import { api } from 'app/api';
 
 import CrudApp, {
@@ -17,7 +19,7 @@ import CrudApp, {
 } from '../index';
 import { TextInput } from 'components/forms';
 
-export const initialData = [
+const initialData = [
     {
         id: 1,
         title: 'Schumm Group',
@@ -49,18 +51,6 @@ export let database = initialData;
 
 export function resetDatabase() {
     database = JSON.parse(JSON.stringify(initialData));
-}
-
-export function queryResult(data) {
-    return {
-        data,
-        isLoading: false,
-        isFetching: false,
-        error: false,
-        isUninitialized: false,
-        isSuccess: true,
-        isError: false,
-    };
 }
 
 export const handlers = [
@@ -101,6 +91,59 @@ export const handlers = [
 export const setupServer = () => {
     return mswSetupServer(...handlers);
 };
+
+api.enhanceEndpoints({ addTagTypes: ['Records'] });
+
+export const recordApi = api.injectEndpoints({
+    endpoints: (builder) => ({
+        getRecords: builder.query({
+            query: (search) => {
+                return {
+                    url: '/records/' + (search && `?search=${search}`),
+                    method: 'GET',
+                };
+            },
+            providesTags: (result, error, arg) =>
+                result
+                    ? [
+                          ...result.map(({ id }) => ({ type: 'Records', id })),
+                          'Records',
+                      ]
+                    : ['Records'],
+        }),
+        getRecord: builder.query({
+            query: (recordId) => ({
+                url: `/records/${recordId}/`,
+                method: 'GET',
+            }),
+            providesTags: ({ id }) => [{ type: 'Records', id }],
+        }),
+        addRecord: builder.mutation({
+            query: (details) => ({
+                url: '/records/',
+                method: 'POST',
+                body: details,
+            }),
+            invalidatesTags: ({ id }) => ['Records', { type: 'Records', id }],
+        }),
+        editRecord: builder.mutation({
+            query: (record) => ({
+                url: `/records/${record.id}/`,
+                method: 'PUT',
+                body: record,
+            }),
+            invalidatesTags: ({ id }) => [{ type: 'Records', id }],
+        }),
+    }),
+    overrideExisting: false,
+});
+
+export const {
+    useGetRecordsQuery,
+    useGetRecordQuery,
+    useAddRecordMutation,
+    useEditRecordMutation,
+} = recordApi;
 
 export const SUT = () => {
     const {
@@ -177,55 +220,9 @@ export const SUT = () => {
     );
 };
 
-api.enhanceEndpoints({ addTagTypes: ['Records'] });
-
-export const recordApi = api.injectEndpoints({
-    endpoints: (builder) => ({
-        getRecords: builder.query({
-            query: (search) => {
-                return {
-                    url: '/records/' + (search && `?search=${search}`),
-                    method: 'GET',
-                };
-            },
-            providesTags: (result, error, arg) =>
-                result
-                    ? [
-                          ...result.map(({ id }) => ({ type: 'Records', id })),
-                          'Records',
-                      ]
-                    : ['Records'],
-        }),
-        getRecord: builder.query({
-            query: (recordId) => ({
-                url: `/records/${recordId}/`,
-                method: 'GET',
-            }),
-            providesTags: ({ id }) => [{ type: 'Records', id }],
-        }),
-        addRecord: builder.mutation({
-            query: (details) => ({
-                url: '/records/',
-                method: 'POST',
-                body: details,
-            }),
-            invalidatesTags: ({ id }) => ['Records', { type: 'Records', id }],
-        }),
-        editRecord: builder.mutation({
-            query: (record) => ({
-                url: `/records/${record.id}/`,
-                method: 'PUT',
-                body: record,
-            }),
-            invalidatesTags: ({ id }) => [{ type: 'Records', id }],
-        }),
-    }),
-    overrideExisting: false,
-});
-
-export const {
-    useGetRecordsQuery,
-    useGetRecordQuery,
-    useAddRecordMutation,
-    useEditRecordMutation,
-} = recordApi;
+export function renderSUT(initialEntry) {
+    const initialEntries = _.isArray(initialEntry)
+        ? initialEntry
+        : [initialEntry];
+    return render(<SUT />, { initialEntries });
+}
