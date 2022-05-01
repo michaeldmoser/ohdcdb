@@ -1,7 +1,6 @@
 import './people.scss';
-import { useState } from 'react';
 
-import { Route, Routes, useResolvedPath } from 'react-router-dom';
+import { useResolvedPath } from 'react-router-dom';
 
 import CrudApp, {
     ListOfRecords,

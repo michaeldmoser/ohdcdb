@@ -1,31 +1,35 @@
 import './properties.scss';
 import React from 'react';
-
-import PropTypes from 'prop-types';
+import { useResolvedPath } from 'react-router-dom';
 
 import CrudApp, {
     ListOfRecords,
     RecordDetail,
     Header,
-    AddRecordView,
+    RecordForm,
+    AddRecord,
+    EditRecord,
 } from 'components/crudapp';
 
 import {
     useGetPropertiesQuery,
     useGetPropertyQuery,
     useAddPropertyMutation,
+    useEditPropertyMutation,
 } from './api';
 import PropertyDetail from './PropertyDetail';
-import AddProperty from './AddProperty';
-import EditProperty from './EditProperty';
 import PropertiesList from './PropertiesList';
+import PropertyForm from './PropertyForm';
 
 const Properties = () => {
+    const path = useResolvedPath('./');
     return (
         <CrudApp
-            useGetListQuery={useGetPropertiesQuery}
+            to={path.pathname}
+            useGetRecordsQuery={useGetPropertiesQuery}
             useGetRecordQuery={useGetPropertyQuery}
             useAddRecordMutation={useAddPropertyMutation}
+            useEditRecordMutation={useEditPropertyMutation}
         >
             <Header
                 title='Properties'
@@ -39,6 +43,21 @@ const Properties = () => {
             <RecordDetail>
                 {(query) => <PropertyDetail {...query} />}
             </RecordDetail>
+
+            <AddRecord title='Add Property' />
+            <EditRecord
+                title={(record) => `Update ${record.address1}`}
+            ></EditRecord>
+            <RecordForm
+                initialValues={{
+                    address1: '',
+                    address2: '',
+                    acres: '',
+                    postalcode: '',
+                }}
+            >
+                <PropertyForm />
+            </RecordForm>
         </CrudApp>
     );
 };
