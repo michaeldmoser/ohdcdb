@@ -47,7 +47,7 @@
     },
     "describe with MSW": {
         "scope": "javascript",
-        "prefix": "describe:msw",
+        "prefix": "desc:msw",
         "description": "Create a describe testing block that use's MSW",
         "body": [
             "describe('${1:Describe the block of tests}', () => {",
@@ -68,6 +68,20 @@
             "\t",
             "\tafterAll(() => server.close());",
             "\t",
+            "\tit('should ${4:do something interesting}', () => {",
+            "\t\trender(<${5:Sut} />);",
+            "\t\t${6:expect};",
+            "\t});",
+            "});",
+        ]
+    },
+    "describe = basic": {
+        "scope": "javascript",
+        "prefix": "desc",
+        "description": "Create a describe testing block ",
+        "body": [
+            "describe('${1:Describe the block of tests}', () => {",
+            "", 
             "\tit('should ${4:do something interesting}', () => {",
             "\t\trender(<${5:Sut} />);",
             "\t\t${6:expect};",

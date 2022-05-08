@@ -25,6 +25,7 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test --runInBand --testPathIgnorePatterns=__tests__/utils.js",
+        "test-full": "react-scripts test --max-workers=3 --testPathIgnorePatterns=__tests__/utils.js",
         "docs": "jsdoc -c ../jsdoc.conf.json"
     },
     "eslintConfig": {

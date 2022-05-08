@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { useNavigate, useResolvedPath } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import _ from 'lodash';
 
@@ -41,7 +41,7 @@ export const RecordForm = ({ children, initialValues, ...rest }) => {
     const prepopulateFormValues = Object.assign(
         {},
         initialValues,
-        detailQuery.data ?? {}
+        detailQuery.currentData ?? {}
     );
 
     return (

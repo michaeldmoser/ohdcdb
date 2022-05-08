@@ -23,11 +23,10 @@ Can add a new person to the database
     When she adds a new person to the database
     Then she sees the details screen for the new person
     And she sees the person in the list view
-
-Can edit a person in the database
-    Given Rachel is viewing a person
-    When she changes some details for the person
-    Then she sees the updated details screen for that person
+# Can edit a person in the database
+#    Given Rachel is viewing a person
+#    When she changes some details for the person
+#    Then she sees the updated details screen for that person
 
 Can search for people
 # Should be more specific about the search, ie: search by first name, search by last name, email, etc... What criteria do we want?
@@ -81,7 +80,7 @@ ${pronoun:(s?h|x)e} sees the details screen for the new person
 
 ${pronoun:(s?h|x)e} adds a new person to the database
     Click Button    Add Person
-    Wait Until Location Is    ${APP_URL}/people/add-person
+    Wait Until Location Is    ${APP_URL}/people/add
     Input Text    first_name    Bill
     Input Text    last_name    Billson
     Input Text    mobile    406-555-1234
@@ -105,8 +104,8 @@ ${pronoun:(s?h|x)e} changes some details for the person
     Textfield Should Contain    last_name    ${PERSON.last_name}
     Textfield Should Contain    email    ${PERSON.email}
     Textfield Should Contain    mobile    ${PERSON.mobile}
-    Input Text    email    person1@example.com
-    Input Text    mobile    406-555-9876
+    Input Text    email    person1@example.com    True
+    Input Text    mobile    406-555-9876    True
     Click Button    Save
 
 ${pronoun:(s?h|x)e} sees the updated details screen for that person

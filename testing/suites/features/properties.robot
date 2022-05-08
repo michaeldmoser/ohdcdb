@@ -68,7 +68,7 @@ ${pronoun:(s?h|x)e} sees the details screen for that property
 
 ${pronoun:(s?h|x)e} adds a new property to the database
     Click Button    Add Property
-    Wait Until Location Is    ${APP_URL}/properties/create
+    Wait Until Location Is    ${APP_URL}/properties/add
     ${property}    Generate new property
     Set Test Variable    $property
     Input Text    address1    ${property.address1}
@@ -88,7 +88,7 @@ Dominick is viewing a property
     Open the app for    Dominick
     Set Test Variable    $property    ${PROPERTIES[0]}
     Go To    ${APP_URL}/properties/${property.id}
-    Wait Until Element Contains    ${DETAIL_ARTICLE}    ${property.first_name}
+    Wait Until Element Contains    ${DETAIL_ARTICLE}    ${property.address1}
 
 ${pronoun:(s?h|x)e} changes some details for the property
     Click Link    ${DETAIL_ARTICLE}//a[contains(., 'Edit')]
