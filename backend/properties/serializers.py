@@ -1,32 +1,29 @@
 """
 Properties Serializer
 """
-import logging
-
 from rest_framework.serializers import ModelSerializer
+from people.models import People
 
 from .models import Properties
+
+
+class OnwerSerializer(ModelSerializer):
+    '''Serializer for Owner's of a property'''
+    class Meta:
+        '''Meta class'''
+        model = People
+        fields = ['id', 'first_name', 'last_name']
 
 
 class PropertiesSerializer(ModelSerializer):  # pylint: disable=too-many-ancestors
     '''
     Properties Serializer
     '''
+    owners = OnwerSerializer(many=True)
+
     class Meta:
         '''
         Meta class for Properties serializer
         '''
         model = Properties
         fields = '__all__'
-
-    # TODO: Implement an extra fields option so that we can do things like include @property fields
-    #     extra_fields = ['full_name']
-
-    # def get_field_names(self, declared_fields, info):
-    #     expanded_fields = super(PeopleSerializer, self).get_field_names(
-    #         declared_fields, info)
-
-    #     if getattr(self.Meta, 'extra_fields', None):
-    #         return expanded_fields + self.Meta.extra_fields
-    #     else:
-    #         return expanded_fields

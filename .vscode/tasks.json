@@ -8,7 +8,7 @@
             "type": "shell",
             "command": "python manage.py makemigrations && python manage.py migrate",
             "options": {
-                "cwd": "${workspaceFolder}/ohdccrm"
+                "cwd": "${workspaceFolder}/backend"
             },
             "problemMatcher": []
         },
@@ -17,7 +17,7 @@
             "type": "shell",
             "command": "python manage.py migrate",
             "options": {
-                "cwd": "${workspaceFolder}/ohdccrm"
+                "cwd": "${workspaceFolder}/backend"
             },
             "problemMatcher": []
         },

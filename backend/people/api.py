@@ -3,9 +3,10 @@ People objects api
 '''
 from rest_framework import viewsets, permissions
 from rest_framework import filters
+from rest_framework.response import Response
 
 from .models import People
-from .serializers import PeopleSerializer
+from .serializers import PeopleSerializer, PeopleListSerializer
 
 
 class PeopleViewSet(viewsets.ModelViewSet):  # pylint: disable=too-many-ancestors
@@ -24,3 +25,9 @@ class PeopleViewSet(viewsets.ModelViewSet):  # pylint: disable=too-many-ancestor
 
     def perform_create(self, serializer):
         serializer.save()
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return PeopleListSerializer
+
+        return PeopleSerializer

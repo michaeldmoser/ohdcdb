@@ -30,7 +30,25 @@ class PropertiesTestCase(TestCase):
 
         properties = response.json()
 
-        names = [property.address1 for property in properties]
+        names = [property['address1'] for property in properties]
         expected_order = sorted(names)
 
         self.assertEqual(expected_order, names)
+
+    def test_owner_details_on_property(self):
+        '''Test that the owner details are present in the list'''
+        expected = PropertiesFactory.create_batch(10)
+        response = self.client.get(
+            reverse('properties-list'))
+
+        actual = response.json()
+
+        expected.sort(key=lambda property: property.address1)
+        actual.sort(key=lambda property: property['address1'])
+
+        self.assertEqual(expected[0].owners.all()[0].first_name,
+                         actual[0]['owners'][0]['first_name'])
+        self.assertEqual(expected[0].owners.all()[0].last_name,
+                         actual[0]['owners'][0]['last_name'])
+        self.assertEqual(expected[0].owners.all()[0].id,
+                         actual[0]['owners'][0]['id'])

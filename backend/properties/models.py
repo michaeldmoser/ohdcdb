@@ -3,6 +3,8 @@ Properties model
 '''
 from django.db import models
 
+from people.models import People
+
 
 class Properties(models.Model):
     '''
@@ -14,3 +16,5 @@ class Properties(models.Model):
         max_length=255, default='59801')
     acres = models.DecimalField(decimal_places=3, max_digits=5)
     date_entered = models.DateTimeField(auto_now_add=True)
+
+    owners = models.ManyToManyField(People)
