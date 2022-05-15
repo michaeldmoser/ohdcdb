@@ -1,5 +1,4 @@
 import React from 'react';
-import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import {
     render,
@@ -54,6 +53,29 @@ describe('Test displaying a property', () => {
         ).toBeInTheDocument();
         expect(
             getByText(container, new RegExp(property.postalcode, 'i'))
+        ).toBeInTheDocument();
+    });
+
+    it('should display a list of property owners as links', async () => {
+        const property = propertyList[5];
+        render(<Properties />, { initialEntries: [`/${property.id}`] });
+
+        expect(
+            await screen.findByRole('link', {
+                name: new RegExp(
+                    `${property.owners[0].first_name} ${property.owners[0].last_name}`,
+                    'i'
+                ),
+            })
+        ).toBeInTheDocument();
+
+        expect(
+            await screen.findByRole('link', {
+                name: new RegExp(
+                    `${property.owners[1].first_name} ${property.owners[1].last_name}`,
+                    'i'
+                ),
+            })
         ).toBeInTheDocument();
     });
 });
