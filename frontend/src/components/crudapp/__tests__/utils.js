@@ -16,6 +16,8 @@ import CrudApp, {
     RecordForm,
     AddRecord,
     EditRecord,
+    FieldContainer,
+    Field,
 } from '../index';
 import { TextInput } from 'components/forms';
 
@@ -185,14 +187,13 @@ export const SUT = () => {
                     return (
                         <DetailsView>
                             <DetailsView.Body>
-                                <DetailsView.Field
-                                    value={data?.title}
-                                    label='Title'
-                                />
-                                <DetailsView.Field
-                                    value={data?.description}
-                                    label='Description'
-                                />
+                                <FieldContainer>
+                                    <Field value={data?.title} label='Title' />
+                                    <Field
+                                        value={data?.description}
+                                        label='Description'
+                                    />
+                                </FieldContainer>
                             </DetailsView.Body>
                             <DetailsView.Header>
                                 {data?.title}

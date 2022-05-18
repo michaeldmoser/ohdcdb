@@ -1,7 +1,14 @@
 import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import PropTypes from 'utils/PropTypes';
 import _ from 'lodash';
 
+/**
+ * Display a field on the detailview
+ *
+ * @param {string} props.label - The user visible name of the field
+ * @param {*} props.value - The value to be rendered for the field
+ * @returns
+ */
 export const Field = ({ label, value, ...props }) => {
     return (
         <>
@@ -13,6 +20,26 @@ export const Field = ({ label, value, ...props }) => {
             </dd>
         </>
     );
+};
+Field.propTypes = {
+    label: PropTypes.string.isRequired,
+    value: PropTypes.any,
+};
+
+/**
+ * Renders a container for Fields on a detail view
+ *
+ * @param {array} props.children - An array of Field components
+ */
+export const FieldContainer = ({ children, ...props }) => {
+    return <dl className='row'>{children}</dl>;
+};
+
+FieldContainer.propTypes = {
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.isComponent(Field)),
+        PropTypes.isComponent(Field),
+    ]),
 };
 
 /**

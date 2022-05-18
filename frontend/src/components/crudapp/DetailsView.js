@@ -3,7 +3,6 @@ import { Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 import Context from './context';
-import { Field } from './Fields';
 
 const ActionsMenu = () => {
     return (
@@ -28,11 +27,7 @@ const Header = ({ children, ...props }) => {
 };
 
 const Body = ({ children, ...props }) => {
-    return (
-        <div className='card-body'>
-            <dl className='row'>{children}</dl>
-        </div>
-    );
+    return <div className='card-body'>{children}</div>;
 };
 
 export const DetailsView = ({ children }) => {
@@ -62,6 +57,5 @@ Object.assign(DetailsView, {
     Header,
     Body,
     ActionsMenu,
-    Field,
 });
 export default DetailsView;

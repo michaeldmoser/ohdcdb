@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render } from 'testing/library';
 
-import { RelatedField, Field } from '../Fields';
+import { RelatedField, FieldContainer, Field } from '../Fields';
 
 describe('RelatedField', () => {
     const relations = [
@@ -81,6 +81,18 @@ describe('RelatedField', () => {
             >
                 {child}
             </RelatedField>
+        );
+
+        expect(rendered).toMatchSnapshot();
+    });
+});
+
+describe('Fields and field', () => {
+    it('should render a basic field label and value', () => {
+        const rendered = render(
+            <FieldContainer>
+                <Field value={1} label='Field label' />
+            </FieldContainer>
         );
 
         expect(rendered).toMatchSnapshot();

@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { DetailsView, RelatedField } from 'components/crudapp';
+import {
+    DetailsView,
+    Field,
+    RelatedField,
+    FieldContainer,
+} from 'components/crudapp';
 
 function OwnersField(props) {
     return (
@@ -21,13 +26,18 @@ OwnersField.propTypes = {
 };
 
 const PropertyDetail = ({ data: property, isLoading, ...rest }) => {
-    const { Body, Header, Field } = DetailsView;
+    const { Body, Header } = DetailsView;
     return (
         <DetailsView>
             <Body>
-                <Field value={property?.acres} label='Acres' />
-                <Field value={property?.postalcode} label='Zipcode' />
-                <OwnersField value={property?.owners ?? []} label='Owners' />
+                <FieldContainer>
+                    <Field value={property?.acres} label='Acres' />
+                    <Field value={property?.postalcode} label='Zipcode' />
+                    <OwnersField
+                        value={property?.owners ?? []}
+                        label='Owners'
+                    />
+                </FieldContainer>
             </Body>
             <Header>
                 {property?.address1} {property?.address2}
