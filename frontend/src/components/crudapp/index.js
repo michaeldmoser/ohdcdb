@@ -1,3 +1,5 @@
+import './crudapp.scss';
+
 import CrudApp from './CrudApp';
 
 export * from './containers';

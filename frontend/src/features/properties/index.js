@@ -1,4 +1,3 @@
-import './properties.scss';
 import React from 'react';
 import { useResolvedPath } from 'react-router-dom';
 

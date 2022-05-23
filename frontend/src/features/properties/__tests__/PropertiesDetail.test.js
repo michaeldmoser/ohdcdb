@@ -46,7 +46,7 @@ describe('Test displaying a property', () => {
 
         const container = (
             await screen.findByRole('heading', { name: regx, level: 4 })
-        ).closest('article');
+        ).closest('section');
 
         expect(
             getByText(container, new RegExp(property.acres, 'i'))

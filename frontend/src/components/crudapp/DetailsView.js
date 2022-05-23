@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
-import { Nav } from 'react-bootstrap';
+import { Nav, Card } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'utils/PropTypes';
 
 import Context from './context';
 
@@ -43,14 +44,20 @@ export const DetailsView = ({ children }) => {
     const body = kids.find(({ type }) => type === Body);
 
     return (
-        <article className='detail-view'>
-            <header className='d-flex'>
+        <Card as='section' className='detail-view'>
+            <Card.Header as='header' className='d-flex'>
                 {header}
                 <ActionsMenu />
-            </header>
+            </Card.Header>
             {body}
-        </article>
+        </Card>
     );
+};
+DetailsView.propTypes = {
+    children: PropTypes.oneOfType([
+        PropTypes.isComponent(Header),
+        PropTypes.isComponent(Body),
+    ]),
 };
 
 Object.assign(DetailsView, {

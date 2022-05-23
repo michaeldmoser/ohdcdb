@@ -58,33 +58,29 @@ const CrudApp = ({
         >
             <section className='container-fluid data-view h-100 overflow-hidden'>
                 {header}
-                <div className='card'>
-                    <div className='row h-100 overflow-hidden'>
-                        <Routes>
-                            {/* <Route
+                <div className='row crudapp-body overflow-hidden'>
+                    <Routes>
+                        {/* <Route
                                 index
                                 element={<ListOnly>{recordlist}</ListOnly>}
                             /> */}
-                            <Route
-                                path='*'
-                                element={
-                                    <RecordWithSearchResults
-                                        listview={recordlist}
-                                    >
-                                        {recordview}
-                                    </RecordWithSearchResults>
-                                }
-                            >
-                                <Route path='add' element={addrecordview} />
+                        <Route
+                            path='*'
+                            element={
+                                <RecordWithSearchResults listview={recordlist}>
+                                    {recordview}
+                                </RecordWithSearchResults>
+                            }
+                        >
+                            <Route path='add' element={addrecordview} />
 
-                                <Route path=':recordId' element={recordview} />
-                                <Route
-                                    path=':recordId/edit'
-                                    element={editrecordview}
-                                />
-                            </Route>
-                        </Routes>
-                    </div>
+                            <Route path=':recordId' element={recordview} />
+                            <Route
+                                path=':recordId/edit'
+                                element={editrecordview}
+                            />
+                        </Route>
+                    </Routes>
                 </div>
             </section>
         </Context.Provider>

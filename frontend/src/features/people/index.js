@@ -1,5 +1,3 @@
-import './people.scss';
-
 import { useResolvedPath } from 'react-router-dom';
 
 import CrudApp, {

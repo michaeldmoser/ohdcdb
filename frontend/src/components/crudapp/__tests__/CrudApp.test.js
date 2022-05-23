@@ -34,7 +34,7 @@ it('should display the details of a record', async () => {
     renderSUT(`/${record.id}`);
 
     const title = await screen.findByText('Title');
-    const container = title.closest('article');
+    const container = title.closest('section');
 
     expect(title).toBeInTheDocument();
     expect(getByText(container, 'Description')).toBeInTheDocument();
@@ -174,7 +174,7 @@ async function findDetailViewContainer(record) {
             name: regx,
             level: 4,
         })
-    ).closest('article');
+    ).closest('section');
 
     return container;
 }
