@@ -8,7 +8,28 @@ export const peopleList = [
         first_name: 'Patty',
         last_name: 'Moser',
         email: 'patty@example.com',
+        mobile: '406-555-1234',
         date_entered: '2022-03-04T18:25:53.759000Z',
+        properties_set: [
+            {
+                id: 25,
+                address1: '545 Some St',
+                address2: '',
+                postalcode: '59801',
+                acres: '3.510',
+                date_entered: '2022-05-12T12:16:01.312580Z',
+                owners: [1],
+            },
+            {
+                id: 2,
+                address1: '545 Nicholas Green',
+                address2: '',
+                postalcode: '59801',
+                acres: '0.510',
+                date_entered: '2022-05-12T12:16:01.312580Z',
+                owners: [1],
+            },
+        ],
     },
     {
         id: 2,
@@ -89,6 +110,23 @@ export const baseHandlers = [
         return response(
             context.status(200),
             context.json(results),
+            context.delay(1)
+        );
+    }),
+    rest.get('/api/people/:recordId/', (request, response, context) => {
+        const { recordId } = request.params;
+
+        const person = peopleList.find(
+            (person) => person.id === parseInt(recordId)
+        );
+
+        return response(
+            context.status(person ? 200 : 404),
+            context.json(
+                person || {
+                    detail: 'Not found.',
+                }
+            ),
             context.delay(1)
         );
     }),
