@@ -31,7 +31,7 @@ const Body = ({ children, ...props }) => {
     return <div className='card-body'>{children}</div>;
 };
 
-export const DetailsView = ({ children }) => {
+export const DetailsView = ({ children, className = '' }) => {
     const {
         detailQuery: { data, isLoading },
     } = useContext(Context);
@@ -44,7 +44,7 @@ export const DetailsView = ({ children }) => {
     const body = kids.find(({ type }) => type === Body);
 
     return (
-        <Card as='section' className='detail-view'>
+        <Card as='section' className={'detail-view ' + (className ?? '')}>
             <Card.Header as='header' className='d-flex'>
                 {header}
                 <ActionsMenu />
