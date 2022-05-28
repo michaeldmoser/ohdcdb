@@ -1,4 +1,5 @@
 import { rest } from 'msw';
+import setupBackend from 'testing/backend';
 import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
 
@@ -131,6 +132,15 @@ export const baseHandlers = [
         );
     }),
 ];
+
+export const setupPeopleBackend = () =>
+    setupBackend(
+        peopleList,
+        'people',
+        (search) =>
+            ({ first_name, last_name, email }) =>
+                [first_name, last_name, email].join(' ').includes(search)
+    );
 
 export const openAddPersonForm = () => {
     userEvent.click(screen.getByRole('button', { name: 'Add Person' }));

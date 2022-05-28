@@ -2,6 +2,8 @@ import { rest } from 'msw';
 
 import { faker } from '@faker-js/faker';
 
+import setupBackend from 'testing/backend';
+
 export const propertyList = Array.from({ length: 10 }, (v, index) => ({
     id: index + 1,
     address1: faker.address.streetAddress(),
@@ -22,35 +24,11 @@ export const propertyList = Array.from({ length: 10 }, (v, index) => ({
     ],
 }));
 
-export const baseHandlers = [
-    rest.get('/api/properties/', (request, response, context) => {
-        const search = request.url.searchParams.get('search');
-
-        const results = search
-            ? propertyList.filter(({ address1 }) => address1.includes(search))
-            : propertyList;
-
-        return response(
-            context.status(200),
-            context.json(results),
-            context.delay(1)
-        );
-    }),
-    rest.get('/api/properties/:recordId/', (request, response, context) => {
-        const { recordId } = request.params;
-
-        const property = propertyList.find(
-            (property) => property.id === parseInt(recordId)
-        );
-
-        return response(
-            context.status(property ? 200 : 404),
-            context.json(
-                property || {
-                    detail: 'Not found.',
-                }
-            ),
-            context.delay(1)
-        );
-    }),
-];
+export const setupPropertiesBackend = () =>
+    setupBackend(
+        propertyList,
+        'properties',
+        (search) =>
+            ({ address1 }) =>
+                address1.includes(search)
+    );

@@ -5,20 +5,10 @@ import userEvent from '@testing-library/user-event';
 
 import People from '../index';
 
-import { peopleList, baseHandlers } from './utils';
+import { peopleList, setupPeopleBackend } from './utils';
 
 describe('Search for people in the database', () => {
-    const handlers = [...baseHandlers];
-
-    const server = setupServer(...handlers);
-
-    beforeAll(() => {
-        server.listen();
-    });
-
-    afterEach(() => server.resetHandlers());
-
-    afterAll(() => server.close());
+    setupPeopleBackend();
 
     it('should display a list of people matching the search results', async () => {
         const person = peopleList[0];

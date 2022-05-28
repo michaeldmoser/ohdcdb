@@ -7,24 +7,14 @@ import {
     waitForElementToBeRemoved,
     getByText,
 } from 'testing/library';
-import { peopleList, baseHandlers } from './utils';
+import { peopleList, setupPeopleBackend } from './utils';
 import userEvent from '@testing-library/user-event';
 
 import People from '../index';
 
 describe('Test displaying a person', () => {
-    const handlers = [...baseHandlers];
-
-    const server = setupServer(...handlers);
+    setupPeopleBackend();
     const person = peopleList[0];
-
-    beforeAll(() => {
-        server.listen();
-    });
-
-    afterEach(() => server.resetHandlers());
-
-    afterAll(() => server.close());
 
     it('should display the details of the person clicked on', async () => {
         render(<People />);
@@ -58,18 +48,8 @@ describe('Test displaying a person', () => {
 });
 
 describe('Search for people in the database', () => {
-    const handlers = [...baseHandlers];
-
-    const server = setupServer(...handlers);
+    setupPeopleBackend();
     const person = peopleList[0];
-
-    beforeAll(() => {
-        server.listen();
-    });
-
-    afterEach(() => server.resetHandlers());
-
-    afterAll(() => server.close());
 
     beforeEach(async () => {
         render(<People />, {

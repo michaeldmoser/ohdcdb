@@ -1,5 +1,4 @@
 import React from 'react';
-import { setupServer } from 'msw/node';
 import {
     render,
     screen,
@@ -8,22 +7,11 @@ import {
 } from 'testing/library';
 import userEvent from '@testing-library/user-event';
 
-import { baseHandlers, propertyList } from './utils';
+import { propertyList, setupPropertiesBackend } from './utils';
 import Properties from '../index';
 
 describe('Test displaying a property', () => {
-    const server = setupServer(...baseHandlers);
-
-    // Enable API mocking before tests.
-    beforeAll(() => {
-        server.listen();
-    });
-
-    // Reset any runtime request handlers we may add during the tests.
-    afterEach(() => server.resetHandlers());
-
-    // Disable API mocking after the tests are done.
-    afterAll(() => server.close());
+    setupPropertiesBackend();
 
     it('should display the details of the property clicked on', async () => {
         render(<Properties />);
