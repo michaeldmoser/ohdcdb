@@ -1,44 +1,17 @@
 import React from 'react';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
 import { render, screen, getByText } from 'testing/library';
-import { peopleList, fillOutFormTheForm, submitTheForm } from './utils';
+import {
+    peopleList,
+    fillOutFormTheForm,
+    submitTheForm,
+    setupPeopleBackend,
+} from './utils';
 
 import People from '../index';
 
 describe('Change some details about a person', () => {
     let person = { ...peopleList[6] };
-
-    const handlers = [
-        rest.get(`/api/people/${person.id}/`, (request, response, context) => {
-            return response(
-                context.status(200),
-                context.json(person),
-                context.delay(1)
-            );
-        }),
-        rest.put(`/api/people/${person.id}/`, (req, res, ctx) => {
-            person = { ...person, ...req.body };
-            return res(ctx.json(person));
-        }),
-        rest.get('/api/people/', (request, response, context) => {
-            return response(context.json([person]));
-        }),
-    ];
-
-    const server = setupServer(...handlers);
-
-    beforeAll(() => {
-        server.listen();
-    });
-
-    beforeEach(() => {
-        person = { ...peopleList[6] };
-    });
-
-    afterEach(() => server.resetHandlers());
-
-    afterAll(() => server.close());
+    setupPeopleBackend();
 
     it("should be able to change a person's details", async () => {
         render(<People />, {

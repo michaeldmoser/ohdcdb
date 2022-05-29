@@ -1,50 +1,24 @@
 import React from 'react';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
 import { render, screen, getByText } from 'testing/library';
 
 import People from '../index';
 
-import { openAddPersonForm, fillOutFormTheForm, submitTheForm } from './utils';
+import {
+    openAddPersonForm,
+    fillOutFormTheForm,
+    submitTheForm,
+    setupPeopleBackend,
+} from './utils';
 
 describe('Adding a person to the database', () => {
     const person = {
-        id: 1000,
         first_name: 'Anew',
         last_name: 'User',
         mobile: '406-555-9876',
         email: 'anew.user@example.com',
     };
 
-    let peopleList = [];
-
-    const handlers = [
-        rest.get('/api/people/', (req, res, ctx) => {
-            return res(ctx.json(peopleList));
-        }),
-        rest.post('/api/people/', (request, response, context) => {
-            peopleList = [person];
-            return response(context.json(person));
-        }),
-
-        rest.get('/api/people/1000/', (request, response, context) => {
-            return response(context.json(person));
-        }),
-    ];
-
-    const server = setupServer(...handlers);
-
-    beforeAll(() => {
-        server.listen();
-    });
-
-    beforeEach(() => {
-        peopleList = [];
-    });
-
-    afterEach(() => server.resetHandlers());
-
-    afterAll(() => server.close());
+    setupPeopleBackend();
 
     it('should display details of newly created person', async () => {
         render(<People />, {
