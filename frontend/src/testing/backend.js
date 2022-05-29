@@ -1,5 +1,6 @@
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
+import _ from 'lodash';
 
 /**
  * Mock the backend server API. This pretends to be the Django rest-framework backend.
@@ -11,12 +12,13 @@ import { setupServer } from 'msw/node';
  */
 export default function setupBackend(database, urlSuffix, filter) {
     // FIXME: Need to make a deep copy of the database and reset in a afterEach() hook.
+    let backend = JSON.parse(JSON.stringify(database));
 
     const handlers = [
         rest.get(`/api/${urlSuffix}/`, (request, response, context) => {
             const search = request.url.searchParams.get('search');
 
-            const results = search ? database.filter(filter(search)) : database;
+            const results = search ? backend.filter(filter(search)) : backend;
 
             return response(
                 context.status(200),
@@ -29,7 +31,7 @@ export default function setupBackend(database, urlSuffix, filter) {
             (request, response, context) => {
                 const { recordId } = request.params;
 
-                const record = database.find(
+                const record = backend.find(
                     (record) => record.id === parseInt(recordId)
                 );
 
@@ -42,6 +44,24 @@ export default function setupBackend(database, urlSuffix, filter) {
                     ),
                     context.delay(1)
                 );
+            }
+        ),
+        rest.post(`/api/${urlSuffix}/`, (request, response, context) => {
+            let record = JSON.parse(JSON.stringify(request.body));
+            record.id = _.maxBy(backend, (item) => item.id).id + 1;
+            backend.push(record);
+            return response(context.json(record));
+        }),
+        rest.put(
+            `/api/${urlSuffix}/:recordId/`,
+            (request, response, context) => {
+                const { recordId } = request.params;
+                let record = backend.find(
+                    (item) => item.id === parseInt(recordId)
+                );
+                Object.assign(record, JSON.parse(JSON.stringify(request.body)));
+
+                return response(context.json(record));
             }
         ),
     ];
@@ -58,6 +78,10 @@ export default function setupBackend(database, urlSuffix, filter) {
 
     // Disable API mocking after the tests are done.
     afterAll(() => server.close());
+
+    beforeEach(() => {
+        backend = JSON.parse(JSON.stringify(database));
+    });
 
     return server;
 }
