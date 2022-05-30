@@ -33,6 +33,7 @@ urlpatterns = [
          TokenRefreshView.as_view(), name='token_refresh'),
     path('', include('people.urls'), name='people'),
     path('', include('properties.urls'), name='properties'),
+    path('', include('organizations.urls'), name='organizations'),
     re_path(r"^$", render_react),
     re_path(r"^(?:.*)/?$", render_react),
 ]
