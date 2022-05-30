@@ -22,9 +22,9 @@
             "problemMatcher": []
         },
         {
-            "label": "Django Integration Tests",
+            "label": "Django Tests",
             "type": "shell",
-            "command": "python manage.py test testing.integration",
+            "command": "python manage.py test",
             "options": {
                 "cwd": "${workspaceFolder}/backend"
             },
