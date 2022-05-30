@@ -6,14 +6,7 @@ import Login from 'features/auth/Login';
 import Dashboard from 'scenes/dashboard';
 import People from 'features/people';
 import Properties from 'features/properties';
-
-function Organizations() {
-    return (
-        <>
-            <p>Organizations</p>
-        </>
-    );
-}
+import Organizations from 'features/organizations';
 
 export const App = () => {
     const [accessToken] = useAuth();
