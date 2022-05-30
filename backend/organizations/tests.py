@@ -34,3 +34,14 @@ class OrganizationsTestCase(TestCase):
         expected_order = sorted(names)
 
         self.assertEqual(expected_order, names)
+
+    def test_searching(self):
+        '''Test the list of organiztions can be searched'''
+        orgs = OrganizationsFactory.create_batch(10)
+        baseUrl = reverse('organizations-list')
+        url = f"{baseUrl}?search={orgs[0].name.replace(' ', '+')}"
+        response = self.client.get(url)
+
+        organizations = response.json()
+
+        self.assertEqual(len(organizations), 1)
